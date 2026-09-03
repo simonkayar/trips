@@ -1,0 +1,37 @@
+I am thinking of having an interactive website that will act as an online journal for all the Trips that I have been to. The idea is that I want the following for each of those locations
+1. One page mind map kind of page that captures all the essentials about the place - could be a country or just a city
+2. Allows me to add my own photos from the Trips
+3. Have a Quiz at the outer level which can ask random questions on the destinations I have visited. Option should be given to select 'Domestic Destinations' or 'International Destinations' or both (default). The question database should be pretty huge such that no questions are easily repeated over a period of time
+4. Option of a slideshow kind of feature that just pulls random Destinations that we have visited and adds information about them and keeps going like a slideshow
+5. Option to add our own notes that happened during those trips as a memory log
+6. One world map highlighting the international places we have visited and one India map highlighting domestic destinations alone
+7. When I visit a new place, I will come back here to add it through you so that all the data and pages get reflected of this new place.
+For now start with these:
+International:
+Singapore - Visited in Dec 2024
+Thailand - Visited in June 2024 (places: Bangkok and Phuket)
+Indonesia - Visited in June 2025 (places: Borobudur, Prambanan and Bali)
+Switzerland and Paris - June 2026 (Zurich, Lucerne, Interlaken, Paris)
+
+
+Domestic:
+Karnataka: Hampi, Nandi Hills, Mangalore, Udupi, Gokarna, Coorg, Mysuru, Dandeli, Chitradurga, Lepakshi, Bhoga nandishwara temple, Sharavanabelagola, Melukote, Ramnagara, Srirangapatna, Sivanasamudara, Kukke Subramanya, Belur, Halebeedu, Chikkamagaluru, Sringeri
+
+TamilNadu: Ooty, Kodaikanal, Madurai, Kanyakumari, Rameshwaram, Dhanushkodi, Palani, Trichy, Thanjavur, Velankanni, Pondicherry, Mahabalipuram, Vellore, Kanchipuram, All 6 abodes of Murugan, Yelagiri, Yercaud
+
+Kerala: Kochi, Allepey, Munnar, Wayanad
+
+AP and Telengana: Anantpur, Tirupati, Hyderabad
+
+Others: Mumbai, Lonavala, Ellora, Ajantha, Aurangabad, Shirdi, Bhopal, Bhimbetka, Sanchi, Jaipur, Udaipur, Kumbalgarh fort, Chilika lake, Puri, Konark, Bhubhaneshwar, Agra, Delhi, Rishikesh, Moosoorie, Shimla, Kufri, Dehradun, Chandigarh, Manali
+
+
+Improvements:
+1. The quiz has the location at the top like Zurich Switzerland, but sometimes that gives away the answer like when Question is which city is in Switzerland.
+2. I put one photo in photos/trichy but it does not show up
+3. Have one realistic picture (download it if needed) for the destination and put it as part of the mindmap page for it.
+4. In the mindmap page for Countries have the country's flag in the centre box along with capital.
+5. In all destination pages, have a small map of the place showing where it is (for international it has to be a world level map, for domestic a country level. Instead of an interactive map, it can be a cartoonish explorative map)
+6. The slideshow should also have the realistic photo in the background (at least partly)
+7. In the fun facts box, have an arrow which can be clicked for the next set of fun facts. There should be a lot of information
+8. 

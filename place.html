@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Place · Trips &amp; Tours</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧳</text></svg>">
+</head>
+<body data-page="destinations">
+<div id="site-header"></div>
+
+<main class="wrap" id="main">
+  <section class="place-hero" id="hero"></section>
+  <section class="mindmap" id="mindmap">
+    <svg class="links" id="links"></svg>
+    <div class="mm-grid">
+      <div class="mm-col" id="col-left"></div>
+      <div class="mm-hub" id="hub"></div>
+      <div class="mm-col" id="col-right"></div>
+    </div>
+  </section>
+  <div class="section-title"><h2>📷 Our photos</h2><span class="muted small" id="photo-count"></span></div>
+  <section id="gallery"></section>
+</main>
+
+<div class="lightbox" id="lightbox">
+  <button class="close" aria-label="Close">✕</button>
+  <button class="navbtn prev" aria-label="Previous">‹</button>
+  <img alt="">
+  <div class="cap"></div>
+  <button class="navbtn next" aria-label="Next">›</button>
+</div>
+
+<div id="site-footer"></div>
+<script src="js/loader.js"></script>
+<script src="data/maps-svg.js"></script>
+<script src="js/app.js"></script>
+<script src="js/place.js"></script>
+</body>
+</html>

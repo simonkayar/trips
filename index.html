@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Trips &amp; Tours · Our family travel journal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧳</text></svg>">
+</head>
+<body data-page="home">
+<div id="site-header"></div>
+
+<main class="wrap">
+  <section class="hero">
+    <div>
+      <div class="eyebrow">Our family travel journal</div>
+      <h1>Every place we've been,<br>in one happy place.</h1>
+      <p class="lead">A mind map for each destination, our own photos and memories, two maps of everywhere we've stood, and a quiz to see who remembers best.</p>
+      <div class="actions">
+        <a class="btn lg" href="destinations.html">Browse destinations</a>
+        <a class="btn lg secondary" href="quiz.html">Take the quiz</a>
+        <button class="btn lg ghost" id="surprise">🎲 Surprise me</button>
+      </div>
+    </div>
+    <div class="hero-art" id="hero-art"></div>
+  </section>
+
+  <section class="stats" id="stats"></section>
+
+  <div class="section-title"><h2>Collections</h2><span class="muted small">Themed ways to wander through the places</span></div>
+  <section class="collections" id="collections"></section>
+
+  <div class="section-title"><h2>Our trips abroad</h2><a href="destinations.html?scope=international">All international →</a></div>
+  <section class="grid cols-2" id="trips"></section>
+
+  <div class="section-title"><h2>Recently added</h2><a href="destinations.html">All destinations →</a></div>
+  <section class="grid cols-4" id="recent"></section>
+</main>
+
+<div id="site-footer"></div>
+<script src="js/loader.js"></script>
+<script src="js/app.js"></script>
+<script src="js/home.js"></script>
+</body>
+</html>

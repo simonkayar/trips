@@ -1,0 +1,66 @@
+CHAT SUMMARY — Trips & Tours website
+====================================
+(Running log of the conversation between Simon and Claude. Newest entry last.)
+
+2026-09-03 — Session 1: build the site
+--------------------------------------
+Asked: Build, from design.txt, a static family travel-journal website: one
+mind-map page per destination, own photos, a quiz (domestic / international /
+both, large question bank, few repeats), a slideshow of random destinations, a
+memory-log for notes, a world map + an India map, and a workflow where new places
+are added through Claude. Start with the listed places (4 international trips,
+~70 domestic places). Build locally first; go live later.
+
+Done:
+- Pure HTML/CSS/JS site, data-driven from data/*.js; 7 pages (home,
+  destinations, place mind-map, maps, quiz, slideshow, journal).
+- 104 data entries (84 places, 20 country/state hubs) with history, must-see,
+  food, culture, fun facts, tips; 488 hand-written quiz questions + ~258
+  generated ones; quiz remembers seen questions in the browser.
+- Leaflet maps (world + India), photo folders with a scanner script, journal
+  with browser-local quick notes and "Copy for Claude" export.
+- Verified every page in headless Edge; data cross-check script
+  (tools/validate_data.py) passes.
+Decisions: Lepakshi under Andhra Pradesh; six Murugan abodes as separate
+entries; UT hubs for Pondicherry/Delhi/Chandigarh; flag emoji replaced (Windows
+cannot render them); Enter-key double-fire in quiz fixed.
+
+2026-09-03 — Session 2: improvements round 1
+--------------------------------------------
+Asked (8 points): 1) quiz shows the place name and gives away answers; 2) a
+photo put in photos/trichy did not show; 3) one realistic picture per
+destination on the mind-map page; 4) country pages: flag + capital in the centre
+box; 5) a small cartoon locator map on every page (world for international,
+India for domestic); 6) slideshow should use the realistic picture; 7) fun facts
+box with an arrow for more facts, lots of facts; 8) home page should show
+interesting collections (Temples, Beaches, Countries, Abodes of Murugan…)
+instead of repeating the menu.
+
+Done:
+1) Place name now revealed only with the answer explanation.
+2) Photos need data/photos.js regenerated (python tools/scan_photos.py) — done;
+   documented; Trichy photo shrunk.
+3) tools/fetch_images.py downloads each place's Wikipedia lead image with a
+   credit (rejects flags/maps/SVGs, backs off on rate limits); 102/104 have one;
+   shrunk from 69 MB to 19 MB with tools/shrink_images.py. No picture for
+   Thiruparankundram and Kufri (nothing usable on Wikipedia).
+4) Flag PNGs (flagcdn) + "Capital: X" in the hub for the 5 countries and India.
+5) tools/build_maps.py converts world/India GeoJSON to SVG; place pages show a
+   cartoon map with the country/state highlighted, a pulsing pin, and for
+   international places a dashed flight arc from Bengaluru.
+6) Slideshow background = realistic picture; own photo shown as a polaroid.
+7) Fun facts paged 3 at a time with arrows; ~560 extra facts added
+   (data/facts-*.js); some doubtful facts removed, one corrected (Dhauli edicts).
+8) 14 collections (data/collections.js) as picture tiles on the home page and
+   as filters/chips on the destinations page.
+
+2026-09-03 — Session 3: go live + project memory files
+------------------------------------------------------
+Asked: 1) push the site live to https://simonkayar.com/trips via FTP;
+2) push the project to https://github.com/simonkayar/trips; 3) add a rule to
+C:\Users\simon\Projects\CLAUDE.md that every project keeps Chat_Summary.txt and
+Project_Summary.txt; 4) create those two files for this project.
+Done: tools/deploy_ftp.py (incremental FTP upload, credentials from the
+git-ignored ftp.txt, remote folder public_html/trips to match the requested
+URL); .gitignore; rule added to Projects\CLAUDE.md; these two files created.
+Deployment and GitHub push results are recorded below once completed.

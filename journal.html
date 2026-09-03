@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Journal · Trips &amp; Tours</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧳</text></svg>">
+</head>
+<body data-page="journal">
+<div id="site-header"></div>
+
+<main class="wrap">
+  <div class="page-head">
+    <div class="eyebrow">Memory log</div>
+    <h1>Journal</h1>
+    <p class="lead">Little things that happened on the trips — the stuff photos don't capture. Newest first.</p>
+  </div>
+
+  <div class="grid" style="grid-template-columns: 1fr 340px; gap: 30px; align-items: start">
+    <div>
+      <div class="toolbar">
+        <select id="filter" style="max-width:320px"><option value="">All places</option></select>
+        <span class="count-note" id="count"></span>
+      </div>
+      <div class="timeline" id="timeline"></div>
+    </div>
+
+    <aside class="card pad" style="position:sticky;top:90px">
+      <h3>✍️ Quick note</h3>
+      <p class="muted small">Saved in this browser only. Use “Copy for Claude” to move notes into the site’s data file for everyone.</p>
+      <label class="field">Place</label>
+      <select id="n-place" style="margin-bottom:10px"></select>
+      <label class="field">Date</label>
+      <input type="date" id="n-date" style="margin-bottom:10px">
+      <label class="field">Title</label>
+      <input type="text" id="n-title" placeholder="e.g. The night we missed the last ferry" style="margin-bottom:10px">
+      <label class="field">What happened</label>
+      <textarea id="n-text" rows="5" placeholder="Tell the story…" style="margin-bottom:12px"></textarea>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <button class="btn" id="n-save">Save note</button>
+        <button class="btn secondary sm" id="n-export">Copy for Claude</button>
+      </div>
+    </aside>
+  </div>
+</main>
+
+<div id="site-footer"></div>
+<script src="js/loader.js"></script>
+<script src="js/app.js"></script>
+<script src="js/journal.js"></script>
+</body>
+</html>

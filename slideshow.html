@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Slideshow · Trips &amp; Tours</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧳</text></svg>">
+</head>
+<body data-page="slideshow">
+<div id="site-header"></div>
+
+<main class="wrap">
+  <div class="page-head">
+    <div class="eyebrow">Sit back</div>
+    <h1>Slideshow</h1>
+    <p class="lead">Random destinations we've visited, one after another, with a few facts and our photos when we have them.</p>
+  </div>
+
+  <div class="slide-opts">
+    <div class="chips" id="scope-chips">
+      <button class="chip active" data-scope="both">Both</button>
+      <button class="chip" data-scope="domestic">Domestic</button>
+      <button class="chip terracotta" data-scope="international">International</button>
+    </div>
+    <label class="small muted">Every
+      <select id="interval" style="width:auto;display:inline-block;padding:6px 10px;margin-left:6px">
+        <option value="6">6 s</option><option value="10" selected>10 s</option><option value="15">15 s</option><option value="25">25 s</option>
+      </select>
+    </label>
+    <label class="small muted"><input type="checkbox" id="only-photos"> only places with photos</label>
+  </div>
+
+  <div class="slideshow" id="show">
+    <div class="bg" id="bg"></div>
+    <div class="shade"></div>
+    <div class="counter" id="counter"></div>
+    <a class="open-link" id="open" href="#">Open page →</a>
+    <div class="content" id="content"></div>
+    <div class="bar"><span id="bar"></span></div>
+    <div class="controls">
+      <button id="prev" title="Previous">⏮</button>
+      <button id="toggle" title="Play / pause">⏸</button>
+      <button id="next" title="Next">⏭</button>
+      <button id="fs" title="Full screen">⛶</button>
+    </div>
+  </div>
+  <p class="muted small" style="margin-top:12px">Keyboard: space = pause, ← → = previous / next, F = full screen.</p>
+</main>
+
+<div id="site-footer"></div>
+<script src="js/loader.js"></script>
+<script src="js/app.js"></script>
+<script src="js/slideshow.js"></script>
+</body>
+</html>

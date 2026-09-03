@@ -1,0 +1,16 @@
+# credentials — never commit
+ftp.txt
+
+# local tooling / caches
+.venv/
+__pycache__/
+*.pyc
+.deploy-manifest.json
+.claude/
+
+# full-size photo originals kept by tools/shrink_photos.py
+photos/_originals/
+
+# OS noise
+Thumbs.db
+.DS_Store
