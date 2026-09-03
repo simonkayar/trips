@@ -70,3 +70,12 @@ files as the first commit on main. ftp.txt, .deploy-manifest.json and
 photos/_originals are confirmed untracked.
 Open: nothing pending. Future flow after a change = validate_data.py ->
 deploy_ftp.py -> git commit & push -> update these summaries.
+
+2026-09-03 — Session 3b: credentials moved out of the projects
+--------------------------------------------------------------
+Asked: move ftp.txt out of every project under Projects\WEBSITES.
+Done: created C:\Users\simon\.secrets (NTFS permissions: this user only) and
+moved Trips\ftp.txt -> trips-ftp.txt, FINANCE\ftp.txt -> finance-ftp.txt,
+Lazybaker\ftp.txt -> lazybaker-ftp.txt. tools/deploy_ftp.py now reads
+~/.secrets/trips-ftp.txt; Lazybaker's README and the Trips docs updated.
+FINANCE had never committed its ftp.txt (git-ignored from the first commit).

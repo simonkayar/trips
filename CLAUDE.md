@@ -75,7 +75,9 @@ nothing may depend on a server-side language or a build step.
 - Keep the warm "paper journal" look: colours and components live in `css/style.css`.
 - No frameworks, no build tools, no Node. Python 3 only for the helper scripts.
 
-## Deploying (later)
-Upload the whole folder (except `tools/`, `serve.bat`, `design.txt`, `ftp.txt`,
-`CLAUDE.md`, `photos/_originals/`) to the FTP path in `ftp.txt`. Never commit or
-upload `ftp.txt`.
+## Deploying
+`python tools/deploy_ftp.py` uploads changed files to
+`/domains/simonkayar.com/public_html/trips` → https://simonkayar.com/trips/ .
+FTP credentials live **outside the project** in `C:\Users\simon\.secrets\trips-ftp.txt`
+(never copy them into the repo). GitHub: https://github.com/simonkayar/trips — commit
+and push after each change; update `Chat_Summary.txt` / `Project_Summary.txt` too.

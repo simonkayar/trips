@@ -6,8 +6,9 @@ deploy_ftp.py — uploads the site to the web host over FTP.
     python tools/deploy_ftp.py --dry-run    # show what would be uploaded
     python tools/deploy_ftp.py --list       # list the remote web root and exit
 
-Reads credentials from ftp.txt in the project root (never committed — see
-.gitignore). Remote folder: REMOTE_DIR below. Uploads only files whose content
+Reads credentials from %USERPROFILE%\.secrets\trips-ftp.txt (outside the
+project, so it can never be committed or uploaded by mistake). Remote folder:
+REMOTE_DIR below. Uploads only files whose content
 hash changed since the last deploy (tracked in .deploy-manifest.json), so a
 typical update after adding a place takes seconds. Files/folders in EXCLUDE
 never go to the server.
@@ -20,6 +21,7 @@ from ftplib import FTP, FTP_TLS, error_perm
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
+CREDS = Path.home() / ".secrets" / "trips-ftp.txt"
 MANIFEST = ROOT / ".deploy-manifest.json"
 REMOTE_DIR = "/domains/simonkayar.com/public_html/trips"     # -> https://simonkayar.com/trips/
 EXCLUDE_DIRS = {".git", ".venv", "tools", "photos/_originals", "__pycache__", ".claude"}
@@ -28,7 +30,10 @@ EXCLUDE_FILES = {"ftp.txt", "design.txt", "serve.bat", "CLAUDE.md", "Chat_Summar
 
 
 def creds():
-    cfg = (ROOT / "ftp.txt").read_text(encoding="utf-8")
+    if not CREDS.exists():
+        raise SystemExit(f"credentials file not found: {CREDS}\n"
+                         "(host/user/password/port lines, same format as the old ftp.txt)")
+    cfg = CREDS.read_text(encoding="utf-8")
     host = re.search(r"ftp://([\w.\-]+)", cfg).group(1)
     user = re.search(r"username\s+(\S+)", cfg).group(1)
     pwd = re.search(r"password\s+(\S+)", cfg).group(1)

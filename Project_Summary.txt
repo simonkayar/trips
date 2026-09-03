@@ -14,10 +14,10 @@ LIVE SITE / HOSTING
 - URL: https://simonkayar.com/trips/
 - Hosting: shared web hosting (Hostinger-style), plain FTP, port 21.
   Server path: /domains/simonkayar.com/public_html/trips
-  (ftp.txt in the project root holds host/user/password — it is git-ignored and
-  must never be committed or uploaded. The original note in ftp.txt mentioned
-  public_html/sites/trips; the site was deployed to public_html/trips to match the
-  URL simonkayar.com/trips.)
+  Credentials (host/user/password) are in C:\Users\simon\.secrets\trips-ftp.txt —
+  outside the project, folder readable only by this Windows user. Never copy
+  them into the repo. (The host's original note said public_html/sites/trips; the
+  site was deployed to public_html/trips to match the URL simonkayar.com/trips.)
 - Deploy: python tools/deploy_ftp.py   (uploads only changed files; --all forces
   everything; --dry-run previews; --list shows the remote folders). Excludes
   tools/, ftp.txt, design.txt, serve.bat, CLAUDE.md, the two summary files and
@@ -26,7 +26,8 @@ LIVE SITE / HOSTING
 SOURCE CONTROL
 --------------
 - GitHub: https://github.com/simonkayar/trips  (branch main)
-- .gitignore keeps ftp.txt, .venv, photos/_originals, .deploy-manifest.json out.
+- .gitignore keeps .venv, photos/_originals, .deploy-manifest.json (and any stray
+  ftp.txt) out.
 - Photos in photos/ and pictures in images/ are committed (they are public on the
   site anyway).
 
