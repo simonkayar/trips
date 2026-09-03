@@ -63,4 +63,10 @@ Project_Summary.txt; 4) create those two files for this project.
 Done: tools/deploy_ftp.py (incremental FTP upload, credentials from the
 git-ignored ftp.txt, remote folder public_html/trips to match the requested
 URL); .gitignore; rule added to Projects\CLAUDE.md; these two files created.
-Deployment and GitHub push results are recorded below once completed.
+Results: first deploy uploaded 147 files (~20 MB) to public_html/trips over
+FTP-TLS; https://simonkayar.com/trips/ verified live (pages, data, images and
+the Trichy photo all return 200). GitHub: repository was empty; pushed 160
+files as the first commit on main. ftp.txt, .deploy-manifest.json and
+photos/_originals are confirmed untracked.
+Open: nothing pending. Future flow after a change = validate_data.py ->
+deploy_ftp.py -> git commit & push -> update these summaries.
