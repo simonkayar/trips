@@ -143,3 +143,20 @@ mode remains as fallback. tools/pull_journal.py backs notes up into notes.js;
 tools/test_journal_api.py verified everything live (all checks passed; one
 test note posted and deleted → one test email sent). Moderation page:
 /trips/api/moderate.php (admin key in the .secrets config).
+
+2026-09-04 — Session 7: journal made private; admin passphrase instead of a
+moderation page
+--------------------------------------------------------------------------
+Asked: family memories should not be public. Put the passphrase box at the
+top next to the trip log; unlocking reveals the memories and the add form.
+"SKS" = family login, "SKSAdmin" = admin login with a delete button on each
+note; drop the separate moderation page.
+Done: API now token-based (unlock → signed 90-day session token with role
+family|admin; list/post/delete all require it; delete admin-only). Journal
+page: public trip log + unlock box; memories and form appear after unlock;
+admin sees ✕ delete on every note; "lock again" link. Place pages show
+memories only on unlocked devices. moderate.php and the public data/notes.js
+removed (no public copy of notes anywhere); backup now goes to the
+git-ignored journal-backup/ via tools/pull_journal.py. Unlock attempts
+limited to 10/IP/hour. Config regenerated with admin_pass_hash (same HMAC
+secret kept). Live test passed all checks; deployed and pushed.

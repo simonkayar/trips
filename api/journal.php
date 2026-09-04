@@ -1,67 +1,82 @@
 <?php
-/* journal.php — the family journal API.
-     GET  journal.php?action=list                → {ok, notes:[…approved…], names:[…]}
-     POST journal.php?action=post  (JSON body)   → {ok, note}   body: {place, who, date, title, text, pass, website}
-     GET/POST journal.php?action=delete|approve&id=…&t=<token>   (from the notification email)
-     POST journal.php?action=delete|approve&id=…&key=<admin key>  (from moderate.php)
-   Spam protection: family passphrase, honeypot field ("website"), per-IP rate limit,
-   length limits, link limit. Everything is escaped by the site when displayed. */
+/* journal.php — the family journal API. Everything except unlock needs a session token.
+     POST ?action=unlock  {pass}                        → {ok, role:'family'|'admin', token, names}
+     POST ?action=list    {token}                       → {ok, notes:[…]}
+     POST ?action=post    {token, place, who, date, title, text, website}  → {ok, note}
+     POST ?action=delete  {token, id}                   → {ok}          (admin only)
+     GET  ?action=delete&id=…&t=<note token>            → tiny HTML page (link in the email)
+   Spam / abuse protection: passphrase (family) or admin passphrase, session tokens,
+   unlock attempts limited per IP, honeypot field "website", posts limited per IP,
+   length and link limits. The site escapes everything when displaying. */
 declare(strict_types=1);
 require __DIR__ . '/lib.php';
 
-header('Content-Type: application/json; charset=utf-8');
 header('Cache-Control: no-store');
 $cfg = jr_config();
-$action = $_GET['action'] ?? $_POST['action'] ?? '';
+$action = $_GET['action'] ?? '';
 $method = $_SERVER['REQUEST_METHOD'];
 
-function fail(int $code, string $msg): void {
+function out(array $d, int $code = 200): void {
     http_response_code($code);
-    echo json_encode(['ok' => false, 'error' => $msg], JSON_UNESCAPED_UNICODE);
+    header('Content-Type: application/json; charset=utf-8');
+    echo json_encode($d, JSON_UNESCAPED_UNICODE);
     exit;
 }
+function fail(int $code, string $msg): void { out(['ok' => false, 'error' => $msg], $code); }
 
-/* ---------- list (public) ---------- */
-if ($action === 'list') {
-    $notes = array_values(array_filter(jr_notes(), fn($n) => ($n['status'] ?? 'approved') === 'approved'));
-    echo json_encode(['ok' => true, 'notes' => array_map('jr_public', $notes), 'names' => $cfg['names']], JSON_UNESCAPED_UNICODE);
-    exit;
-}
-
-/* ---------- delete / approve (admin key, or the per-note token from the email) ---------- */
-if ($action === 'delete' || $action === 'approve') {
-    $id = (string)($_REQUEST['id'] ?? '');
-    $t = (string)($_REQUEST['t'] ?? '');
-    $byToken = $id !== '' && $t !== '' && hash_equals(jr_token($id), $t);
-    if (!$byToken && !jr_is_admin()) fail(403, 'Not allowed.');
+/* ---------- delete from the email link (GET with the per-note token) ---------- */
+if ($method === 'GET' && $action === 'delete') {
+    $id = (string)($_GET['id'] ?? ''); $t = (string)($_GET['t'] ?? '');
+    $okTok = $id !== '' && $t !== '' && hash_equals(jr_note_token($id), $t);
     $found = false;
-    jr_with_notes(function (array $notes) use ($id, $action, &$found) {
-        foreach ($notes as $i => $n) {
-            if (($n['id'] ?? '') === $id) {
-                $found = true;
-                if ($action === 'delete') unset($notes[$i]); else $notes[$i]['status'] = 'approved';
-            }
-        }
+    if ($okTok) jr_with_notes(function (array $notes) use ($id, &$found) {
+        foreach ($notes as $i => $n) if (($n['id'] ?? '') === $id) { unset($notes[$i]); $found = true; }
         return $notes;
     });
-    if (!$found) fail(404, 'No such note (maybe already deleted).');
-    if ($method === 'GET') {           // clicked from the email → show a friendly page
-        header('Location: moderate.php?msg=' . ($action === 'delete' ? 'deleted' : 'approved'), true, 302);
-        exit;
-    }
-    echo json_encode(['ok' => true]);
+    header('Content-Type: text/html; charset=utf-8');
+    $msg = !$okTok ? 'That link is not valid.' : ($found ? 'The note has been deleted.' : 'That note was already deleted.');
+    echo '<!DOCTYPE html><meta charset="utf-8"><title>Trips journal</title><body style="font-family:system-ui;padding:40px;color:#1f2a30"><h2>Trips journal</h2><p>' . h($msg) . '</p><p><a href="../journal.html">Back to the journal</a></p></body>';
     exit;
 }
 
-/* ---------- post ---------- */
-if ($method !== 'POST' || $action !== 'post') fail(400, 'Unknown request.');
+if ($method !== 'POST') fail(400, 'Unknown request.');
 $in = json_decode((string)file_get_contents('php://input'), true);
 if (!is_array($in)) fail(400, 'Bad request.');
 
-if (trim((string)($in['website'] ?? '')) !== '') fail(400, 'Rejected.');           // honeypot: humans never see this field
-$pass = strtolower(trim((string)($in['pass'] ?? '')));
-if ($pass === '' || !hash_equals((string)$cfg['pass_hash'], hash('sha256', $pass))) fail(403, 'That is not the family passphrase.');
+/* ---------- unlock: passphrase → session token ---------- */
+if ($action === 'unlock') {
+    if (!jr_rate('unlock', 10)) fail(429, 'Too many tries — wait a while and try again.');
+    $pass = strtolower(trim((string)($in['pass'] ?? '')));
+    $role = null;
+    if ($pass !== '' && hash_equals((string)$cfg['admin_pass_hash'], hash('sha256', $pass))) $role = 'admin';
+    elseif ($pass !== '' && hash_equals((string)$cfg['pass_hash'], hash('sha256', $pass))) $role = 'family';
+    if (!$role) fail(403, 'That is not the family passphrase.');
+    out(['ok' => true, 'role' => $role, 'token' => jr_make_token($role), 'names' => $cfg['names']]);
+}
 
+/* ---------- everything below needs a valid token ---------- */
+$role = jr_token_role((string)($in['token'] ?? ''));
+if (!$role) fail(401, 'Please enter the family passphrase.');
+
+if ($action === 'list') {
+    out(['ok' => true, 'role' => $role, 'names' => $cfg['names'], 'notes' => array_map('jr_public', jr_notes())]);
+}
+
+if ($action === 'delete') {
+    if ($role !== 'admin') fail(403, 'Only the admin can delete notes.');
+    $id = (string)($in['id'] ?? ''); $found = false;
+    jr_with_notes(function (array $notes) use ($id, &$found) {
+        foreach ($notes as $i => $n) if (($n['id'] ?? '') === $id) { unset($notes[$i]); $found = true; }
+        return $notes;
+    });
+    if (!$found) fail(404, 'No such note (maybe already deleted).');
+    out(['ok' => true]);
+}
+
+if ($action !== 'post') fail(400, 'Unknown request.');
+
+/* ---------- post ---------- */
+if (trim((string)($in['website'] ?? '')) !== '') fail(400, 'Rejected.');           // honeypot
 $who = trim((string)($in['who'] ?? ''));
 if (!in_array($who, $cfg['names'], true)) fail(400, 'Pick who you are.');
 $place = trim((string)($in['place'] ?? ''));
@@ -73,41 +88,22 @@ $text = trim(str_replace("\r\n", "\n", (string)($in['text'] ?? '')));
 if ($title === '' || mb_strlen($title) > 120) fail(400, 'The title needs 1–120 characters.');
 if ($text === '' || mb_strlen($text) > 2000) fail(400, 'The story needs 1–2000 characters.');
 if (substr_count(strtolower($title . ' ' . $text), 'http') > 2) fail(400, 'Too many links for a journal note.');
-
-/* rate limit: N posts per IP per hour */
-$ip = $_SERVER['REMOTE_ADDR'] ?? '0';
-$now = time();
-$rateFile = jr_data_dir() . '/ratelimit.json';
-$rate = [];
-foreach (jr_read($rateFile) as $k => $ts) {
-    $ts = array_values(array_filter((array)$ts, fn($x) => $x > $now - 3600));
-    if ($ts) $rate[$k] = $ts;
-}
-$hits = $rate[$ip] ?? [];
-if (count($hits) >= (int)($cfg['max_per_hour'] ?? 5)) fail(429, 'Too many notes in one hour from here — try again a little later.');
-$hits[] = $now;
-$rate[$ip] = $hits;
-file_put_contents($rateFile, json_encode($rate), LOCK_EX);
+if (!jr_rate('post', (int)($cfg['max_per_hour'] ?? 5))) fail(429, 'Too many notes in one hour from here — try again a little later.');
 
 $id = 'srv-' . gmdate('Ymd-His') . '-' . bin2hex(random_bytes(3));
-$note = [
-    'id' => $id, 'place' => $place, 'who' => $who, 'date' => $date, 'title' => $title, 'text' => $text,
-    'status' => !empty($cfg['auto_approve']) ? 'approved' : 'pending',
-    'created' => gmdate('c'), 'ip' => $ip,
-];
+$note = ['id' => $id, 'place' => $place, 'who' => $who, 'date' => $date, 'title' => $title, 'text' => $text,
+         'created' => gmdate('c'), 'ip' => $_SERVER['REMOTE_ADDR'] ?? '0'];
 jr_with_notes(function (array $notes) use ($note) { $notes[] = $note; return $notes; });
 
-/* notify by email, with one-click links */
+/* notify by email with a one-click delete link */
 $base = jr_base_url();
-$t = jr_token($id);
-$lines = [
+$body = implode("\n", [
     "$who added a note to the Trips journal.", '',
     "Place: $place", "Date:  $date", "Title: $title", '', $text, '',
-    'Delete this note:  ' . "$base/journal.php?action=delete&id=$id&t=$t",
-];
-if ($note['status'] === 'pending') $lines[] = 'Approve this note: ' . "$base/journal.php?action=approve&id=$id&t=$t";
-$lines[] = 'Moderate all notes: ' . "$base/moderate.php";
+    'Delete this note: ' . "$base/journal.php?action=delete&id=$id&t=" . jr_note_token($id),
+    'Journal: ' . dirname($base) . '/journal.html',
+]);
 $headers = 'From: ' . $cfg['from_email'] . "\r\nReply-To: " . $cfg['from_email'] . "\r\nContent-Type: text/plain; charset=UTF-8";
-@mail($cfg['notify_email'], "[Trips journal] $who: $title", implode("\n", $lines), $headers);
+@mail($cfg['notify_email'], "[Trips journal] $who: $title", $body, $headers);
 
-echo json_encode(['ok' => true, 'note' => jr_public($note)], JSON_UNESCAPED_UNICODE);
+out(['ok' => true, 'note' => jr_public($note)]);

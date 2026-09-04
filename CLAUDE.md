@@ -80,19 +80,24 @@ nothing may depend on a server-side language or a build step.
 - Keep the warm "paper journal" look: colours and components live in `css/style.css`.
 - No frameworks, no build tools, no Node. Python 3 only for the helper scripts.
 
-## The journal is the one dynamic part (PHP, no database)
-- `api/journal.php` (API), `api/moderate.php` (Simon's moderation page), `api/lib.php`.
-  Notes are stored on the server in `api/journal-data/notes.json` — that folder is
-  **excluded from deploys** and web-blocked by `.htaccess`; never create or upload it.
-- Config (family names, passphrase hash, admin key, HMAC secret, notify email) is
+## The journal is the one dynamic part (PHP, no database) — and it is PRIVATE
+- Memories are visible only after unlocking with the family passphrase on journal.html;
+  the trip log on that page is public. `api/journal.php` + `api/lib.php`. Notes are
+  stored on the server in `api/journal-data/notes.json` — that folder is **excluded
+  from deploys** and web-blocked by `.htaccess`; never create or upload it.
+- Unlock returns a signed session token (`role.expiry.hmac`, 90 days) kept in
+  localStorage (`trips_journal_session`). Family passphrase → role `family` (read +
+  post); admin passphrase → role `admin` (also delete, via the ✕ on each note). Every
+  API call is a POST with `{token, …}`; `T.journalApi(action, body, cb)` in app.js.
+- Config (names, both passphrase hashes, HMAC secret, notify email) is
   `C:\Users\simon\.secrets\trips-journal-config.php`, uploaded ABOVE the web root with
   `python tools/deploy_ftp.py --config`. `api/config.example.php` is the template.
-- Spam protection: family passphrase, honeypot field `website`, 5 posts/IP/hour, length
-  and link limits. Posting is immediate (`auto_approve => true`); every post emails Simon
-  with one-click delete/approve links (HMAC token per note).
-- Pages call `T.loadServerNotes()` and merge live notes into `TRIPS.notes` by id; when
-  the API is unreachable (file://, local server) they fall back to `data/notes.js`.
-- Back up the live notes into git: `python tools/pull_journal.py` (rewrites notes.js).
+- Abuse protection: unlock limited to 10 tries/IP/hour, posts 5/IP/hour, honeypot field
+  `website`, length and link limits. Every post emails Simon with a one-click delete link.
+- Place pages show "Our trip" memories only on an unlocked device (`T.loadServerNotes`).
+  There is NO public copy of the notes: `data/notes.js` was removed. Backup:
+  `python tools/pull_journal.py` → `journal-backup/` (git-ignored, never deployed —
+  the GitHub repo is public).
 - End-to-end check after any change: `python tools/test_journal_api.py` (posts and
   deletes one test note → one email).
 

@@ -26,7 +26,8 @@ CREDS = Path.home() / ".secrets" / "trips-ftp.txt"
 MANIFEST = ROOT / ".deploy-manifest.json"
 REMOTE_DIR = "/domains/simonkayar.com/public_html/trips"     # -> https://simonkayar.com/trips/
 EXCLUDE_DIRS = {".git", ".venv", "tools", "photos/_originals", "__pycache__", ".claude",
-                "api/journal-data"}          # the live journal notes live only on the server — never overwrite
+                "api/journal-data",          # the live journal notes live only on the server — never overwrite
+                "journal-backup"}            # local backup of those notes — private, never uploaded
 JOURNAL_CONFIG = Path.home() / ".secrets" / "trips-journal-config.php"
 JOURNAL_CONFIG_REMOTE = "/domains/simonkayar.com/trips-journal-config.php"   # above the web root
 EXCLUDE_FILES = {"ftp.txt", "design.txt", "serve.bat", "CLAUDE.md", "Chat_Summary.txt", "Project_Summary.txt",

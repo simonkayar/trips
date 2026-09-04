@@ -1,31 +1,33 @@
 """
-pull_journal.py — downloads the family's live journal notes from the site and
-writes them into data/notes.js, so git always has a backup (and the notes still
-show if the PHP API is ever unavailable). The site de-duplicates by id, so a
-note that is both in notes.js and on the server appears once.
+pull_journal.py — downloads the family's live journal notes into
+journal-backup/notes.json as a local backup. The folder is git-ignored (the
+GitHub repo is public and the notes are private), never deployed, and not
+loaded by the site. Needs the admin passphrase, read from the config in ~/.secrets.
 
     python tools/pull_journal.py
 """
 import json
+import re
 import urllib.request
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-URL = "https://simonkayar.com/trips/api/journal.php?action=list"
-OUT = ROOT / "data" / "notes.js"
+API = "https://simonkayar.com/trips/api/journal.php"
+OUT = ROOT / "journal-backup" / "notes.json"
 
-req = urllib.request.Request(URL, headers={"User-Agent": "TripsFamilySite/1.1 backup"})
-data = json.loads(urllib.request.urlopen(req, timeout=40).read().decode("utf-8"))
-notes = data.get("notes", [])
-body = ",\n".join("  " + json.dumps({k: n.get(k) for k in ("id", "place", "who", "date", "title", "text")}, ensure_ascii=False) for n in notes)
-OUT.write_text(
-    "/* ------------------------------------------------------------------\n"
-    "   notes.js — backup of the family journal, written by tools/pull_journal.py\n"
-    "   from the live API (api/journal.php). Entries: {id, place, who, date, title, text}.\n"
-    "   Notes are normally posted on the Journal page itself; re-run the script to\n"
-    "   refresh this backup. Hand-written entries without an id are fine too.\n"
-    "   ------------------------------------------------------------------ */\n"
-    "TRIPS.notes.push(\n" + body + "\n);\n",
-    encoding="utf-8",
-)
+cfg = (Path.home() / ".secrets" / "trips-journal-config.php").read_text(encoding="utf-8")
+admin_pass = re.search(r"'admin_pass_hash'\s*=>\s*hash\('sha256',\s*'([^']+)'\)", cfg).group(1)
+
+
+def call(action, body):
+    req = urllib.request.Request(f"{API}?action={action}", data=json.dumps(body).encode("utf-8"), method="POST",
+                                 headers={"Content-Type": "application/json", "User-Agent": "TripsFamilySite/backup"})
+    with urllib.request.urlopen(req, timeout=40) as r:
+        return json.loads(r.read().decode("utf-8"))
+
+
+tok = call("unlock", {"pass": admin_pass})["token"]
+notes = call("list", {"token": tok})["notes"]
+OUT.parent.mkdir(exist_ok=True)
+OUT.write_text(json.dumps(notes, indent=2, ensure_ascii=False), encoding="utf-8")
 print(f"wrote {OUT.relative_to(ROOT)} — {len(notes)} note(s)")

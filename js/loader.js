@@ -33,7 +33,6 @@ window.TRIPS = window.TRIPS || {
     'data/facts-others.js',
     'data/facts-more.js',
     'data/collections.js',
-    'data/notes.js',
     'data/photos.js',
     'data/images.js'
   ];

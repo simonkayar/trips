@@ -1,6 +1,9 @@
 # credentials — never commit
 ftp.txt
 
+# private family journal backup (tools/pull_journal.py) — the GitHub repo is public
+journal-backup/
+
 # local tooling / caches
 .venv/
 __pycache__/

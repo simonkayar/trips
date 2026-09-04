@@ -1,7 +1,7 @@
 <?php
-/* lib.php — shared bits for the family-journal API (journal.php, moderate.php).
+/* lib.php — shared bits for the family-journal API (journal.php).
    No database: notes live in api/journal-data/notes.json on the server.
-   The config (names, passphrase hash, admin key, email) lives ABOVE the web
+   The config (names, passphrase hashes, HMAC secret, email) lives ABOVE the web
    root in /domains/simonkayar.com/trips-journal-config.php — uploaded with
    `python tools/deploy_ftp.py --config`, never committed. */
 declare(strict_types=1);
@@ -9,8 +9,7 @@ declare(strict_types=1);
 function jr_config(): array {
     static $cfg = null;
     if ($cfg !== null) return $cfg;
-    $candidates = [dirname(__DIR__, 3) . '/trips-journal-config.php', __DIR__ . '/config.php'];
-    foreach ($candidates as $f) {
+    foreach ([dirname(__DIR__, 3) . '/trips-journal-config.php', __DIR__ . '/config.php'] as $f) {
         if (file_exists($f)) { $cfg = require $f; return $cfg; }
     }
     http_response_code(500);
@@ -40,14 +39,13 @@ function jr_write(string $file, array $data): void {
     rename($tmp, $file);
 }
 
-/* run $fn while holding an exclusive lock on the notes file */
+/* run $fn while holding an exclusive lock on the notes file; $fn gets the list and returns the new one */
 function jr_with_notes(callable $fn) {
     $file = jr_data_dir() . '/notes.json';
     $fp = fopen("$file.lock", 'c');
     flock($fp, LOCK_EX);
     try {
-        $notes = jr_read($file);
-        $result = $fn($notes);          // $notes is passed by value; $fn returns the new list (or null = unchanged)
+        $result = $fn(jr_read($file));
         if (is_array($result)) jr_write($file, $result);
     } finally {
         flock($fp, LOCK_UN);
@@ -58,13 +56,40 @@ function jr_with_notes(callable $fn) {
 
 function jr_notes(): array { return jr_read(jr_data_dir() . '/notes.json'); }
 
-/* per-note token so an email link can delete/approve without the admin password */
-function jr_token(string $id): string { return hash_hmac('sha256', $id, jr_config()['secret']); }
+/* ---- session tokens: "role.expiry.signature", handed out by action=unlock ---- */
+function jr_b64(string $s): string { return rtrim(strtr(base64_encode($s), '+/', '-_'), '='); }
+function jr_make_token(string $role, int $days = 90): string {
+    $payload = $role . '.' . (time() + $days * 86400);
+    return $payload . '.' . jr_b64(hash_hmac('sha256', $payload, jr_config()['secret'], true));
+}
+/* returns 'family' | 'admin' | null */
+function jr_token_role(?string $token): ?string {
+    if (!$token || substr_count($token, '.') !== 2) return null;
+    [$role, $exp, $sig] = explode('.', $token);
+    if (!in_array($role, ['family', 'admin'], true) || (int)$exp < time()) return null;
+    $good = jr_b64(hash_hmac('sha256', "$role.$exp", jr_config()['secret'], true));
+    return hash_equals($good, $sig) ? $role : null;
+}
 
-function jr_is_admin(): bool {
-    $cfg = jr_config();
-    $key = $_POST['key'] ?? $_GET['key'] ?? $_COOKIE['trips_admin'] ?? '';
-    return $key !== '' && hash_equals((string)$cfg['admin_key'], (string)$key);
+/* per-note token so the email's delete link works without logging in */
+function jr_note_token(string $id): string { return hash_hmac('sha256', 'note:' . $id, jr_config()['secret']); }
+
+/* simple per-IP counters in ratelimit.json: jr_rate('post', 5) → true if allowed (and counts it) */
+function jr_rate(string $kind, int $limit): bool {
+    $file = jr_data_dir() . '/ratelimit.json';
+    $key = $kind . ':' . ($_SERVER['REMOTE_ADDR'] ?? '0');
+    $now = time();
+    $rate = [];
+    foreach (jr_read($file) as $k => $ts) {
+        $ts = array_values(array_filter((array)$ts, fn($x) => $x > $now - 3600));
+        if ($ts) $rate[$k] = $ts;
+    }
+    $hits = $rate[$key] ?? [];
+    if (count($hits) >= $limit) return false;
+    $hits[] = $now;
+    $rate[$key] = $hits;
+    file_put_contents($file, json_encode($rate), LOCK_EX);
+    return true;
 }
 
 function jr_public(array $n): array { unset($n['ip']); return $n; }

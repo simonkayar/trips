@@ -91,7 +91,9 @@
       }).join('') + '</ul>';
     } else if (visited) html += '<p><strong>Visited:</strong> ' + T.esc(visited) + '</p>';
     if (notes.length) html += list(notes.slice(0, 4).map(function (n) { return '**' + n.title + '**' + (n.who ? ' (' + n.who + ')' : '') + ' — ' + n.text; }));
-    html += '<p style="margin:10px 0 0"><a href="journal.html?place=' + p.id + '">' + (notes.length ? 'All ' + notes.length + ' memories in the journal →' : 'Add a memory in the journal →') + '</a></p>';
+    var unlocked = !!T.journalSession();
+    html += '<p style="margin:10px 0 0"><a href="journal.html?place=' + p.id + '">' +
+      (notes.length ? 'All ' + notes.length + ' memories in the journal →' : (unlocked ? 'Add a memory in the journal →' : '🔒 Family memories — unlock in the journal →')) + '</a></p>';
     return html;
   }
   nodes.push({ title: 'Our trip', ic: '❤️', cls: 'c-terracotta', html: '<div id="ourtrip">' + ourTripHTML() + '</div>' });

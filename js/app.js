@@ -234,19 +234,35 @@
     });
   };
 
-  /* ---------- notes ---------- */
-  // Fetch the family's live notes from api/journal.php (PHP on the host) and merge
-  // them into T.notes. cb(data) on success, cb(null) if the API is unreachable
-  // (file://, local static server, host down) — pages then just use data/notes.js.
+  /* ---------- family journal (api/journal.php on the host) ---------- */
+  // The session {token, role} from unlocking with the passphrase, kept per device.
+  var SESSION_KEY = 'trips_journal_session';
+  T.journalSession = function (set) {
+    if (set !== undefined) { T.store.set(SESSION_KEY, set || ''); return set; }
+    var s = T.store.get(SESSION_KEY, null);
+    return s && s.token ? s : null;
+  };
+  // POST to the API; the token is added automatically. cb gets the JSON (with
+  // ok:false + status on failure) — never throws, so pages work without the API.
+  T.journalApi = function (action, body, cb) {
+    if (!window.fetch || location.protocol === 'file:') { cb({ ok: false, status: 0, error: 'The journal needs the live site.' }); return; }
+    var s = T.journalSession();
+    var payload = Object.assign({}, body || {}, s ? { token: s.token } : {});
+    fetch('api/journal.php?action=' + action, { method: 'POST', cache: 'no-store', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) })
+      .then(function (r) { return r.json().then(function (d) { d.status = r.status; return d; }); })
+      .then(cb)
+      .catch(function () { cb({ ok: false, status: 0, error: 'Could not reach the journal server.' }); });
+  };
+  // Load the notes into T.notes when this device is unlocked; cb(data|null).
   T.loadServerNotes = function (cb) {
-    if (!window.fetch || location.protocol === 'file:') { cb(null); return; }
-    fetch('api/journal.php?action=list', { cache: 'no-store' }).then(function (r) { return r.ok ? r.json() : null; }).then(function (d) {
-      if (!d || !d.ok) { cb(null); return; }
+    if (!T.journalSession()) { cb(null); return; }
+    T.journalApi('list', {}, function (d) {
+      if (!d.ok) { if (d.status === 401) T.journalSession(null); cb(null); return; }
       var have = {};
       T.notes.forEach(function (n) { if (n.id) have[n.id] = 1; });
       (d.notes || []).forEach(function (n) { if (!have[n.id]) T.notes.push(n); });
       cb(d);
-    }).catch(function () { cb(null); });
+    });
   };
   T.notesFor = function (placeId) {
     var kids = T.children(placeId).map(function (c) { return c.id; });
