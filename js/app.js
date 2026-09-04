@@ -52,21 +52,24 @@
   T.hubs = function () { return T.places.filter(function (p) { return p.kind !== 'place'; }); };
   T.children = function (id) { return T.places.filter(function (p) { return p.parent === id; }); };
   T.hubOf = function (p) { return p && p.parent ? T.byId(p.parent) : null; };
-  T.tripOf = function (p) {
-    if (!p) return null;
-    for (var i = 0; i < T.trips.length; i++) {
-      var t = T.trips[i];
-      if (t.places.indexOf(p.id) >= 0 || (p.parent && t.places.indexOf(p.parent) >= 0)) return t;
-    }
-    return null;
+  // every trip that included this place, oldest first. A place counts only when the
+  // trip lists it directly; a hub (country/state) also rolls up its children's trips.
+  T.tripsOf = function (p) {
+    if (!p) return [];
+    var kids = p.kind === 'place' ? [] : T.children(p.id).map(function (c) { return c.id; });
+    return T.trips.filter(function (t) {
+      if (t.places.indexOf(p.id) >= 0) return true;
+      for (var i = 0; i < kids.length; i++) if (t.places.indexOf(kids[i]) >= 0) return true;
+      return false;
+    }).sort(function (a, b) { return (a.date || '').localeCompare(b.date || ''); });
   };
+  T.tripOf = function (p) { var ts = T.tripsOf(p); return ts.length ? ts[ts.length - 1] : null; };
   T.visitedLabel = function (p) {
     if (!p) return '';
     if (p.visited) return p.visited;
     var hub = T.hubOf(p);
     if (hub && hub.visited) return hub.visited;
-    var trip = T.tripOf(p);
-    return trip ? trip.when : '';
+    return T.uniq(T.tripsOf(p).map(function (t) { return t.when; })).join(' · ');
   };
   T.locationLabel = function (p) {
     if (p.kind === 'country') return 'Country';
@@ -196,7 +199,7 @@
     });
     T.trips.forEach(function (t) {
       var m = /(\d{4})/.exec(t.when || '');
-      if (!m) return;
+      if (!m || !t.places.length) return;
       var y = m[1];
       var p = T.byId(t.places[0]);
       if (!p) return;
@@ -241,7 +244,7 @@
   var NAV = [
     ['index.html', 'Home', 'home'], ['destinations.html', 'Destinations', 'destinations'],
     ['maps.html', 'Maps', 'maps'], ['quiz.html', 'Quiz', 'quiz'],
-    ['slideshow.html', 'Slideshow', 'slideshow'], ['journal.html', 'Journal', 'journal']
+    ['slideshow.html', 'Slideshow', 'slideshow'], ['album.html', 'Album', 'album'], ['journal.html', 'Journal', 'journal']
   ];
   function renderChrome() {
     var active = document.body.getAttribute('data-page') || '';

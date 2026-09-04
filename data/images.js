@@ -88,8 +88,8 @@ TRIPS.images = {
   },
   "mangalore": {
     "src": "images/mangalore.jpg",
-    "file": "Growing_skylines_of_the_Mangalore_CBD_region.jpg",
-    "page": "https://en.wikipedia.org/wiki/Mangaluru"
+    "file": "St._Aloysius_Church_Mangalore.jpg",
+    "page": "https://en.wikipedia.org/wiki/St._Aloysius_Chapel"
   },
   "udupi": {
     "src": "images/udupi.jpg",
@@ -128,8 +128,8 @@ TRIPS.images = {
   },
   "shravanabelagola": {
     "src": "images/shravanabelagola.jpg",
-    "file": "Gommateshwara,_Shravanabelagola.jpg",
-    "page": "https://en.wikipedia.org/wiki/Gommateshwara_statue"
+    "file": "Shravanabelagola - Gommateshwara.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File%3AShravanabelagola_-_Gommateshwara.jpg"
   },
   "melukote": {
     "src": "images/melukote.jpg",
@@ -168,8 +168,8 @@ TRIPS.images = {
   },
   "chikkamagaluru": {
     "src": "images/chikkamagaluru.jpg",
-    "file": "Chikmagalur,_India._(7793316622).jpg",
-    "page": "https://en.wikipedia.org/wiki/Chikmagalur"
+    "file": "Mullayanagiri peak.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File%3AMullayanagiri_peak.jpg"
   },
   "sringeri": {
     "src": "images/sringeri.jpg",
@@ -183,8 +183,8 @@ TRIPS.images = {
   },
   "ooty": {
     "src": "images/ooty.jpg",
-    "file": "NMR_train_at_Ketti_05-02-26_75.jpeg",
-    "page": "https://en.wikipedia.org/wiki/Nilgiri_Mountain_Railway"
+    "file": "Arts_College_Hill_Ooty_Nilgiris_Mar21_A7C_00188.jpg",
+    "page": "https://en.wikipedia.org/wiki/Doddabetta"
   },
   "kodaikanal": {
     "src": "images/kodaikanal.jpg",
@@ -268,8 +268,8 @@ TRIPS.images = {
   },
   "vellore": {
     "src": "images/vellore.jpg",
-    "file": "Vellorefort.jpg",
-    "page": "https://en.wikipedia.org/wiki/Vellore_Fort"
+    "file": "Golden Temple, Vellore, India.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File%3AGolden_Temple%2C_Vellore%2C_India.jpg"
   },
   "kanchipuram": {
     "src": "images/kanchipuram.jpg",
@@ -278,8 +278,8 @@ TRIPS.images = {
   },
   "yelagiri": {
     "src": "images/yelagiri.jpg",
-    "file": "01Yelagiri_Hills.jpg",
-    "page": "https://en.wikipedia.org/wiki/Yelagiri"
+    "file": "Yelagiri Lake.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Yelagiri_Lake.jpg"
   },
   "yercaud": {
     "src": "images/yercaud.jpg",
@@ -308,8 +308,8 @@ TRIPS.images = {
   },
   "wayanad": {
     "src": "images/wayanad.jpg",
-    "file": "Edakkal_Cave.jpg",
-    "page": "https://en.wikipedia.org/wiki/Edakkal_caves"
+    "file": "Banasurasagar_Main_Dam.jpg",
+    "page": "https://en.wikipedia.org/wiki/Banasura_Sagar_Dam"
   },
   "andhrapradesh": {
     "src": "images/andhrapradesh.jpg",
@@ -323,8 +323,8 @@ TRIPS.images = {
   },
   "anantapur": {
     "src": "images/anantapur.jpg",
-    "file": "Thimmamma_Marrimanu_Anantapur_dt_Andhra_JEG9125_(cropped).JPG",
-    "page": "https://en.wikipedia.org/wiki/Thimmamma_Marrimanu"
+    "file": "Indian_Grand_Canyon_Sudhakar_Bichali.jpg",
+    "page": "https://en.wikipedia.org/wiki/Gandikota"
   },
   "tirupati": {
     "src": "images/tirupati.jpg",
@@ -488,8 +488,8 @@ TRIPS.images = {
   },
   "shimla": {
     "src": "images/shimla.jpg",
-    "file": "Landscape_of_Shimla_,_Himachal_Pradesh.jpg",
-    "page": "https://en.wikipedia.org/wiki/Shimla"
+    "file": "Christ_Church,_Shimla.jpg",
+    "page": "https://en.wikipedia.org/wiki/Christ_Church%2C_Shimla"
   },
   "manali": {
     "src": "images/manali.jpg",
@@ -503,13 +503,173 @@ TRIPS.images = {
   },
   "chandigarh": {
     "src": "images/chandigarh.jpg",
-    "file": "Chandigarh_Rock_Garden_4.jpg",
-    "page": "https://en.wikipedia.org/wiki/Rock_Garden_of_Chandigarh"
+    "file": "Dancing girls at Rock Garden, Chandigarh.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Dancing_girls_at_Rock_Garden%2C_Chandigarh.jpg"
   },
   "dehradun": {
     "src": "images/dehradun.jpg",
     "file": "Dehradun_view_from_maggi_point.jpg",
     "page": "https://en.wikipedia.org/wiki/Dehradun"
+  },
+  "usa": {
+    "src": "images/usa.jpg",
+    "file": "Capitol_Building_Full_View.jpg",
+    "page": "https://en.wikipedia.org/wiki/United_States_Capitol"
+  },
+  "grand-canyon": {
+    "src": "images/grand-canyon.jpg",
+    "file": "Canyon_River_Tree_(165872763).jpeg",
+    "page": "https://en.wikipedia.org/wiki/Grand_Canyon"
+  },
+  "las-vegas": {
+    "src": "images/las-vegas.jpg",
+    "file": "Las_Vegas_Strip_09_2017_4897.jpg",
+    "page": "https://en.wikipedia.org/wiki/Las_Vegas_Strip"
+  },
+  "niagara-falls": {
+    "src": "images/niagara-falls.jpg",
+    "file": "3Falls_Niagara.jpg",
+    "page": "https://en.wikipedia.org/wiki/Niagara_Falls"
+  },
+  "new-york": {
+    "src": "images/new-york.jpg",
+    "file": "Front_view_of_Statue_of_Liberty_(cropped).jpg",
+    "page": "https://en.wikipedia.org/wiki/Statue_of_Liberty"
+  },
+  "san-diego": {
+    "src": "images/san-diego.jpg",
+    "file": "LaJolla-2_(45716612345).jpg",
+    "page": "https://en.wikipedia.org/wiki/La_Jolla_Cove"
+  },
+  "china": {
+    "src": "images/china.jpg",
+    "file": "The_Forbidden_City_-_View_from_Coal_Hill.jpg",
+    "page": "https://en.wikipedia.org/wiki/Forbidden_City"
+  },
+  "beijing": {
+    "src": "images/beijing.jpg",
+    "file": "The_Great_Wall_of_China_at_Jinshanling-edit.jpg",
+    "page": "https://en.wikipedia.org/wiki/Great_Wall_of_China"
+  },
+  "south-korea": {
+    "src": "images/south-korea.jpg",
+    "file": "광화문_월대.jpg",
+    "page": "https://en.wikipedia.org/wiki/Gyeongbokgung"
+  },
+  "gumi": {
+    "src": "images/gumi.jpg",
+    "file": "금오산 마애여래입상-2.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File%3A%EA%B8%88%EC%98%A4%EC%82%B0_%EB%A7%88%EC%95%A0%EC%97%AC%EB%9E%98%EC%9E%85%EC%83%81-2.jpg"
+  },
+  "goa-state": {
+    "src": "images/goa-state.jpg",
+    "file": "Fort_aguada.jpg",
+    "page": "https://en.wikipedia.org/wiki/Fort_Aguada"
+  },
+  "goa": {
+    "src": "images/goa.jpg",
+    "file": "Front_Elevation_of_Basilica_of_Bom_Jesus.jpg",
+    "page": "https://en.wikipedia.org/wiki/Basilica_of_Bom_Jesus"
+  },
+  "sikkim": {
+    "src": "images/sikkim.jpg",
+    "file": "Kangchenjunga_PangPema.JPG",
+    "page": "https://en.wikipedia.org/wiki/Kangchenjunga"
+  },
+  "gangtok": {
+    "src": "images/gangtok.jpg",
+    "file": "View of Gangtok city from Ropeway.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File%3AView_of_Gangtok_city_from_Ropeway.jpg"
+  },
+  "westbengal": {
+    "src": "images/westbengal.jpg",
+    "file": "Howrah_bridge_at_night.jpg",
+    "page": "https://en.wikipedia.org/wiki/Howrah_Bridge"
+  },
+  "darjeeling": {
+    "src": "images/darjeeling.jpg",
+    "file": "DarjeelingTrainFruitshop_(2).jpg",
+    "page": "https://en.wikipedia.org/wiki/Darjeeling"
+  },
+  "gandikota": {
+    "src": "images/gandikota.jpg",
+    "file": "Indian_Grand_Canyon_Sudhakar_Bichali.jpg",
+    "page": "https://en.wikipedia.org/wiki/Gandikota"
+  },
+  "belum-caves": {
+    "src": "images/belum-caves.jpg",
+    "file": "Belumcave1.jpg",
+    "page": "https://en.wikipedia.org/wiki/Belum_Caves"
+  },
+  "devarayanadurga": {
+    "src": "images/devarayanadurga.jpg",
+    "file": "Yoga_Narasimha_Temple_Devarayanadurga.JPG",
+    "page": "https://en.wikipedia.org/wiki/Devarayanadurga"
+  },
+  "murudeshwar": {
+    "src": "images/murudeshwar.jpg",
+    "file": "Shiva_Statue_Murdeshwara_Temple.jpg",
+    "page": "https://en.wikipedia.org/wiki/Murdeshwar"
+  },
+  "somanathapura": {
+    "src": "images/somanathapura.jpg",
+    "file": "Le_temple_de_Chennakesava_(Somanathapura,_Inde)_(14465165685).jpg",
+    "page": "https://en.wikipedia.org/wiki/Chennakeshava_Temple%2C_Somanathapura"
+  },
+  "mekedatu": {
+    "src": "images/mekedatu.jpg",
+    "file": "Mekedat.jpg",
+    "page": "https://en.wikipedia.org/wiki/Mekedatu"
+  },
+  "kgf": {
+    "src": "images/kgf.jpg",
+    "file": "Champion Reef Mine shaft.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File%3AChampion_Reef_Mine_shaft.jpg"
+  },
+  "mandaragiri": {
+    "src": "images/mandaragiri.jpg",
+    "file": "Mandaragiri Jain Temple.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File%3AMandaragiri_Jain_Temple.jpg"
+  },
+  "hogenakkal": {
+    "src": "images/hogenakkal.jpg",
+    "file": "Hogenakkal_Falls_Close.jpg",
+    "page": "https://en.wikipedia.org/wiki/Hogenakkal_Falls"
+  },
+  "chidambaram": {
+    "src": "images/chidambaram.jpg",
+    "file": "Le_temple_de_Shiva_Nataraja_(Chidambaram,_Inde)_(14037020332).jpg",
+    "page": "https://en.wikipedia.org/wiki/Nataraja_Temple%2C_Chidambaram"
+  },
+  "coimbatore": {
+    "src": "images/coimbatore.jpg",
+    "file": "Adiyogi_Shiva_steel_burst_2018.jpg",
+    "page": "https://en.wikipedia.org/wiki/Adiyogi_Shiva_bust"
+  },
+  "pichavaram": {
+    "src": "images/pichavaram.jpg",
+    "file": "Pichavaram-Pno.png",
+    "page": "https://en.wikipedia.org/wiki/Pichavaram"
+  },
+  "tharangambadi": {
+    "src": "images/tharangambadi.jpg",
+    "file": "Fort_Dansborg.JPG",
+    "page": "https://en.wikipedia.org/wiki/Fort_Dansborg"
+  },
+  "hampta-pass": {
+    "src": "images/hampta-pass.jpg",
+    "file": "Mesmerising beauty of Hampta pass on Chandrataal Trek Himachal India.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File%3AMesmerising_beauty_of_Hampta_pass_on_Chandrataal_Trek_Himachal_India.jpg"
+  },
+  "thiruparankundram": {
+    "src": "images/thiruparankundram.jpg",
+    "file": "Thiruparankundram Murugan temple and rock hill.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File%3AThiruparankundram_Murugan_temple_and_rock_hill.jpg"
+  },
+  "kufri": {
+    "src": "images/kufri.jpg",
+    "file": "Kufri Simla Himachal India (6).jpg",
+    "page": "https://commons.wikimedia.org/wiki/File%3AKufri_Simla_Himachal_India_%286%29.jpg"
   }
 };
-TRIPS.flags = {"singapore": "images/flags/sg.png", "thailand": "images/flags/th.png", "indonesia": "images/flags/id.png", "switzerland": "images/flags/ch.png", "france": "images/flags/fr.png", "india": "images/flags/in.png"};
+TRIPS.flags = {"singapore": "images/flags/sg.png", "thailand": "images/flags/th.png", "indonesia": "images/flags/id.png", "switzerland": "images/flags/ch.png", "france": "images/flags/fr.png", "india": "images/flags/in.png", "usa": "images/flags/us.png", "china": "images/flags/cn.png", "south-korea": "images/flags/kr.png"};

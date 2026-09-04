@@ -17,6 +17,22 @@
   if (filter) $('#n-place').value = filter;
   $('#n-date').value = new Date().toISOString().slice(0, 10);
 
+  // trip log: every trip from data/trips.js grouped by year, newest first
+  (function () {
+    var trips = T.trips.slice().sort(function (a, b) { return (b.date || '').localeCompare(a.date || ''); });
+    $('#triplog-count').textContent = trips.length + ' trips since ' + (trips[trips.length - 1] || {}).when;
+    var years = [];
+    trips.forEach(function (t) { var y = (t.date || '').slice(0, 4); if (years.indexOf(y) < 0) years.push(y); });
+    $('#triplog-body').innerHTML = years.map(function (y) {
+      return '<div class="year-block"><div class="year">' + y + '</div><ul>' + trips.filter(function (t) { return (t.date || '').slice(0, 4) === y; }).map(function (t) {
+        var links = t.places.map(function (id) { var p = T.byId(id); return p ? '<a href="place.html?id=' + id + '">' + p.emoji + ' ' + T.esc(p.name) + '</a>' : ''; }).join(' ');
+        return '<li><span class="when">' + T.esc(t.when) + '</span> <strong>' + T.esc(t.title) + '</strong>' +
+          (t.scope === 'international' ? ' <span class="tag intl">abroad</span>' : '') + (links ? '<div class="places">' + links + '</div>' : '') + '</li>';
+      }).join('') + '</ul></div>';
+    }).join('');
+    if (T.param('log') === '1') $('#triplog').open = true;
+  })();
+
   function localNotes() { return T.store.get(LOCAL_KEY, []); }
   function fmtDate(d) {
     if (!d) return '';

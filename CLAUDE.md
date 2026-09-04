@@ -33,9 +33,11 @@ nothing may depend on a server-side language or a build step.
 
 ## Adding a new place (the usual request)
 1. Pick the data file by region (`places-karnataka.js`, `places-tamilnadu.js`,
-   `places-kerala-ap-ts.js`, `places-others.js`, `places-international.js`). A new
-   state/country needs a **hub** entry (`kind: 'state'` or `'country'`, `parent: 'india'`
-   for Indian states) before its places.
+   `places-kerala-ap-ts.js`, `places-others.js`, `places-international.js`; anything
+   added after Sept 2026 goes in `places-more.js`). A new state/country needs a
+   **hub** entry (`kind: 'state'` or `'country'`, `parent: 'india'` for Indian states)
+   before its places. Hubs in use now also include `usa`, `china`, `south-korea`,
+   `goa-state`, `sikkim`, `westbengal`.
 2. Append a place object. Required: `id` (kebab-case, unique), `name`, `kind: 'place'`,
    `scope` (`'domestic'` | `'international'`), `country`, `state` (domestic only), `parent`
    (hub id), `lat`, `lng`, `emoji`, `tagline`. Content sections (all arrays of strings,
@@ -46,7 +48,10 @@ nothing may depend on a server-side language or a build step.
 3. Add 4–8 questions to the matching `questions-*.js`:
    `{ id: '<place>-<n>', place: '<id>', q, a: [4 options], correct: <index>, why }`.
    Keep facts verifiable; the `why` line is shown after answering.
-4. For a dated trip, add/extend an entry in `data/trips.js` (`places` lists hub + places).
+4. Add the trip to `data/trips.js` — this is the trip log and the ONLY source of
+   "Visited …" dates: `{ id, title, when, date: 'YYYY-MM', scope, emoji, places: [...] }`.
+   List the places actually visited (hubs optional); a place shows a trip only if it
+   is listed directly. Never hard-code `visited` on a place.
 5. Photos: create `photos/<id>/`, copy pictures, run `python tools/scan_photos.py`
    (and `py -3.10 tools/shrink_photos.py` first if they are big phone originals).
    **A photo dropped into the folder is invisible until scan_photos.py has run** —

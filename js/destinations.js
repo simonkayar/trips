@@ -11,9 +11,9 @@
     $('.page-head').insertAdjacentHTML('afterend', '<div class="coll-head"><span class="em">' + coll.emoji + '</span><div><h2>' + T.esc(coll.title) + '</h2><p>' + T.esc(coll.blurb || '') + '</p></div>' +
       '<a class="btn sm secondary" style="margin-left:auto" href="destinations.html">All places</a></div>');
   }
-  $('#region-chips').insertAdjacentHTML('beforebegin', '<div class="chips" id="coll-chips" style="margin-bottom:12px">' + T.collections.map(function (c) {
+  $('#coll-chips').innerHTML = T.collections.map(function (c) {
     return '<a class="chip' + (state.collection === c.id ? ' active' : '') + '" href="destinations.html?collection=' + c.id + '">' + c.emoji + ' ' + T.esc(c.title) + '</a>';
-  }).join('') + '</div>');
+  }).join('');
 
   var scopeChips = $$('#scope-chips .chip');
   scopeChips.forEach(function (c) {
@@ -23,6 +23,7 @@
       c.classList.add('active');
       state.scope = c.getAttribute('data-scope');
       state.region = '';
+      fillRegions();
       render();
     });
   });
@@ -30,36 +31,33 @@
 
   function regionOf(p) { return p.parent ? T.byId(p.parent) : null; }
 
-  function render() {
-    var list = leaves.filter(function (p) {
-      if (coll && coll.ids.indexOf(p.id) < 0) return false;
-      if (state.scope !== 'all' && p.scope !== state.scope) return false;
-      if (state.q) {
-        var hay = [p.name, p.state, p.country, p.tagline, (p.aka || [])].join(' ').toLowerCase();
-        if (hay.indexOf(state.q) < 0) return false;
-      }
-      return true;
-    });
-
-    // region chips (states / countries present in the current scope)
+  // "jump to a state / country" dropdown — replaces the old row of chips
+  var sel = $('#region-select');
+  function fillRegions() {
     var regions = [];
     leaves.forEach(function (p) {
       if (state.scope !== 'all' && p.scope !== state.scope) return;
       var r = regionOf(p);
       if (r && regions.indexOf(r) < 0) regions.push(r);
     });
-    $('#region-chips').innerHTML = regions.map(function (r) {
-      return '<button class="chip' + (state.region === r.id ? ' active' : '') + '" data-region="' + r.id + '">' + r.emoji + ' ' + T.esc(r.name) + '</button>';
+    sel.innerHTML = '<option value="">All states &amp; countries</option>' + regions.map(function (r) {
+      return '<option value="' + r.id + '"' + (state.region === r.id ? ' selected' : '') + '>' + r.emoji + ' ' + T.esc(r.name) + '</option>';
     }).join('');
-    $$('#region-chips .chip').forEach(function (c) {
-      c.addEventListener('click', function () {
-        var id = c.getAttribute('data-region');
-        state.region = state.region === id ? '' : id;
-        render();
-      });
-    });
-    if (state.region) list = list.filter(function (p) { return p.parent === state.region; });
+  }
+  sel.addEventListener('change', function () { state.region = sel.value; render(); });
+  fillRegions();
 
+  function render() {
+    var list = leaves.filter(function (p) {
+      if (coll && coll.ids.indexOf(p.id) < 0) return false;
+      if (state.scope !== 'all' && p.scope !== state.scope) return false;
+      if (state.region && p.parent !== state.region) return false;
+      if (state.q) {
+        var hay = [p.name, p.state, p.country, p.tagline, (p.aka || [])].join(' ').toLowerCase();
+        if (hay.indexOf(state.q) < 0) return false;
+      }
+      return true;
+    });
     $('#count').textContent = list.length + ' place' + (list.length === 1 ? '' : 's');
 
     // group by region, keep data order

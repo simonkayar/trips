@@ -1,27 +1,82 @@
 /* ------------------------------------------------------------------
-   trips.js — dated trips. `places` lists the ids (from places-*.js) that
-   were part of the trip; the first id is used for "when did we visit …"
-   quiz questions. `date` (YYYY-MM) is only used for sorting.
+   trips.js — the trip log. Every trip we made, oldest first.
+   { id, title, when (as shown), date (YYYY-MM, for sorting), scope, emoji,
+     places: [ids from places-*.js — hubs and/or places], summary (optional) }
+   "Visited …" on every place page is derived from this list, the Journal page
+   shows it as a timeline, and the quiz asks "in which year did we go to …".
+   Places we have no page for yet just get an empty places: [] entry.
    ------------------------------------------------------------------ */
 TRIPS.trips.push(
-  {
-    id: 'thailand-2024', title: 'Thailand', when: 'June 2024', date: '2024-06', emoji: '🐘',
-    places: ['thailand', 'bangkok', 'phuket'],
-    summary: 'Temples and street food in Bangkok, then beaches and island hopping around Phuket.'
-  },
-  {
-    id: 'singapore-2024', title: 'Singapore', when: 'Dec 2024', date: '2024-12', emoji: '🦁',
-    places: ['singapore'],
-    summary: 'A year-end city break: Gardens by the Bay, Sentosa, Marina Bay and a lot of hawker food.'
-  },
-  {
-    id: 'indonesia-2025', title: 'Indonesia', when: 'June 2025', date: '2025-06', emoji: '🌋',
-    places: ['indonesia', 'borobudur', 'prambanan', 'bali'],
-    summary: 'Sunrise at Borobudur, the Hindu temples of Prambanan, then rice terraces and beaches in Bali.'
-  },
-  {
-    id: 'europe-2026', title: 'Switzerland & Paris', when: 'June 2026', date: '2026-06', emoji: '⛰️',
-    places: ['switzerland', 'zurich', 'lucerne', 'interlaken', 'france', 'paris'],
-    summary: 'Lakes and Alps across Zurich, Lucerne and Interlaken, finishing with a few days in Paris.'
-  }
+  { id: 'school-1996', title: 'School trip — Madurai, Kanyakumari, Kerala, Kodaikanal', when: '1996', date: '1996-01', scope: 'domestic', emoji: '🎒', places: ['madurai', 'kanyakumari', 'kerala', 'kodaikanal'] },
+  { id: 'college-1999', title: 'College trip — Bangalore & Mysore', when: '1999', date: '1999-01', scope: 'domestic', emoji: '🎓', places: ['mysuru'] },
+  { id: 'devarayanadurga-2004', title: 'Devarayanadurga (day trip)', when: 'Jul 2004', date: '2004-07', scope: 'domestic', emoji: '⛰️', places: ['devarayanadurga'] },
+  { id: 'pondicherry-2006', title: 'Pondicherry (day trip)', when: 'Jan 2006', date: '2006-01', scope: 'domestic', emoji: '🚲', places: ['pondicherry'] },
+  { id: 'andover-2006a', title: 'Andover, USA (work)', when: 'May 2006', date: '2006-05', scope: 'international', emoji: '💼', places: ['usa'] },
+  { id: 'andover-2006b', title: 'Andover, USA (work)', when: 'Oct 2006', date: '2006-10', scope: 'international', emoji: '💼', places: ['usa'] },
+  { id: 'bangalore-2007', title: 'Bangalore (day trip)', when: 'Apr 2007', date: '2007-04', scope: 'domestic', emoji: '🏙️', places: [] },
+  { id: 'irvine-2007', title: 'Irvine, USA (work)', when: 'Jun 2007', date: '2007-06', scope: 'international', emoji: '💼', places: ['usa'] },
+  { id: 'beijing-2007', title: 'Beijing & the Great Wall, with a Singapore stopover', when: 'Dec 2007', date: '2007-12', scope: 'international', emoji: '🏯', places: ['china', 'beijing', 'singapore'], summary: 'The Great Wall at Badaling in the winter cold, Tiananmen and the Forbidden City, then a short stop in Singapore on the way back.' },
+  { id: 'coorg-2008', title: 'Coorg (first trip)', when: 'Mar 2008', date: '2008-03', scope: 'domestic', emoji: '☕', places: ['coorg'] },
+  { id: 'sandiego-2008a', title: 'San Diego, USA — La Jolla, Universal Studios', when: 'Jun 2008', date: '2008-06', scope: 'international', emoji: '🌴', places: ['san-diego'] },
+  { id: 'mahabalipuram-2008', title: 'Mahabalipuram (day trip from Pondicherry)', when: 'Sep 2008', date: '2008-09', scope: 'domestic', emoji: '🐘', places: ['mahabalipuram'] },
+  { id: 'sandiego-2008b', title: 'San Diego, USA — Sunset Cliffs', when: 'Oct 2008', date: '2008-10', scope: 'international', emoji: '🌅', places: ['san-diego'] },
+  { id: 'gumi-2008', title: 'Gumi, South Korea — Geumosan trek', when: 'Nov 2008', date: '2008-11', scope: 'international', emoji: '🥾', places: ['south-korea', 'gumi'], summary: 'A work trip that turned into a hike up Geumosan in the autumn colours.' },
+  { id: 'ooty-2008', title: 'Ooty (first trip)', when: 'Dec 2008', date: '2008-12', scope: 'domestic', emoji: '🚂', places: ['ooty'] },
+  { id: 'kodaikanal-2009', title: 'Kodaikanal', when: 'Jul 2009', date: '2009-07', scope: 'domestic', emoji: '🌫️', places: ['kodaikanal'] },
+  { id: 'golden-triangle-2010', title: 'Delhi, Agra & Jaipur', when: 'Feb 2010', date: '2010-02', scope: 'domestic', emoji: '🕌', places: ['delhi', 'agra', 'jaipur'], summary: 'The Golden Triangle: Red Fort and Qutub Minar, the Taj at sunrise, Amber Fort and Hawa Mahal.' },
+  { id: 'andover-2010', title: 'Andover, USA — Niagara Falls & New York', when: 'Jun 2010', date: '2010-06', scope: 'international', emoji: '🗽', places: ['niagara-falls', 'new-york'], summary: 'Weekend runs from Andover: the Maid of the Mist at Niagara, then the Statue of Liberty, Wall Street and Times Square.' },
+  { id: 'sandiego-2010', title: 'San Diego, USA — Point Loma, Grand Canyon & Las Vegas', when: 'Dec 2010', date: '2010-12', scope: 'international', emoji: '🏜️', places: ['san-diego', 'grand-canyon', 'las-vegas'], summary: 'Point Loma lighthouse, a drive out to the Grand Canyon’s South Rim and the neon of the Las Vegas Strip.' },
+  { id: 'hogenakkal-munnar-2011', title: 'Hogenakkal & Munnar', when: 'Mar 2011', date: '2011-03', scope: 'domestic', emoji: '💦', places: ['hogenakkal', 'munnar'] },
+  { id: 'tirupati-2011', title: 'Tirupati (first trip)', when: 'Dec 2011', date: '2011-12', scope: 'domestic', emoji: '🙏', places: ['tirupati'] },
+  { id: 'andover-2012', title: 'Andover, USA (work)', when: 'Dec 2012', date: '2012-12', scope: 'international', emoji: '💼', places: ['usa'] },
+  { id: 'santaclara-2013', title: 'Santa Clara, USA (work)', when: 'Jan 2013', date: '2013-01', scope: 'international', emoji: '💼', places: ['usa'] },
+  { id: 'nandi-2014', title: 'Nandi Hills (day trip)', when: 'May 2014', date: '2014-05', scope: 'domestic', emoji: '🌄', places: ['nandi-hills'] },
+  { id: 'coorg-2014', title: 'Coorg (second trip)', when: 'Oct 2014', date: '2014-10', scope: 'domestic', emoji: '☕', places: ['coorg'] },
+  { id: 'irvine-2014', title: 'Irvine, USA — Oceanside Pier, La Jolla', when: 'Nov 2014', date: '2014-11', scope: 'international', emoji: '🌴', places: ['san-diego'] },
+  { id: 'goa-2015', title: 'Goa', when: 'Jan 2015', date: '2015-01', scope: 'domestic', emoji: '🏖️', places: ['goa'] },
+  { id: 'jaladhama-2016', title: 'Jaladhama (resort weekend)', when: 'Jan 2016', date: '2016-01', scope: 'domestic', emoji: '🏝️', places: [] },
+  { id: 'mangalore-2016', title: 'Mangalore & Murudeshwar', when: 'Oct 2016', date: '2016-10', scope: 'domestic', emoji: '⛵', places: ['mangalore', 'murudeshwar'] },
+  { id: 'yercaud-2016', title: 'Yercaud', when: 'Nov 2016', date: '2016-11', scope: 'domestic', emoji: '🍊', places: ['yercaud'] },
+  { id: 'yelagiri-2016', title: 'Yelagiri & Pondicherry', when: 'Dec 2016', date: '2016-12', scope: 'domestic', emoji: '🪂', places: ['yelagiri', 'pondicherry'] },
+  { id: 'rameswaram-2017', title: 'Rameswaram & Madurai', when: 'Jun 2017', date: '2017-06', scope: 'domestic', emoji: '🐚', places: ['rameswaram', 'dhanushkodi', 'madurai'] },
+  { id: 'hoysala-2017', title: 'Belur, Halebidu & Chikkamagaluru', when: 'Jul 2017', date: '2017-07', scope: 'domestic', emoji: '🎨', places: ['belur', 'halebidu', 'chikkamagaluru'] },
+  { id: 'chidambaram-2017', title: 'Chidambaram (day trip from Pondicherry)', when: 'Aug 2017', date: '2017-08', scope: 'domestic', emoji: '🕺', places: ['chidambaram'] },
+  { id: 'wayanad-2017', title: 'Wayanad', when: 'Sep 2017', date: '2017-09', scope: 'domestic', emoji: '🌲', places: ['wayanad'] },
+  { id: 'mysore-2017', title: 'Mysore (day trip)', when: 'Nov 2017', date: '2017-11', scope: 'domestic', emoji: '👑', places: ['mysuru'] },
+  { id: 'thanjavur-2017', title: 'Thanjavur & Velankanni', when: 'Dec 2017', date: '2017-12', scope: 'domestic', emoji: '🎨', places: ['thanjavur', 'velankanni'] },
+  { id: 'lepakshi-2018', title: 'Lepakshi (day trip)', when: 'Jan 2018', date: '2018-01', scope: 'domestic', emoji: '🐂', places: ['lepakshi'] },
+  { id: 'bhoga-2018', title: 'Bhoga Nandeeshwara temple (day trip)', when: 'Jan 2018', date: '2018-01', scope: 'domestic', emoji: '🛕', places: ['bhoga-nandeeshwara'] },
+  { id: 'coimbatore-2018', title: 'Coimbatore (first trip)', when: 'Feb 2018', date: '2018-02', scope: 'domestic', emoji: '🧵', places: ['coimbatore'] },
+  { id: 'ooty-2018', title: 'Ooty (second trip)', when: 'Mar 2018', date: '2018-03', scope: 'domestic', emoji: '🚂', places: ['ooty'] },
+  { id: 'coorg-2018', title: 'Coorg (third trip)', when: 'May 2018', date: '2018-05', scope: 'domestic', emoji: '☕', places: ['coorg'] },
+  { id: 'tirupati-2019', title: 'Tirupati (second trip)', when: 'Feb 2019', date: '2019-02', scope: 'domestic', emoji: '🙏', places: ['tirupati'] },
+  { id: 'sikkim-2019', title: 'Sikkim & Darjeeling', when: 'Apr 2019', date: '2019-04', scope: 'domestic', emoji: '🏔️', places: ['gangtok', 'darjeeling'], summary: 'Gangtok and the high passes, then the toy train and Tiger Hill sunrise at Darjeeling.' },
+  { id: 'isha-2019', title: 'Isha Yoga, Coimbatore (second trip)', when: 'Jul 2019', date: '2019-07', scope: 'domestic', emoji: '🧘', places: ['coimbatore'] },
+  { id: 'hampi-2019', title: 'Hampi', when: 'Jul 2019', date: '2019-07', scope: 'domestic', emoji: '🏛️', places: ['hampi'] },
+  { id: 'trichy-2019', title: 'Trichy & Srirangam', when: 'Aug 2019', date: '2019-08', scope: 'domestic', emoji: '🪨', places: ['trichy'] },
+  { id: 'gandikota-2019', title: 'Gooty Fort, Belum Caves & Gandikota', when: 'Aug 2019', date: '2019-08', scope: 'domestic', emoji: '🏜️', places: ['anantapur', 'belum-caves', 'gandikota'] },
+  { id: 'mekedatu-2019', title: 'Muthathi, Sangama & Mekedatu (day trip)', when: 'Oct 2019', date: '2019-10', scope: 'domestic', emoji: '🛶', places: ['mekedatu'] },
+  { id: 'kaveri-2019', title: 'Ramanagara, Srirangapatna, Somanathapura & Shivanasamudra', when: 'Oct 2019', date: '2019-10', scope: 'domestic', emoji: '⚔️', places: ['ramanagara', 'srirangapatna', 'somanathapura', 'shivanasamudra'] },
+  { id: 'shravanabelagola-2019', title: 'Shravanabelagola & Melukote', when: 'Oct 2019', date: '2019-10', scope: 'domestic', emoji: '🧘', places: ['shravanabelagola', 'melukote'] },
+  { id: 'pichavaram-2019', title: 'Pichavaram, Kollidam & Tharangambadi', when: 'Nov 2019', date: '2019-11', scope: 'domestic', emoji: '🌿', places: ['pichavaram', 'tharangambadi'] },
+  { id: 'dandeli-2019', title: 'Dandeli & Chitradurga', when: 'Dec 2019', date: '2019-12', scope: 'domestic', emoji: '🛶', places: ['dandeli', 'chitradurga'] },
+  { id: 'vellore-2020', title: 'Vellore, Kanchipuram & Thiruthani', when: 'Jan 2020', date: '2020-01', scope: 'domestic', emoji: '🏰', places: ['vellore', 'kanchipuram', 'thiruthani'] },
+  { id: 'kgf-2020', title: 'KGF (day trip)', when: 'Feb 2020', date: '2020-02', scope: 'domestic', emoji: '⛏️', places: ['kgf'] },
+  { id: 'mandaragiri-2021', title: 'Mandaragiri Hill (day trip)', when: 'Jan 2021', date: '2021-01', scope: 'domestic', emoji: '🪷', places: ['mandaragiri'] },
+  { id: 'nandi-trek-2021', title: 'Nandi Hills trek (day trip)', when: 'Jan 2021', date: '2021-01', scope: 'domestic', emoji: '🥾', places: ['nandi-hills'] },
+  { id: 'udupi-2021', title: 'Udupi & Gokarna', when: 'Mar 2021', date: '2021-03', scope: 'domestic', emoji: '🏖️', places: ['udupi', 'gokarna'] },
+  { id: 'pec-2021', title: 'PEC & Petit visit', when: 'Nov 2021', date: '2021-11', scope: 'domestic', emoji: '🏫', places: [] },
+  { id: 'hampta-2022', title: 'Hampta Pass trek', when: 'Aug 2022', date: '2022-08', scope: 'domestic', emoji: '🏔️', places: ['hampta-pass', 'manali'], summary: 'Five days from Manali over the 4,270 m Hampta Pass into Lahaul, ending at Chandratal.' },
+  { id: 'mumbai-2022', title: 'Mumbai & Lonavala', when: 'Sep 2022', date: '2022-09', scope: 'domestic', emoji: '🌆', places: ['mumbai', 'lonavala'] },
+  { id: 'farm-2023', title: 'Farm visit near Mysore', when: 'Jul 2023', date: '2023-07', scope: 'domestic', emoji: '🌾', places: ['mysuru'] },
+  { id: 'shirdi-2023', title: 'Shirdi, Ajanta & Ellora', when: 'Oct 2023', date: '2023-10', scope: 'domestic', emoji: '🙏', places: ['shirdi', 'ajanta', 'ellora', 'aurangabad'] },
+  { id: 'kochi-2024', title: 'Kochi & Alappuzha', when: 'Jan 2024', date: '2024-01', scope: 'domestic', emoji: '🛶', places: ['kochi', 'alleppey'] },
+  { id: 'odisha-2024', title: 'Odisha — Puri, Konark, Chilika, Bhubaneswar', when: 'Jan 2024', date: '2024-01', scope: 'domestic', emoji: '☀️', places: ['puri', 'konark', 'chilika', 'bhubaneswar'] },
+  { id: 'bhopal-2024', title: 'Bhopal, Sanchi & Bhimbetka', when: 'Mar 2024', date: '2024-03', scope: 'domestic', emoji: '☸️', places: ['bhopal', 'sanchi', 'bhimbetka'] },
+  { id: 'thailand-2024', title: 'Thailand', when: 'Jun 2024', date: '2024-06', scope: 'international', emoji: '🐘', places: ['thailand', 'bangkok', 'phuket'], summary: 'Temples and street food in Bangkok, then beaches and island hopping around Phuket.' },
+  { id: 'uttarakhand-2024', title: 'Uttarakhand — Rishikesh, Mussoorie, Dehradun', when: 'Oct 2024', date: '2024-10', scope: 'domestic', emoji: '🧘', places: ['rishikesh', 'mussoorie', 'dehradun'] },
+  { id: 'singapore-2024', title: 'Singapore', when: 'Dec 2024', date: '2024-12', scope: 'international', emoji: '🦁', places: ['singapore'], summary: 'A year-end city break: Gardens by the Bay, Sentosa, Marina Bay and a lot of hawker food.' },
+  { id: 'udaipur-2025', title: 'Udaipur & Kumbhalgarh', when: 'Feb 2025', date: '2025-02', scope: 'domestic', emoji: '🏰', places: ['udaipur', 'kumbhalgarh'] },
+  { id: 'indonesia-2025', title: 'Indonesia', when: 'Jun 2025', date: '2025-06', scope: 'international', emoji: '🌋', places: ['indonesia', 'borobudur', 'prambanan', 'bali'], summary: 'Sunrise at Borobudur, the Hindu temples of Prambanan, then rice terraces and beaches in Bali.' },
+  { id: 'europe-2026', title: 'Switzerland & Paris', when: 'Jun 2026', date: '2026-06', scope: 'international', emoji: '⛰️', places: ['switzerland', 'zurich', 'lucerne', 'interlaken', 'france', 'paris'], summary: 'Lakes and Alps across Zurich, Lucerne and Interlaken, finishing with a few days in Paris.' }
 );

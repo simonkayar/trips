@@ -32,7 +32,7 @@ OUT = ROOT / "data" / "images.js"
 UA = {"User-Agent": "TripsFamilySite/1.1 (+https://simonkayar.com/sites/trips; family travel journal, one-off image fetch)"}
 WIDTH = 1400
 PAUSE = 1.5            # seconds between requests
-BAD_FILE = re.compile(r"\.svg$|flag|map|locator|emblem|seal|logo|coat_of_arms|collage|montage", re.I)
+BAD_FILE = re.compile(r"\.svg$|\.gif$|flag|map|locator|emblem|seal|logo|coat_of_arms|collage|montage|multiple_views", re.I)
 
 # place id -> Wikipedia article(s) to try, in order, for a usable lead image
 TITLES = {
@@ -87,11 +87,42 @@ TITLES = {
     "himachal": ["Rohtang Pass"], "shimla": ["Shimla", "Christ Church, Shimla"],
     "kufri": ["Kufri", "Himalayan Nature Park", "Fagu, Himachal Pradesh", "Shimla district"],
     "manali": ["Manali, Himachal Pradesh", "Hidimba Devi Temple"],
-    "chandigarh-ut": ["Open Hand Monument"], "chandigarh": ["Rock Garden of Chandigarh"],
+    "chandigarh-ut": ["Open Hand Monument"], "chandigarh": ["file:Dancing girls at Rock Garden, Chandigarh.jpg", "file:Decorated wall at Rock Garden, Chandigarh.jpg", "Rock Garden of Chandigarh"],
+    # added Sept 2026
+    "usa": ["United States Capitol"], "grand-canyon": ["Grand Canyon"], "las-vegas": ["Las Vegas Strip", "Las Vegas"],
+    "niagara-falls": ["Niagara Falls"], "new-york": ["Statue of Liberty"], "san-diego": ["La Jolla Cove", "Sunset Cliffs Natural Park", "La Jolla"],
+    "china": ["Forbidden City"], "beijing": ["Great Wall of China", "Badaling"],
+    "south-korea": ["Gyeongbokgung"], "gumi": ["commons:Geumosan Gumi", "Gumi, North Gyeongsang"],
+    "goa-state": ["Fort Aguada"], "goa": ["Basilica of Bom Jesus", "Palolem Beach", "Goa"],
+    "sikkim": ["Kangchenjunga"], "gangtok": ["Gangtok", "Rumtek Monastery"],
+    "westbengal": ["Howrah Bridge"], "darjeeling": ["Darjeeling Himalayan Railway", "Darjeeling"],
+    "gandikota": ["Gandikota"], "belum-caves": ["Belum Caves"],
+    "devarayanadurga": ["Devarayanadurga"], "murudeshwar": ["Murudeshwar"], "somanathapura": ["Chennakesava Temple, Somanathapura"],
+    "mekedatu": ["Mekedatu"], "kgf": ["Kolar Gold Fields", "commons:Kolar Gold Fields mine"], "mandaragiri": ["commons:Mandaragiri Jain temple Tumkur", "Mandaragiri"],
+    "hogenakkal": ["Hogenakkal Falls"], "chidambaram": ["Thillai Nataraja Temple, Chidambaram"], "coimbatore": ["Adiyogi Shiva statue"],
+    "pichavaram": ["Pichavaram"], "tharangambadi": ["Fort Dansborg", "Tharangambadi"], "hampta-pass": ["Hampta Pass", "commons:Hampta Pass trek"],
 }
 
+# picture changes requested Sept 2026 (better / more specific views)
+TITLES.update({
+    "thiruparankundram": ["commons:Thiruparankundram Murugan temple", "commons:Tirupparankunram"],
+    "mangalore": ["St. Aloysius Chapel", "Kadri Manjunath Temple", "Panambur Beach"],
+    "shravanabelagola": ["commons:Gommateshwara Bahubali face Shravanabelagola", "commons:Bahubali statue head Shravanabelagola"],
+    "chikkamagaluru": ["commons:Mullayanagiri peak", "Baba Budangiri", "Kemmangundi"],
+    "ooty": ["Doddabetta", "commons:Nilgiri hills Ooty landscape"],
+    "yelagiri": ["file:Yelagiri Lake.jpg", "file:Mangalam Trek, Yelagiri.jpg"],
+    "vellore": ["commons:Sripuram Golden Temple Vellore", "commons:Lakshmi Narayani Golden Temple Sripuram"],
+    "gangtok": ["commons:Gangtok city view Sikkim", "commons:MG Marg Gangtok", "Gangtok"],
+    "kgf": ["commons:Kolar Gold Fields cyanide dump", "commons:KGF mine shaft Kolar", "Kolar Gold Fields"],
+    "wayanad": ["Banasura Sagar Dam"],
+    "anantapur": ["Gandikota"],
+    "shimla": ["Christ Church, Shimla", "The Ridge, Shimla"],
+    "kufri": ["commons:Kufri Himachal Pradesh snow", "commons:Kufri Shimla"],
+})
+
 # country hubs (and India) -> ISO code for the flag image
-FLAG_ISO = {"singapore": "sg", "thailand": "th", "indonesia": "id", "switzerland": "ch", "france": "fr", "india": "in"}
+FLAG_ISO = {"singapore": "sg", "thailand": "th", "indonesia": "id", "switzerland": "ch", "france": "fr", "india": "in",
+            "usa": "us", "china": "cn", "south-korea": "kr"}
 
 
 def fetch(url, binary=False):
@@ -113,8 +144,43 @@ def fetch(url, binary=False):
     raise RuntimeError("gave up")
 
 
+def commons_search(query):
+    """'commons:<query>' entries: first usable photo from a Wikimedia Commons file search."""
+    q = urllib.parse.urlencode({
+        "action": "query", "generator": "search", "gsrsearch": query + " filetype:bitmap", "gsrnamespace": 6, "gsrlimit": 8,
+        "prop": "imageinfo", "iiprop": "url", "iiurlwidth": WIDTH, "format": "json",
+    })
+    data = fetch("https://commons.wikimedia.org/w/api.php?" + q)
+    pages = sorted(data.get("query", {}).get("pages", {}).values(), key=lambda p: p.get("index", 99))
+    for p in pages:
+        fname = p["title"].replace("File:", "")
+        if BAD_FILE.search(fname) or not fname.lower().endswith((".jpg", ".jpeg", ".png")):
+            continue
+        info = (p.get("imageinfo") or [{}])[0]
+        url = info.get("thumburl") or info.get("url")
+        if url:
+            return url, fname, "https://commons.wikimedia.org/wiki/" + urllib.parse.quote(p["title"].replace(" ", "_"))
+    return None
+
+
+def commons_file(fname):
+    """'file:<File name>' entries: a specific Wikimedia file (find names with list_article_images.py)."""
+    q = urllib.parse.urlencode({"action": "query", "titles": "File:" + fname, "prop": "imageinfo", "iiprop": "url", "iiurlwidth": WIDTH, "format": "json"})
+    data = fetch("https://commons.wikimedia.org/w/api.php?" + q)
+    for p in data.get("query", {}).get("pages", {}).values():
+        info = (p.get("imageinfo") or [{}])[0]
+        url = info.get("thumburl") or info.get("url")
+        if url:
+            return url, fname, "https://commons.wikimedia.org/wiki/File:" + urllib.parse.quote(fname.replace(" ", "_"))
+    return None
+
+
 def lead_image(title):
     """Returns (thumb_url, file_name, page_url) for the article's lead image, or None."""
+    if title.startswith("commons:"):
+        return commons_search(title[len("commons:"):])
+    if title.startswith("file:"):
+        return commons_file(title[len("file:"):])
     q = urllib.parse.urlencode({
         "action": "query", "prop": "pageimages", "piprop": "thumbnail|name", "pithumbsize": WIDTH,
         "titles": title, "redirects": 1, "format": "json",

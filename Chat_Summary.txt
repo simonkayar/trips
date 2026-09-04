@@ -79,3 +79,34 @@ moved Trips\ftp.txt -> trips-ftp.txt, FINANCE\ftp.txt -> finance-ftp.txt,
 Lazybaker\ftp.txt -> lazybaker-ftp.txt. tools/deploy_ftp.py now reads
 ~/.secrets/trips-ftp.txt; Lazybaker's README and the Trips docs updated.
 FINANCE had never committed its ftp.txt (git-ignored from the first commit).
+
+2026-09-04 — Session 4: improvements round 2 + the full trip log
+----------------------------------------------------------------
+Asked (8 points): 1) rename "Must see & do" to "Tourist Highlights"; 2) make the
+home-page stats clickable and add a photo album; 3) too many filters on the
+destinations page — drop the state/country chips; 4) better pictures for
+Thiruparankundram, Mangaluru, Shravanabelagola (face), Chikkamagaluru (peak),
+Ooty (hills), Yelagiri, Vellore (Golden Temple), Wayanad (dam), Anantapur
+(Gandikota), Shimla (Christ Church), Kufri, Chandigarh (Rock Garden); 5) shorter
+button labels "Browse them" / "Quiz me"; 6) add USA (Grand Canyon, Las Vegas,
+Niagara, New York), China (Great Wall / Beijing), South Korea (Gumi trek);
+7) the full trip log from Simon's own website (1996–2025) — take anything new.
+Done:
+- 1, 3, 5 as asked; state/country filter is now a dropdown; collection chips stay.
+- 2: stats link to destinations / India page / album / quiz; new album.html
+  (all uploaded photos grouped by place, shared lightbox); "Album" in the nav.
+- 4: pictures replaced via Wikipedia / a new Wikimedia Commons search fallback
+  ("commons:<query>" in TITLES); reviewed by eye. GIF/collage lead images now
+  rejected.
+- 6 + 7: data/trips.js is now the complete trip log (72 trips). "Visited" on
+  every place is derived from it (places count a trip only if listed directly;
+  hubs roll up their children); the Journal page shows the log by year; quiz
+  gains "in which year did we go to …" questions. New data/places-more.js:
+  USA hub + 5 places, China + Beijing/Great Wall, South Korea + Gumi, Goa,
+  Sikkim/Gangtok, West Bengal/Darjeeling, Gandikota, Belum Caves,
+  Devarayanadurga, Murudeshwar, Somanathapura, Mekedatu, KGF, Mandaragiri,
+  Hogenakkal, Chidambaram, Coimbatore/Adiyogi, Pichavaram, Tharangambadi,
+  Hampta Pass (24 new places + 6 hubs → 108 places, 26 hubs, 1,045 questions).
+  Work-trip towns (Andover, Irvine, Santa Clara) are logged as trips on the USA
+  hub, not as places. New "Treks & hikes" collection.
+- Fixed: western longitudes now print "W".

@@ -15,7 +15,7 @@ TRIPS.places.push(
   /* ======================= SINGAPORE ======================= */
   {
     id: 'singapore', name: 'Singapore', kind: 'place', scope: 'international', country: 'Singapore',
-    lat: 1.29, lng: 103.85, emoji: '🦁', tagline: 'The Lion City — a garden city-state on the equator', visited: 'Dec 2024',
+    lat: 1.29, lng: 103.85, emoji: '🦁', tagline: 'The Lion City — a garden city-state on the equator',
     glance: { 'Type': 'Island city-state', 'Language': 'English, Malay, Mandarin, Tamil', 'Currency': 'Singapore dollar (SGD)', 'Population': '~5.9 million', 'Time zone': 'UTC+8 (2½ hours ahead of India)' },
     history: [
       '**1819** — Sir Stamford Raffles set up a British trading post on the island; the name comes from the Sanskrit “Singapura”, Lion City.',
@@ -51,7 +51,7 @@ TRIPS.places.push(
   /* ======================= THAILAND ======================= */
   {
     id: 'thailand', name: 'Thailand', kind: 'country', scope: 'international', country: 'Thailand',
-    lat: 15.87, lng: 100.99, emoji: '🐘', tagline: 'Land of Smiles', visited: 'June 2024',
+    lat: 15.87, lng: 100.99, emoji: '🐘', tagline: 'Land of Smiles',
     glance: { 'Capital': 'Bangkok', 'Language': 'Thai', 'Currency': 'Thai baht (THB)', 'Population': '~72 million', 'Religion': '~93% Buddhist', 'Time zone': 'UTC+7 (1½ hours ahead of India)' },
     history: [
       'Known as **Siam** until 1939; the only South-East Asian country never colonised by a European power.',
@@ -66,7 +66,7 @@ TRIPS.places.push(
   },
   {
     id: 'bangkok', name: 'Bangkok', kind: 'place', scope: 'international', country: 'Thailand', parent: 'thailand',
-    lat: 13.75, lng: 100.50, emoji: '🛕', tagline: 'City of Angels on the Chao Phraya', visited: 'June 2024',
+    lat: 13.75, lng: 100.50, emoji: '🛕', tagline: 'City of Angels on the Chao Phraya',
     glance: { 'Thai name': 'Krung Thep', 'River': 'Chao Phraya', 'Population': '~11 million (metro)', 'Founded': '1782 by Rama I', 'Known for': 'Temples, street food, markets, nightlife' },
     history: [
       'Became the capital in **1782** when King Rama I moved across the river from Thonburi after the fall of Ayutthaya.',
@@ -88,7 +88,7 @@ TRIPS.places.push(
   },
   {
     id: 'phuket', name: 'Phuket', kind: 'place', scope: 'international', country: 'Thailand', parent: 'thailand',
-    lat: 7.88, lng: 98.39, emoji: '🏝️', tagline: 'Pearl of the Andaman', visited: 'June 2024',
+    lat: 7.88, lng: 98.39, emoji: '🏝️', tagline: 'Pearl of the Andaman',
     glance: { 'Type': 'Thailand’s largest island', 'Sea': 'Andaman Sea', 'Known for': 'Beaches, island trips, Old Town', 'Best season': 'Nov–Apr (dry)', 'Connected by': 'Sarasin Bridge to the mainland' },
     history: [
       'Grew rich on **tin mining** and rubber in the 19th century, bringing Chinese and Portuguese influences to Old Town’s Sino-Portuguese shophouses.',
@@ -112,7 +112,7 @@ TRIPS.places.push(
   /* ======================= INDONESIA ======================= */
   {
     id: 'indonesia', name: 'Indonesia', kind: 'country', scope: 'international', country: 'Indonesia',
-    lat: -2.5, lng: 118, emoji: '🌋', tagline: 'Seventeen thousand islands', visited: 'June 2025',
+    lat: -2.5, lng: 118, emoji: '🌋', tagline: 'Seventeen thousand islands',
     glance: { 'Capital': 'Jakarta (moving to Nusantara)', 'Language': 'Bahasa Indonesia', 'Currency': 'Rupiah (IDR)', 'Population': '~280 million — 4th largest', 'Islands': '~17,000', 'Time zones': '3 (Java UTC+7, Bali UTC+8)' },
     history: [
       'Great Hindu-Buddhist kingdoms — **Sailendra, Mataram, Majapahit** — built Borobudur and Prambanan between the 8th and 15th centuries.',
@@ -127,7 +127,7 @@ TRIPS.places.push(
   },
   {
     id: 'borobudur', name: 'Borobudur', kind: 'place', scope: 'international', country: 'Indonesia', parent: 'indonesia',
-    lat: -7.608, lng: 110.204, emoji: '🛕', tagline: 'The largest Buddhist monument on Earth', visited: 'June 2025',
+    lat: -7.608, lng: 110.204, emoji: '🛕', tagline: 'The largest Buddhist monument on Earth',
     glance: { 'Location': 'Magelang, Central Java (near Yogyakarta)', 'Built': 'c. 780–840 CE, Sailendra dynasty', 'UNESCO': 'World Heritage 1991', 'Stone blocks': '~2 million', 'Reliefs': '2,672 panels, 504 Buddha statues' },
     history: [
       'Built by the **Sailendra** kings as a giant three-dimensional mandala: a square base (the world of desire), circular terraces (world of forms) and the top stupa (formlessness).',
@@ -142,7 +142,7 @@ TRIPS.places.push(
   },
   {
     id: 'prambanan', name: 'Prambanan', kind: 'place', scope: 'international', country: 'Indonesia', parent: 'indonesia',
-    lat: -7.752, lng: 110.491, emoji: '🕉️', tagline: 'Indonesia’s grandest Hindu temple', visited: 'June 2025',
+    lat: -7.752, lng: 110.491, emoji: '🕉️', tagline: 'Indonesia’s grandest Hindu temple',
     glance: { 'Location': 'Yogyakarta / Central Java border', 'Built': 'c. 850 CE, Mataram kingdom', 'UNESCO': 'World Heritage 1991', 'Main shrine': 'Shiva temple, 47 m tall', 'Dedicated to': 'Trimurti — Brahma, Vishnu, Shiva' },
     history: [
       'Built by **Rakai Pikatan** of the Sanjaya line of the Mataram kingdom — possibly as a Hindu answer to Buddhist Borobudur, 17 km away.',
@@ -157,7 +157,7 @@ TRIPS.places.push(
   },
   {
     id: 'bali', name: 'Bali', kind: 'place', scope: 'international', country: 'Indonesia', parent: 'indonesia',
-    lat: -8.51, lng: 115.26, emoji: '🌺', tagline: 'Island of the Gods', visited: 'June 2025',
+    lat: -8.51, lng: 115.26, emoji: '🌺', tagline: 'Island of the Gods',
     glance: { 'Capital': 'Denpasar', 'Religion': '~87% Balinese Hindu', 'Highest point': 'Mount Agung, 3,031 m', 'Known for': 'Temples, rice terraces, surf, Ubud arts', 'Time zone': 'UTC+8' },
     history: [
       'Hinduism arrived from Java; when Majapahit fell in the 15th century its priests and nobles fled to Bali, preserving Hindu culture on an island in a Muslim archipelago.',
@@ -181,7 +181,7 @@ TRIPS.places.push(
   /* ======================= SWITZERLAND ======================= */
   {
     id: 'switzerland', name: 'Switzerland', kind: 'country', scope: 'international', country: 'Switzerland',
-    lat: 46.82, lng: 8.23, emoji: '⛰️', tagline: 'Alps, lakes and clockwork trains', visited: 'June 2026',
+    lat: 46.82, lng: 8.23, emoji: '⛰️', tagline: 'Alps, lakes and clockwork trains',
     glance: { 'Capital': 'Bern (federal city)', 'Languages': 'German, French, Italian, Romansh', 'Currency': 'Swiss franc (CHF)', 'Population': '~9 million', 'Cantons': '26', 'Time zone': 'UTC+2 in summer (3½ hours behind India)' },
     history: [
       '**1291** — Three forest cantons swore the Rütli oath, the founding of the Swiss Confederation; William Tell’s legend belongs to this era.',
@@ -196,7 +196,7 @@ TRIPS.places.push(
   },
   {
     id: 'zurich', name: 'Zurich', kind: 'place', scope: 'international', country: 'Switzerland', parent: 'switzerland',
-    lat: 47.37, lng: 8.54, emoji: '🏦', tagline: 'Lakeside banking city with a medieval heart', visited: 'June 2026',
+    lat: 47.37, lng: 8.54, emoji: '🏦', tagline: 'Lakeside banking city with a medieval heart',
     glance: { 'Canton': 'Zurich', 'Lake': 'Lake Zurich, river Limmat', 'Language': 'German', 'Population': '~450,000 (city)', 'Known for': 'Banks, chocolate, Bahnhofstrasse, old town' },
     history: ['A Roman customs post called **Turicum**; became a free imperial city in 1218.', '**Huldrych Zwingli** launched the Swiss Reformation from the Grossmünster in 1519.', 'Dada art movement was born at **Cabaret Voltaire** in 1916; Einstein studied at ETH Zurich.'],
     mustSee: ['**Old Town (Altstadt)** and the twin towers of the **Grossmünster**', '**Fraumünster** — Chagall’s stained-glass windows', '**Bahnhofstrasse** — one of the world’s most expensive shopping streets', '**Lake Zurich** boat trip and **Uetliberg** hill for the city-and-Alps panorama', '**Lindt Home of Chocolate** in Kilchberg — the 9 m chocolate fountain', 'Swiss National Museum'],
@@ -207,7 +207,7 @@ TRIPS.places.push(
   },
   {
     id: 'lucerne', name: 'Lucerne', kind: 'place', scope: 'international', country: 'Switzerland', parent: 'switzerland',
-    lat: 47.05, lng: 8.31, emoji: '🌉', tagline: 'Chapel Bridge, lake and Mount Pilatus', visited: 'June 2026',
+    lat: 47.05, lng: 8.31, emoji: '🌉', tagline: 'Chapel Bridge, lake and Mount Pilatus',
     glance: { 'Canton': 'Lucerne', 'Lake': 'Lake Lucerne (Vierwaldstättersee)', 'Language': 'German', 'Famous for': 'Kapellbrücke, Lion Monument, Pilatus & Rigi', 'Population': '~85,000' },
     history: ['Grew around a Benedictine monastery in the 8th century and prospered on the Gotthard pass trade route.', 'Joined the Confederation in **1332**, one of the earliest members.', 'The **Lion Monument** (1821) remembers Swiss Guards killed defending the French king in 1792 — Mark Twain called it “the saddest stone in the world”.'],
     mustSee: ['**Kapellbrücke (Chapel Bridge)** — 14th-century covered wooden bridge with painted panels and the Water Tower', '**Lion Monument** (Löwendenkmal)', '**Mount Pilatus** — the world’s steepest cogwheel railway (48%), cable car and boat “Golden Round Trip”', '**Mount Rigi** — “Queen of the Mountains”, reached by boat and Europe’s first mountain railway (1871)', '**Old Town** frescoed houses and the **Musegg Wall** towers', '**Swiss Museum of Transport**'],
@@ -218,7 +218,7 @@ TRIPS.places.push(
   },
   {
     id: 'interlaken', name: 'Interlaken', kind: 'place', scope: 'international', country: 'Switzerland', parent: 'switzerland',
-    lat: 46.69, lng: 7.86, emoji: '🏔️', tagline: 'Between two lakes, below the Jungfrau', visited: 'June 2026',
+    lat: 46.69, lng: 7.86, emoji: '🏔️', tagline: 'Between two lakes, below the Jungfrau',
     glance: { 'Canton': 'Bern', 'Between': 'Lake Thun and Lake Brienz', 'Altitude': '568 m', 'Gateway to': 'Jungfrau region — Grindelwald, Lauterbrunnen, Wengen, Mürren', 'Known for': 'Jungfraujoch, paragliding, Harder Kulm' },
     history: ['Named for its position “inter lacus” — between the lakes; grew from a 12th-century monastery.', 'Became a resort in the 1800s when British climbers and painters discovered the Alps; the Jungfrau railway opened in **1912** after 16 years of tunnelling.', 'Byron, Mendelssohn and Goethe all came for the views of the Jungfrau.'],
     mustSee: ['**Jungfraujoch – Top of Europe** (3,454 m) — Sphinx observatory, Ice Palace, Aletsch glacier', '**Lauterbrunnen** valley — 72 waterfalls including Staubbach and **Trümmelbach** inside the rock', '**Harder Kulm** funicular for the two-lakes viewpoint', '**Grindelwald First** cliff walk and **Schilthorn** (James Bond’s Piz Gloria)', 'Boat on **Lake Brienz** to the Giessbach falls', 'Paragliding over Höhematte meadow'],
@@ -231,7 +231,7 @@ TRIPS.places.push(
   /* ======================= FRANCE ======================= */
   {
     id: 'france', name: 'France', kind: 'country', scope: 'international', country: 'France',
-    lat: 46.6, lng: 2.4, emoji: '🍷', tagline: 'Liberté, égalité, fraternité', visited: 'June 2026',
+    lat: 46.6, lng: 2.4, emoji: '🍷', tagline: 'Liberté, égalité, fraternité',
     glance: { 'Capital': 'Paris', 'Language': 'French', 'Currency': 'Euro (EUR)', 'Population': '~68 million', 'Most visited': 'The world’s most-visited country (~100 million tourists a year)', 'Time zone': 'UTC+2 in summer' },
     history: ['Roman **Gaul**, then the Frankish kingdom of Charlemagne (crowned 800 CE), which gave France its name.', 'The **1789 Revolution** ended the monarchy; Napoleon crowned himself Emperor in 1804.', 'Five Republics since; today a founding member of the EU and a permanent UN Security Council member.'],
     mustSee: ['Paris (our stop)', 'Versailles, Mont-Saint-Michel, the Loire châteaux, Provence, the Riviera'],
@@ -242,7 +242,7 @@ TRIPS.places.push(
   },
   {
     id: 'paris', name: 'Paris', kind: 'place', scope: 'international', country: 'France', parent: 'france',
-    lat: 48.86, lng: 2.35, emoji: '🗼', tagline: 'The City of Light', visited: 'June 2026',
+    lat: 48.86, lng: 2.35, emoji: '🗼', tagline: 'The City of Light',
     glance: { 'River': 'Seine', 'Arrondissements': '20, spiralling out like a snail', 'Population': '~2.1 million (city), 12 million (metro)', 'Metro': '16 lines, 300+ stations', 'Known for': 'Eiffel Tower, Louvre, cafés, fashion' },
     history: ['A Celtic tribe, the **Parisii**, settled on the Île de la Cité; the Romans called it Lutetia.', 'Baron **Haussmann** rebuilt the city in the 1850s–70s with the wide boulevards and cream-stone buildings we see today.', 'The **Eiffel Tower** (1889) was meant to be temporary; Paris hosted the Olympics in 1900, 1924 and 2024.'],
     mustSee: [

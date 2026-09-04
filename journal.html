@@ -21,6 +21,10 @@
 
   <div class="grid" style="grid-template-columns: 1fr 340px; gap: 30px; align-items: start">
     <div>
+      <details class="card pad" id="triplog" style="margin-bottom:26px">
+        <summary style="cursor:pointer;font-family:var(--font-display);font-size:1.25rem;font-weight:600">🗓️ Trip log — every trip, by year <span class="muted small" id="triplog-count" style="font-family:var(--font-body);font-weight:500"></span></summary>
+        <div id="triplog-body" style="margin-top:14px"></div>
+      </details>
       <div class="toolbar">
         <select id="filter" style="max-width:320px"><option value="">All places</option></select>
         <span class="count-note" id="count"></span>

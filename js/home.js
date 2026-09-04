@@ -22,12 +22,14 @@
   var countries = T.uniq(intl.map(function (p) { return p.country; }));
   var states = T.uniq(dom.map(function (p) { return p.state; }));
   var stats = [
-    [countries.length, 'countries abroad'], [states.length, 'Indian states & UTs'],
-    [leaves.length, 'places visited'], [T.photoCount(), 'photos'],
-    [T.allQuestions().length, 'quiz questions']
+    [countries.length, 'countries abroad', 'destinations.html?scope=international'],
+    [states.length, 'Indian states & UTs', 'place.html?id=india'],
+    [leaves.length, 'places visited', 'destinations.html'],
+    [T.photoCount(), 'photos', 'album.html'],
+    [T.allQuestions().length, 'quiz questions', 'quiz.html']
   ];
   $('#stats').innerHTML = stats.map(function (s) {
-    return '<div class="stat"><div class="num">' + s[0] + '</div><div class="lbl">' + s[1] + '</div></div>';
+    return '<a class="stat" href="' + s[2] + '"><div class="num">' + s[0] + '</div><div class="lbl">' + s[1] + ' →</div></a>';
   }).join('');
 
   // collections — themed tiles instead of repeating the menu
@@ -41,8 +43,9 @@
       '<div class="txt"><h3>' + T.esc(c.title) + '</h3><p>' + T.esc(c.blurb || '') + '</p></div></a>';
   }).join('');
 
-  // trips abroad
-  var trips = T.trips.slice().sort(function (a, b) { return (b.date || '').localeCompare(a.date || ''); });
+  // trips abroad (the full log, domestic included, is on the journal page)
+  var trips = T.trips.filter(function (t) { return t.scope === 'international'; })
+    .sort(function (a, b) { return (b.date || '').localeCompare(a.date || ''); });
   $('#trips').innerHTML = trips.map(function (t) {
     return '<div class="card trip-card"><div class="em">' + t.emoji + '</div><div>' +
       '<div class="when">' + T.esc(t.when) + '</div><h3>' + T.esc(t.title) + '</h3>' +

@@ -150,7 +150,8 @@ label.field { display: block; font-size: 0.85rem; color: var(--ink-2); font-weig
 @media (max-width: 860px) { .hero { grid-template-columns: 1fr; } .hero-art { min-height: 300px; } }
 
 .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 14px; margin: 30px 0 10px; }
-.stat { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 18px 20px; }
+.stat { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 18px 20px; display: block; color: var(--ink); transition: transform .15s ease, box-shadow .15s ease; }
+a.stat:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); color: var(--ink); border-color: var(--teal); }
 .stat .num { font-family: var(--font-display); font-size: 2.1rem; font-weight: 700; color: var(--teal); line-height: 1; }
 .stat .lbl { color: var(--muted); font-size: 0.85rem; margin-top: 6px; }
 
@@ -254,6 +255,16 @@ label.field { display: block; font-size: 0.85rem; color: var(--ink-2); font-weig
 .note.local { border-left: 4px solid var(--gold); }
 .note .del { float: right; background: none; border: 0; color: var(--muted); cursor: pointer; font-size: 0.8rem; }
 .note .del:hover { color: var(--terracotta); }
+
+/* ---------- Journal: trip log ---------- */
+.year-block { display: grid; grid-template-columns: 64px 1fr; gap: 10px; margin-bottom: 8px; }
+.year-block .year { font-family: var(--font-display); font-size: 1.3rem; font-weight: 700; color: var(--terracotta); padding-top: 4px; }
+.year-block ul { margin: 0 0 8px; padding: 0; list-style: none; }
+.year-block li { padding: 8px 0; border-bottom: 1px dashed var(--line); font-size: 0.93rem; }
+.year-block li .when { color: var(--muted); font-size: 0.8rem; margin-right: 6px; }
+.year-block li .places { margin-top: 4px; display: flex; flex-wrap: wrap; gap: 4px; }
+.year-block li .places a { font-size: 0.8rem; padding: 2px 8px; border-radius: 999px; background: var(--paper-2); color: var(--ink); }
+.year-block li .places a:hover { background: var(--teal-soft); color: var(--teal); }
 
 /* ---------- Quiz ---------- */
 .quiz-wrap { max-width: 760px; margin: 0 auto; }

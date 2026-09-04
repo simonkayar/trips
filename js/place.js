@@ -74,7 +74,7 @@
       html: '<div class="children">' + kids.map(function (c) { return '<a href="place.html?id=' + c.id + '">' + c.emoji + ' ' + T.esc(c.name) + '</a>'; }).join('') + '</div>' });
   }
   if (p.history && p.history.length) nodes.push({ title: 'History', ic: '📜', cls: 'c-gold', html: list(p.history) });
-  if (p.mustSee && p.mustSee.length) nodes.push({ title: 'Must see & do', ic: '🏛️', cls: 'c-terracotta', html: list(p.mustSee) });
+  if (p.mustSee && p.mustSee.length) nodes.push({ title: 'Tourist Highlights', ic: '🏛️', cls: 'c-terracotta', html: list(p.mustSee) });
   if (p.food && p.food.length) nodes.push({ title: 'Food & flavours', ic: '🍛', cls: 'c-sage', html: list(p.food) });
   if (p.culture && p.culture.length) nodes.push({ title: 'Culture & people', ic: '🎭', cls: 'c-ink', html: list(p.culture) });
   if (p.funFacts && p.funFacts.length) nodes.push({ title: 'Fun facts', ic: '✨', cls: 'c-gold', html: '<div id="facts"></div>', facts: true });
@@ -83,9 +83,12 @@
   // our own memories
   var notes = T.notesFor(p.id);
   var ourHtml = '';
-  if (visited) ourHtml += '<p><strong>Visited:</strong> ' + T.esc(visited) + '</p>';
-  var trip = T.tripOf(p);
-  if (trip && trip.summary) ourHtml += '<p class="muted">' + T.esc(trip.summary) + '</p>';
+  var myTrips = T.tripsOf(p);
+  if (myTrips.length) {
+    ourHtml += '<ul>' + myTrips.slice().reverse().map(function (t) {
+      return '<li><strong>' + T.esc(t.when) + '</strong> — ' + T.esc(t.title) + (t.summary ? '<br><span class="muted small">' + T.esc(t.summary) + '</span>' : '') + '</li>';
+    }).join('') + '</ul>';
+  } else if (visited) ourHtml += '<p><strong>Visited:</strong> ' + T.esc(visited) + '</p>';
   if (notes.length) ourHtml += list(notes.slice(0, 4).map(function (n) { return '**' + n.title + '** — ' + n.text; }));
   ourHtml += '<p style="margin:10px 0 0"><a href="journal.html?place=' + p.id + '">' + (notes.length ? 'All ' + notes.length + ' memories in the journal →' : 'Add a memory in the journal →') + '</a></p>';
   nodes.push({ title: 'Our trip', ic: '❤️', cls: 'c-terracotta', html: ourHtml });
@@ -125,7 +128,7 @@
     '<h2>' + T.esc(p.name) + '</h2><div class="where">' + T.esc(where) + '</div>' +
     (capital ? '<div class="capital">Capital: <b>' + T.esc(capital) + '</b></div>' : '') +
     (visited ? '<div class="visited">📅 ' + T.esc(visited) + '</div>' : '') +
-    (typeof p.lat === 'number' ? '<div class="coords">' + Math.abs(p.lat).toFixed(2) + '° ' + (p.lat < 0 ? 'S' : 'N') + ' · ' + p.lng.toFixed(2) + '° E</div>' : '');
+    (typeof p.lat === 'number' ? '<div class="coords">' + Math.abs(p.lat).toFixed(2) + '° ' + (p.lat < 0 ? 'S' : 'N') + ' · ' + Math.abs(p.lng).toFixed(2) + '° ' + (p.lng < 0 ? 'W' : 'E') + '</div>' : '');
 
   /* ---------- cartoon locator map ---------- */
   function locatorHTML(p) {
