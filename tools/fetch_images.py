@@ -102,11 +102,18 @@ TITLES = {
     "hogenakkal": ["Hogenakkal Falls"], "chidambaram": ["Thillai Nataraja Temple, Chidambaram"], "coimbatore": ["Adiyogi Shiva statue"],
     "pichavaram": ["Pichavaram"], "tharangambadi": ["Fort Dansborg", "Tharangambadi"], "hampta-pass": ["Hampta Pass", "commons:Hampta Pass trek"],
     "talakadu": ["Talakadu", "commons:Talakadu temple sand"], "kabini": ["file:Elephant Herd Nagarhole Karnataka Apr22 D72 23799.jpg", "file:Kabini Reservoir Central Sky SE View Pano Karnataka Dec21 D72 21841-842.jpg"],
+    "gooty": ["file:Gooty Fort.JPG", "Gooty Fort"],
+    "pelling": ["file:Sunrise over Kangchenjunga.jpg", "file:Singshore Bridge, Pelling, Sikkim.jpg"],
+    "ravangla": ["file:Large Gautama Buddha statue in Buddha Park of Ravangla, Sikkim.jpg", "Ravangla"],
+    # not places: collection covers and hub icons (images/<id>.jpg)
+    "coll-food": ["Hyderabadi biryani", "Masala dosa"], "coll-rides": ["Nilgiri Mountain Railway"], "coll-cities": ["Manhattan", "New York City"],
+    "icon-nataraja": ["Nataraja"],
 }
 
 # picture changes requested Sept 2026 (better / more specific views)
 TITLES.update({
-    "thiruparankundram": ["commons:Thiruparankundram Murugan temple", "commons:Tirupparankunram"],
+    "thiruparankundram": ["file:Thiruparankundram temple Arun Jayan.jpg", "file:Thiruparankundram Temple 2024 (1).jpg"],
+    "gokarna": ["file:Western Ghats, Gokarna,India.jpg", "file:Sunset in the Arabian sea, Kudle Beach, Gokarna, Karnataka.jpg"],
     "mangalore": ["St. Aloysius Chapel", "Kadri Manjunath Temple", "Panambur Beach"],
     "shravanabelagola": ["commons:Gommateshwara Bahubali face Shravanabelagola", "commons:Bahubali statue head Shravanabelagola"],
     "chikkamagaluru": ["commons:Mullayanagiri peak", "Baba Budangiri", "Kemmangundi"],
@@ -114,7 +121,8 @@ TITLES.update({
     "yelagiri": ["file:Yelagiri Lake.jpg", "file:Mangalam Trek, Yelagiri.jpg"],
     "vellore": ["commons:Sripuram Golden Temple Vellore", "commons:Lakshmi Narayani Golden Temple Sripuram"],
     "gangtok": ["commons:Gangtok city view Sikkim", "commons:MG Marg Gangtok", "Gangtok"],
-    "kgf": ["commons:Kolar Gold Fields cyanide dump", "commons:KGF mine shaft Kolar", "Kolar Gold Fields"],
+    "kgf": ["file:Kotilingeshwara.JPG", "Kotilingeshwara"],
+    "munnar": ["file:Munnar - Tea Plantations.jpg", "file:Tea plantations in Munnar - panoramio.jpg", "file:Munnar Tea Plantations-IMG 20250321 093255.jpg"],
     "wayanad": ["Banasura Sagar Dam"],
     "anantapur": ["Gandikota"],
     "shimla": ["Christ Church, Shimla", "The Ridge, Shimla"],

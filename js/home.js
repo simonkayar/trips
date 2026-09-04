@@ -35,8 +35,10 @@
   // collections — themed tiles instead of repeating the menu
   $('#collections').innerHTML = T.collections.map(function (c) {
     var places = T.collectionPlaces(c);
-    var withPic = places.filter(function (p) { return T.coverPhoto(p); });
-    var cover = withPic.length ? T.coverPhoto(T.pick(withPic)) : null;
+    // cover: a place id whose picture fits the theme, or a dedicated images/<id>.jpg
+    var cover = null;
+    if (c.cover) cover = T.byId(c.cover) ? T.coverPhoto(T.byId(c.cover)) : (T.images[c.cover] || {}).src;
+    if (!cover) { var withPic = places.filter(function (p) { return T.coverPhoto(p); }); cover = withPic.length ? T.coverPhoto(T.pick(withPic)) : null; }
     var style = cover ? 'background-image:url(\'' + T.esc(cover) + '\')' : 'background:' + T.gradientFor(c);
     return '<a class="coll" href="destinations.html?collection=' + c.id + '" style="' + style + '"><div class="shade"></div>' +
       '<span class="em">' + c.emoji + '</span><span class="cnt">' + places.length + ' places</span>' +

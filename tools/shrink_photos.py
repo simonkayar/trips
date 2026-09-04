@@ -31,24 +31,35 @@ def shrink(folder: Path):
     for f in sorted(folder.iterdir()):
         if f.suffix.lower() not in EXTS:
             continue
+        try:
+            n += shrink_one(folder, f)
+        except PermissionError:
+            print(f"  ! {folder.name}/{f.name} is open in another program — close it and re-run")
+        except Exception as e:  # keep going with the rest
+            print(f"  ! {folder.name}/{f.name}: {e}")
+    return n
+
+
+def shrink_one(folder: Path, f: Path) -> int:
+    if True:
         with Image.open(f) as im:
             im = ImageOps.exif_transpose(im)  # respect phone rotation
-            if im.width <= MAX_WIDTH:
-                continue
+            if im.width <= MAX_WIDTH and f.stat().st_size < 600 * 1024:
+                return 0                       # already small enough
             backup = ORIG / folder.name / f.name
             backup.parent.mkdir(parents=True, exist_ok=True)
             if not backup.exists():
                 f.replace(backup)
-            ratio = MAX_WIDTH / im.width
-            im = im.resize((MAX_WIDTH, int(im.height * ratio)), Image.LANCZOS)
+            if im.width > MAX_WIDTH:
+                ratio = MAX_WIDTH / im.width
+                im = im.resize((MAX_WIDTH, int(im.height * ratio)), Image.LANCZOS)
             if f.suffix.lower() in {".jpg", ".jpeg"}:
                 im = im.convert("RGB")
                 im.save(f, quality=QUALITY, optimize=True)
             else:
                 im.save(f, optimize=True)
-            n += 1
             print(f"  shrunk {folder.name}/{f.name}")
-    return n
+            return 1
 
 
 def main():

@@ -290,7 +290,7 @@ TRIPS.places.push(
   },
   {
     id: 'chidambaram', name: 'Chidambaram', kind: 'place', scope: 'domestic', country: 'India', state: 'Tamil Nadu', parent: 'tamilnadu',
-    lat: 11.40, lng: 79.69, emoji: '🕺', tagline: 'Nataraja’s cosmic dance and the secret of space',
+    lat: 11.40, lng: 79.69, emoji: '🔱', icon: 'images/icon-nataraja.jpg', tagline: 'Nataraja’s cosmic dance and the secret of space',
     glance: { 'District': 'Cuddalore', 'Temple': 'Thillai Nataraja — Shiva as the dancer', 'Element': 'Akasha (space) of the Pancha Bhoota temples', 'Area': '40 acres, 4 gopurams with the 108 karanas of Bharatanatyam', 'Priests': 'The Dikshitars, a hereditary community' },
     history: ['One of the oldest Shiva temples, mentioned in Sangam-era Tamil; the **Cholas** were crowned here and gilded the roof.', 'The famous **Nataraja bronze** image originated here — the dance is the movement of the universe.', 'The Dikshitar priests won a 2014 Supreme Court case to keep managing the temple themselves.'],
     mustSee: ['**Chit Sabha** — the golden-roofed hall with the dancing Nataraja', 'The **Chidambara Rahasyam** — the curtain drawn to reveal empty space', 'The 108 **dance poses** carved on the east gopuram', 'Govindaraja Perumal shrine inside — Vishnu and Shiva under one roof', 'Pichavaram mangroves (15 km)'],
@@ -368,5 +368,42 @@ TRIPS.places.push(
     culture: ['Jenu Kuruba (honey-gatherer) and Betta Kuruba tribes — the original forest people, now safari naturalists', 'The Kabini backwater villages were relocated in 1974; the old temple towers still poke out in summer'],
     funFacts: ['Nagarhole means “snake river” in Kannada, for the winding stream through the park.', 'The Kabini black panther, nicknamed Saya, has appeared on National Geographic and BBC.', 'Up to 400 elephants are seen on the Kabini banks in a single summer evening.'],
     tips: ['Safaris are run only by the Forest Dept / JLR — book resorts months ahead for Mar–May.', 'Carry binoculars; the boat safari is the best bet for elephants.']
+  },
+
+  /* ======================= ANDHRA PRADESH (3) ======================= */
+  {
+    id: 'gooty', name: 'Gooty Fort', kind: 'place', scope: 'domestic', country: 'India', state: 'Andhra Pradesh', parent: 'andhrapradesh',
+    lat: 15.12, lng: 77.63, emoji: '🏰', tagline: 'Fifteen forts in one, on a bare Rayalaseema rock', aka: ['Gutti'],
+    glance: { 'District': 'Anantapur', 'Height': '~300 m above the plain, 680 m ASL', 'Age': 'Kalyani Chalukya origins (11th c.), Vijayanagara and Maratha forts', 'Famous for': 'Ring of 15 interlinked forts, Murari Rao, Thomas Munro’s death', 'From Bengaluru': '~300 km on the Hyderabad highway' },
+    history: ['One of the oldest hill forts in Andhra — mentioned in a 7th-century inscription; rebuilt by the **Vijayanagara** kings as a citadel on the Hampi–Penukonda road.', 'The Maratha chief **Murari Rao Ghorpade** held it from 1746 until Hyder Ali starved it out in 1776 — the garrison surrendered when the water ran dry.', 'Sir **Thomas Munro**, the great Madras governor and land-revenue reformer, died of cholera at Gooty in 1827; his grave is in the town.'],
+    mustSee: ['The **climb** — hundreds of rock-cut steps through 15 gates to the topmost fort', '**Murari Rao’s seat** on the cliff edge, and the granaries and tanks cut into the rock', 'The views over the Rayalaseema plain and the railway junction below', 'Gandikota, Belum Caves and Penukonda on the same circuit'],
+    food: ['Rayalaseema meals in Gooty town — ragi sangati and natu kodi'],
+    culture: ['A railway-junction town whose fort is almost forgotten — you often have it to yourself'],
+    funFacts: ['Gooty’s name comes from “Gutti”, a Telugu word for the rock; the British spelt it Gooty.', 'The fort had 15 forts, 15 gates and 15 water tanks — one ring inside another.', 'Thomas Munro’s ghost is said to ride the Gooty road on a white horse.'],
+    tips: ['Start the climb early — no shade and no water sellers on the rock; sturdy shoes.']
+  },
+
+  /* ======================= SIKKIM (2) ======================= */
+  {
+    id: 'pelling', name: 'Pelling', kind: 'place', scope: 'domestic', country: 'India', state: 'Sikkim', parent: 'sikkim',
+    lat: 27.30, lng: 88.24, emoji: '🌄', tagline: 'Kangchenjunga at breakfast and the Sky Walk',
+    glance: { 'District': 'Gyalshing (West Sikkim)', 'Altitude': '2,150 m', 'Famous for': 'Kangchenjunga panorama, Pemayangtse monastery, Rabdentse ruins, Chenrezig Sky Walk', 'Best time': 'Oct–Dec, Mar–May', 'From Gangtok': '~115 km, 5 hours' },
+    history: ['**Pemayangtse** (1705) is one of Sikkim’s oldest and most important monasteries — only “pure” Bhutia monks were admitted, and it crowned the Chogyals.', '**Rabdentse**, in the forest below, was Sikkim’s second capital (1670–1814) until Gurkha raids drove the court to Tumlong.', 'A sleepy village that became a tourist town in the 1990s for one reason: the mountain view.'],
+    mustSee: ['**Kangchenjunga sunrise** from the hotel balcony — the whole range fills the sky', '**Pemayangtse monastery** and the wooden Zangdok Palri model', '**Rabdentse ruins** — a forest walk to the old palace', '**Chenrezig statue and Sky Walk** (glass) at Sanga Choeling', '**Khecheopalri lake**, the wish-fulfilling lake; Kanchenjunga falls; Singshore bridge'],
+    food: ['Momos, thukpa, sel roti; Sikkimese thali at the homestays'],
+    culture: ['Bhutia and Lepcha heartland — prayer wheels line the road'],
+    funFacts: ['Pelling is often called the “Kangchenjunga viewpoint of Sikkim” — the mountain is closer here than from Gangtok.', 'The Chenrezig statue at Sanga Choeling is 42 m tall.'],
+    tips: ['Only the first clear morning matters — set the alarm for 5:30; clouds arrive by 9.']
+  },
+  {
+    id: 'ravangla', name: 'Ravangla', kind: 'place', scope: 'domestic', country: 'India', state: 'Sikkim', parent: 'sikkim',
+    lat: 27.31, lng: 88.36, emoji: '🧘', tagline: 'The giant Buddha of Tathagata Tsal', aka: ['Ravengala', 'Rabong'],
+    glance: { 'District': 'Namchi (South Sikkim)', 'Altitude': '2,100 m', 'Famous for': 'Buddha Park (Tathagata Tsal), Ralang monastery, Maenam hill', 'Buddha statue': '39 m, unveiled 2013 by the Dalai Lama', 'Between': 'Gangtok and Pelling' },
+    history: ['The **Buddha Park** was built for the 2,550th birth anniversary of the Buddha (2006–13) and holds relics inside the statue.', '**Ralang monastery** (Kagyu) dates from 1768; the new Ralang (Palchen Choeling) is a grand modern gompa.', 'Ravangla was a small trade halt on the Gangtok–West Sikkim road, known for its Tibetan carpet weavers.'],
+    mustSee: ['**Buddha Park** — the 39 m gilded Buddha against the Kangchenjunga range', '**Ralang monastery** — the Pang Lhabsol and Kagyed dances', '**Maenam hill** trek (3,200 m) through rhododendron forest', 'Temi tea garden — Sikkim’s only tea estate — on the way to Namchi', 'Namchi’s Char Dham and the Samdruptse Guru Padmasambhava statue (45 m)'],
+    food: ['Temi tea; momos and chhurpi (yak cheese) snacks in the bazaar'],
+    culture: ['The Pang Lhabsol festival worships Kangchenjunga as Sikkim’s guardian deity'],
+    funFacts: ['The Buddha statue contains sacred relics gifted by monasteries across Asia.', 'Ravangla’s Tibetan carpet factory still weaves by hand for export.'],
+    tips: ['The Buddha Park is best in the late afternoon light; combine Ravangla with Temi and Namchi.']
   }
 );

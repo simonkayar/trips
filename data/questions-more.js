@@ -125,5 +125,16 @@ TRIPS.questions.push(
   { id: "kabini-2", place: "kabini", q: "Kabini is famous for the world’s largest summer gathering of…", a: ["Asian elephants", "Tigers", "Flamingos", "Gaur"], correct: 0, why: "Hundreds gather on the receding backwater banks." },
   { id: "kabini-3", place: "kabini", q: "The famous black panther of Kabini is actually a…", a: ["Melanistic leopard", "Black tiger", "Jaguar", "Black jackal"], correct: 0, why: "A leopard with a dark coat — the spots are still faintly visible." },
   { id: "kabini-4", place: "kabini", q: "Nagarhole means…", a: ["Snake river", "Elephant forest", "Tiger hill", "Black water"], correct: 0, why: "Naga (snake) + hole (stream), for the winding river." },
-  { id: "kabini-5", place: "kabini", q: "When was the Kabini dam built, creating the backwaters?", a: ["1974", "1902", "1956", "1990"], correct: 0, why: "It submerged villages whose temple towers appear in summer." }
+  { id: "kabini-5", place: "kabini", q: "When was the Kabini dam built, creating the backwaters?", a: ["1974", "1902", "1956", "1990"], correct: 0, why: "It submerged villages whose temple towers appear in summer." },
+
+  /* Gooty, Pelling, Ravangla */
+  { id: "gooty-1", place: "gooty", q: "Gooty fort is said to be made up of how many interlinked forts?", a: ["15", "3", "7", "50"], correct: 0, why: "Fifteen forts, gates and tanks, one ring inside another." },
+  { id: "gooty-2", place: "gooty", q: "Which Maratha chief held Gooty until Hyder Ali starved the fort out in 1776?", a: ["Murari Rao Ghorpade", "Shivaji", "Baji Rao", "Mahadji Scindia"], correct: 0, why: "His ‘seat’ on the cliff edge is still pointed out." },
+  { id: "gooty-3", place: "gooty", q: "Which British governor of Madras died at Gooty in 1827?", a: ["Thomas Munro", "Robert Clive", "Arthur Wellesley", "Warren Hastings"], correct: 0, why: "Of cholera, while touring the district." },
+  { id: "pelling-1", place: "pelling", q: "Pelling is famous above all for its view of…", a: ["Kangchenjunga", "Everest", "Nanda Devi", "Mount Kailash"], correct: 0, why: "The range fills the sky at sunrise." },
+  { id: "pelling-2", place: "pelling", q: "Which 1705 monastery near Pelling once crowned Sikkim’s kings?", a: ["Pemayangtse", "Rumtek", "Ralang", "Enchey"], correct: 0, why: "One of the oldest and most important in Sikkim." },
+  { id: "pelling-3", place: "pelling", q: "The ruins below Pelling are those of Sikkim’s second capital, called…", a: ["Rabdentse", "Yuksom", "Tumlong", "Namchi"], correct: 0, why: "Capital from 1670 to 1814." },
+  { id: "ravangla-1", place: "ravangla", q: "How tall is the Buddha statue in Ravangla’s Buddha Park?", a: ["39 m", "12 m", "80 m", "108 m"], correct: 0, why: "Unveiled by the Dalai Lama in 2013." },
+  { id: "ravangla-2", place: "ravangla", q: "Sikkim’s only tea estate, near Ravangla, is…", a: ["Temi", "Happy Valley", "Makaibari", "Glenburn"], correct: 0, why: "On the road to Namchi." },
+  { id: "ravangla-3", place: "ravangla", q: "The Buddha Park at Ravangla is also called…", a: ["Tathagata Tsal", "Samdruptse", "Char Dham", "Lhabsol Ground"], correct: 0, why: "Built for the Buddha’s 2,550th birth anniversary." }
 );

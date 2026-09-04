@@ -60,7 +60,12 @@ nothing may depend on a server-side language or a build step.
    article titles to try), run `python tools/fetch_images.py <id>`, then
    `py -3.10 tools/shrink_images.py <id>`. Flags (`FLAG_ISO`) only for country hubs.
 7. Add 5–8 extra facts to the matching `data/facts-*.js`, and add the id to any
-   fitting collections in `data/collections.js`.
+   fitting collections in `data/collections.js`. Every collection has a `cover`
+   (place id, or `coll-<x>` for a dedicated picture fetched like a place) — keep the
+   picture matching the theme (food tile = food, beaches = a beach).
+   Picking a specific picture: `python tools/list_article_images.py "<Wikipedia
+   article>"` or `"commons:<search>"`, then `file:<File name>` in TITLES. A place can
+   also have `icon: 'images/icon-<x>.jpg'` to replace its emoji in the hub (Chidambaram).
 8. Nothing else needs touching — every page reads the data at load time.
 
 ## Conventions

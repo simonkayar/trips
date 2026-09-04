@@ -98,8 +98,8 @@ TRIPS.images = {
   },
   "gokarna": {
     "src": "images/gokarna.jpg",
-    "file": "Main_entry_to_the_Mahabaleshwar_Temple_at_Gokaran.jpg",
-    "page": "https://en.wikipedia.org/wiki/Mahabaleshwar_Temple%2C_Gokarna"
+    "file": "Western Ghats, Gokarna,India.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Western_Ghats%2C_Gokarna%2CIndia.jpg"
   },
   "coorg": {
     "src": "images/coorg.jpg",
@@ -303,8 +303,8 @@ TRIPS.images = {
   },
   "munnar": {
     "src": "images/munnar.jpg",
-    "file": "Munnar_Overview.jpg",
-    "page": "https://en.wikipedia.org/wiki/Munnar"
+    "file": "Munnar - Tea Plantations.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Munnar_-_Tea_Plantations.jpg"
   },
   "wayanad": {
     "src": "images/wayanad.jpg",
@@ -623,8 +623,8 @@ TRIPS.images = {
   },
   "kgf": {
     "src": "images/kgf.jpg",
-    "file": "Champion Reef Mine shaft.jpg",
-    "page": "https://commons.wikimedia.org/wiki/File%3AChampion_Reef_Mine_shaft.jpg"
+    "file": "Kotilingeshwara.JPG",
+    "page": "https://commons.wikimedia.org/wiki/File:Kotilingeshwara.JPG"
   },
   "mandaragiri": {
     "src": "images/mandaragiri.jpg",
@@ -663,8 +663,8 @@ TRIPS.images = {
   },
   "thiruparankundram": {
     "src": "images/thiruparankundram.jpg",
-    "file": "Thiruparankundram Murugan temple and rock hill.jpg",
-    "page": "https://commons.wikimedia.org/wiki/File%3AThiruparankundram_Murugan_temple_and_rock_hill.jpg"
+    "file": "Thiruparankundram temple Arun Jayan.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Thiruparankundram_temple_Arun_Jayan.jpg"
   },
   "kufri": {
     "src": "images/kufri.jpg",
@@ -680,6 +680,41 @@ TRIPS.images = {
     "src": "images/kabini.jpg",
     "file": "Elephant Herd Nagarhole Karnataka Apr22 D72 23799.jpg",
     "page": "https://commons.wikimedia.org/wiki/File:Elephant_Herd_Nagarhole_Karnataka_Apr22_D72_23799.jpg"
+  },
+  "gooty": {
+    "src": "images/gooty.jpg",
+    "file": "Gooty Fort.JPG",
+    "page": "https://commons.wikimedia.org/wiki/File:Gooty_Fort.JPG"
+  },
+  "pelling": {
+    "src": "images/pelling.jpg",
+    "file": "Sunrise over Kangchenjunga.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Sunrise_over_Kangchenjunga.jpg"
+  },
+  "ravangla": {
+    "src": "images/ravangla.jpg",
+    "file": "Large Gautama Buddha statue in Buddha Park of Ravangla, Sikkim.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Large_Gautama_Buddha_statue_in_Buddha_Park_of_Ravangla%2C_Sikkim.jpg"
+  },
+  "coll-food": {
+    "src": "images/coll-food.jpg",
+    "file": "Hyderabadi_Chicken_Biryani.jpg",
+    "page": "https://en.wikipedia.org/wiki/Hyderabadi_biryani"
+  },
+  "coll-rides": {
+    "src": "images/coll-rides.jpg",
+    "file": "NMR_train_at_Ketti_05-02-26_75.jpeg",
+    "page": "https://en.wikipedia.org/wiki/Nilgiri_Mountain_Railway"
+  },
+  "coll-cities": {
+    "src": "images/coll-cities.jpg",
+    "file": "View_of_Empire_State_Building_from_Rockefeller_Center_New_York_City_dllu_(cropped).jpg",
+    "page": "https://en.wikipedia.org/wiki/Manhattan"
+  },
+  "icon-nataraja": {
+    "src": "images/icon-nataraja.jpg",
+    "file": "Shiva_as_the_Lord_of_Dance_LACMA_edit.jpg",
+    "page": "https://en.wikipedia.org/wiki/Nataraja"
   }
 };
 TRIPS.flags = {"singapore": "images/flags/sg.png", "thailand": "images/flags/th.png", "indonesia": "images/flags/id.png", "switzerland": "images/flags/ch.png", "france": "images/flags/fr.png", "india": "images/flags/in.png", "usa": "images/flags/us.png", "china": "images/flags/cn.png", "south-korea": "images/flags/kr.png"};

@@ -163,3 +163,23 @@ secret kept). Live test passed all checks; deployed and pushed.
 Follow-up: admin edit added — ✎ on each note opens an inline form (title,
 date, place, who, story); API action=edit (admin only) marks the note
 "edited". Test extended; deployed and pushed.
+
+2026-09-04 — Session 8: minor improvements
+------------------------------------------
+Asked: collection tiles should show a matching picture; add Pelling and
+Ravangla to the Sikkim trip; better pictures for Thiruparankundram (temple),
+Gokarna (beach + cliff), KGF (temple), Munnar (tea); add Gooty Fort; rename
+Treks collection to "Treks & Climbs" with only the step-climb places; a
+Nataraja (Shiva dancing) icon for Chidambaram; index the new Trichy and
+Singapore photos.
+Done: every collection has a `cover` (a place id, or a dedicated picture —
+coll-food = biryani, coll-rides = Nilgiri train, coll-cities = Manhattan);
+places can have an `icon` image shown in the hub/hero instead of the emoji
+(Chidambaram → Chola Nataraja bronze); new pages Gooty, Pelling, Ravangla
+(113 places, 1,091 questions); pictures swapped as asked; photos index
+rebuilt (10 photos: Trichy 5, Singapore 5). Two Singapore photos
+(IMG_5154.JPG, IMG_5314.jpg) were open in another program and could not be
+shrunk — they are uploaded full-size; re-run shrink_photos.py later.
+Tools: list_article_images.py can also search Commons ("commons:…");
+shrink_photos.py now also recompresses files over 600 KB and skips locked
+files instead of stopping.

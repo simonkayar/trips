@@ -49,7 +49,7 @@ def main():
     ids = known_place_ids()
     result = {}
     total = 0
-    for folder in sorted(p for p in PHOTOS.iterdir() if p.is_dir()):
+    for folder in sorted(p for p in PHOTOS.iterdir() if p.is_dir() and not p.name.startswith("_")):
         pid = folder.name
         if pid not in ids:
             print(f"  ! photos/{pid}/ does not match any place id — skipped (check data/places-*.js)")

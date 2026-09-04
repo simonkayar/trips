@@ -2,9 +2,38 @@
    Drop photos into photos/<place-id>/ and run:  python tools/scan_photos.py
    Optional captions: photos/<place-id>/captions.txt with lines "filename | caption" */
 TRIPS.photos = {
+  "singapore": [
+    {
+      "src": "photos/singapore/IMG20241221111927.jpg"
+    },
+    {
+      "src": "photos/singapore/IMG20241224095516.jpg"
+    },
+    {
+      "src": "photos/singapore/IMG_4732-EDIT.jpg"
+    },
+    {
+      "src": "photos/singapore/IMG_5154.JPG"
+    },
+    {
+      "src": "photos/singapore/IMG_5314.jpg"
+    }
+  ],
   "trichy": [
     {
+      "src": "photos/trichy/IMG_20190811_221119.jpg"
+    },
+    {
+      "src": "photos/trichy/IMG_2910.JPG"
+    },
+    {
       "src": "photos/trichy/IMG_2922.JPG"
+    },
+    {
+      "src": "photos/trichy/IMG_2927.JPG"
+    },
+    {
+      "src": "photos/trichy/IMG_2941.JPG"
     }
   ]
 };

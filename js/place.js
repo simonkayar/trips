@@ -34,7 +34,8 @@
       : T.esc(ownPhotos[0].caption || 'Our photo');
     heroHtml = '<figure class="hero-photo' + (pic ? '' : ' own') + '"><img src="' + T.esc(heroSrc) + '" alt="' + T.esc(p.name) + '"><figcaption>' + cap + '</figcaption></figure>';
   }
-  $('#hero').innerHTML = '<div class="hero-text"><div class="big-emoji">' + p.emoji + '</div><div>' +
+  var iconHtml = p.icon ? '<img class="icon-img" src="' + T.esc(p.icon) + '" alt="">' : p.emoji;
+  $('#hero').innerHTML = '<div class="hero-text"><div class="big-emoji">' + iconHtml + '</div><div>' +
     '<div class="crumbs">' + crumbs + '</div><h1>' + T.esc(p.name) + '</h1>' +
     '<div class="tagline">' + T.esc(p.tagline || '') + '</div><div class="badges">' + badges + '</div>' +
     '<div class="actions"><a class="btn" href="quiz.html?place=' + p.id + '">🧠 Quiz me on this</a>' +
@@ -130,7 +131,8 @@
   var capital = p.glance && (p.glance['Capital'] || p.glance['Capital city']);
   $('#hub').className = 'mm-hub' + (p.scope === 'international' ? ' intl' : '');
   $('#hub').innerHTML =
-    (flag ? '<img class="flag" src="' + T.esc(flag) + '" alt="Flag of ' + T.esc(p.name) + '">' : '<div class="emoji">' + p.emoji + '</div>') +
+    (flag ? '<img class="flag" src="' + T.esc(flag) + '" alt="Flag of ' + T.esc(p.name) + '">' :
+      (p.icon ? '<img class="icon-img" src="' + T.esc(p.icon) + '" alt="">' : '<div class="emoji">' + p.emoji + '</div>')) +
     '<h2>' + T.esc(p.name) + '</h2><div class="where">' + T.esc(where) + '</div>' +
     (capital ? '<div class="capital">Capital: <b>' + T.esc(capital) + '</b></div>' : '') +
     (visited ? '<div class="visited">📅 ' + T.esc(visited) + '</div>' : '') +
