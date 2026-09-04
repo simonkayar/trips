@@ -113,7 +113,7 @@ TITLES = {
 # picture changes requested Sept 2026 (better / more specific views)
 TITLES.update({
     "thiruparankundram": ["file:Thiruparankundram temple Arun Jayan.jpg", "file:Thiruparankundram Temple 2024 (1).jpg"],
-    "gokarna": ["file:Western Ghats, Gokarna,India.jpg", "file:Sunset in the Arabian sea, Kudle Beach, Gokarna, Karnataka.jpg"],
+    "gokarna": ["file:Sunset in the Arabian sea, Kudle Beach, Gokarna, Karnataka.jpg", "file:Kudle beach gokarna.jpg"],
     "mangalore": ["St. Aloysius Chapel", "Kadri Manjunath Temple", "Panambur Beach"],
     "shravanabelagola": ["commons:Gommateshwara Bahubali face Shravanabelagola", "commons:Bahubali statue head Shravanabelagola"],
     "chikkamagaluru": ["commons:Mullayanagiri peak", "Baba Budangiri", "Kemmangundi"],

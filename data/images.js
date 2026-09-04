@@ -98,8 +98,8 @@ TRIPS.images = {
   },
   "gokarna": {
     "src": "images/gokarna.jpg",
-    "file": "Western Ghats, Gokarna,India.jpg",
-    "page": "https://commons.wikimedia.org/wiki/File:Western_Ghats%2C_Gokarna%2CIndia.jpg"
+    "file": "Sunset in the Arabian sea, Kudle Beach, Gokarna, Karnataka.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Sunset_in_the_Arabian_sea%2C_Kudle_Beach%2C_Gokarna%2C_Karnataka.jpg"
   },
   "coorg": {
     "src": "images/coorg.jpg",
