@@ -110,3 +110,6 @@ Done:
   Work-trip towns (Andover, Irvine, Santa Clara) are logged as trips on the USA
   hub, not as places. New "Treks & hikes" collection.
 - Fixed: western longitudes now print "W".
+Deployed: 156 changed files to simonkayar.com/trips (verified live); pushed to
+GitHub (commit 258bda3). Every one of the 134 entries now has a picture.
+Open: none. Photo album has only the one Trichy photo so far.
