@@ -106,7 +106,7 @@ p { margin: 0 0 1em; }
 .chip.active { background: var(--teal); border-color: var(--teal); color: #fff; }
 .chip.terracotta.active { background: var(--terracotta); border-color: var(--terracotta); }
 
-input[type=text], input[type=search], input[type=date], select, textarea {
+input[type=text], input[type=search], input[type=date], input[type=password], select, textarea {
   font-family: var(--font-body); font-size: 0.95rem; color: var(--ink);
   padding: 10px 14px; border-radius: 12px; border: 1px solid var(--line); background: var(--card);
   outline: none; width: 100%;
