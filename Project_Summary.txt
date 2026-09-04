@@ -69,7 +69,8 @@ JOURNAL (the only dynamic part — PHP, no database — PRIVATE to the family)
 --------------------------------------------------------------------------
 journal.html shows the trip log publicly and an unlock box. The family
 passphrase ("SKS", any case) unlocks reading + posting; the admin passphrase
-("SKSAdmin") also allows deleting (✕ on each note). Unlock returns a signed
+("SKSAdmin") also allows editing (✎, inline form) and deleting (✕) on each
+note. Unlock returns a signed
 90-day session token stored on the device, so the passphrase is typed once.
 api/journal.php stores notes in api/journal-data/notes.json on the server
 (web-blocked, excluded from deploys) and emails simonpeterj@gmail.com on

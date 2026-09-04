@@ -4,6 +4,7 @@
      POST ?action=list    {token}                       → {ok, notes:[…]}
      POST ?action=post    {token, place, who, date, title, text, website}  → {ok, note}
      POST ?action=delete  {token, id}                   → {ok}          (admin only)
+     POST ?action=edit    {token, id, place, who, date, title, text}  → {ok, note}   (admin only)
      GET  ?action=delete&id=…&t=<note token>            → tiny HTML page (link in the email)
    Spam / abuse protection: passphrase (family) or admin passphrase, session tokens,
    unlock attempts limited per IP, honeypot field "website", posts limited per IP,
@@ -73,26 +74,48 @@ if ($action === 'delete') {
     out(['ok' => true]);
 }
 
+/* the fields of a note, validated the same way for post and edit */
+function clean_fields(array $in, array $cfg): array {
+    $who = trim((string)($in['who'] ?? ''));
+    if (!in_array($who, $cfg['names'], true)) fail(400, 'Pick who you are.');
+    $place = trim((string)($in['place'] ?? ''));
+    if (!preg_match('/^[a-z0-9\-]{1,60}$/', $place)) fail(400, 'Pick a place.');
+    $date = trim((string)($in['date'] ?? ''));
+    if (!preg_match('/^\d{4}-\d{2}(-\d{2})?$/', $date)) fail(400, 'Pick a date.');
+    $title = trim((string)preg_replace('/\s+/', ' ', (string)($in['title'] ?? '')));
+    $text = trim(str_replace("\r\n", "\n", (string)($in['text'] ?? '')));
+    if ($title === '' || mb_strlen($title) > 120) fail(400, 'The title needs 1–120 characters.');
+    if ($text === '' || mb_strlen($text) > 2000) fail(400, 'The story needs 1–2000 characters.');
+    if (substr_count(strtolower($title . ' ' . $text), 'http') > 2) fail(400, 'Too many links for a journal note.');
+    return ['place' => $place, 'who' => $who, 'date' => $date, 'title' => $title, 'text' => $text];
+}
+
+/* ---------- edit (admin only) ---------- */
+if ($action === 'edit') {
+    if ($role !== 'admin') fail(403, 'Only the admin can edit notes.');
+    $id = (string)($in['id'] ?? '');
+    $fields = clean_fields($in, $cfg);
+    $updated = null;
+    jr_with_notes(function (array $notes) use ($id, $fields, &$updated) {
+        foreach ($notes as $i => $n) {
+            if (($n['id'] ?? '') === $id) { $notes[$i] = array_merge($n, $fields, ['edited' => gmdate('c')]); $updated = $notes[$i]; }
+        }
+        return $notes;
+    });
+    if (!$updated) fail(404, 'No such note (maybe already deleted).');
+    out(['ok' => true, 'note' => jr_public($updated)]);
+}
+
 if ($action !== 'post') fail(400, 'Unknown request.');
 
 /* ---------- post ---------- */
 if (trim((string)($in['website'] ?? '')) !== '') fail(400, 'Rejected.');           // honeypot
-$who = trim((string)($in['who'] ?? ''));
-if (!in_array($who, $cfg['names'], true)) fail(400, 'Pick who you are.');
-$place = trim((string)($in['place'] ?? ''));
-if (!preg_match('/^[a-z0-9\-]{1,60}$/', $place)) fail(400, 'Pick a place.');
-$date = trim((string)($in['date'] ?? ''));
-if (!preg_match('/^\d{4}-\d{2}(-\d{2})?$/', $date)) fail(400, 'Pick a date.');
-$title = trim((string)preg_replace('/\s+/', ' ', (string)($in['title'] ?? '')));
-$text = trim(str_replace("\r\n", "\n", (string)($in['text'] ?? '')));
-if ($title === '' || mb_strlen($title) > 120) fail(400, 'The title needs 1–120 characters.');
-if ($text === '' || mb_strlen($text) > 2000) fail(400, 'The story needs 1–2000 characters.');
-if (substr_count(strtolower($title . ' ' . $text), 'http') > 2) fail(400, 'Too many links for a journal note.');
+$fields = clean_fields($in, $cfg);
+['place' => $place, 'who' => $who, 'date' => $date, 'title' => $title, 'text' => $text] = $fields;
 if (!jr_rate('post', (int)($cfg['max_per_hour'] ?? 5))) fail(429, 'Too many notes in one hour from here — try again a little later.');
 
 $id = 'srv-' . gmdate('Ymd-His') . '-' . bin2hex(random_bytes(3));
-$note = ['id' => $id, 'place' => $place, 'who' => $who, 'date' => $date, 'title' => $title, 'text' => $text,
-         'created' => gmdate('c'), 'ip' => $_SERVER['REMOTE_ADDR'] ?? '0'];
+$note = array_merge(['id' => $id], $fields, ['created' => gmdate('c'), 'ip' => $_SERVER['REMOTE_ADDR'] ?? '0']);
 jr_with_notes(function (array $notes) use ($note) { $notes[] = $note; return $notes; });
 
 /* notify by email with a one-click delete link */

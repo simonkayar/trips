@@ -50,6 +50,9 @@ ok &= show("empty title", call("post", dict(base, title="")), 400)
 r = call("post", base); ok &= show("valid post (family)", r, 200)
 note_id = r[1].get("note", {}).get("id")
 r = call("list", {"token": ft}); listed = any(n.get("id") == note_id for n in r[1].get("notes", [])); print(f"{'OK ' if listed else 'BAD'} listed after post"); ok &= listed
+edit = dict(base, token=at, id=note_id, title="API test note (edited)")
+ok &= show("family cannot edit", call("edit", dict(edit, token=ft)), 403)
+r = call("edit", edit); ok &= show("admin edits", r, 200) and r[1].get("note", {}).get("title") == "API test note (edited)" and bool(r[1].get("note", {}).get("edited"))
 ok &= show("family cannot delete", call("delete", {"token": ft, "id": note_id}), 403)
 ok &= show("admin deletes", call("delete", {"token": at, "id": note_id}), 200)
 r = call("list", {"token": at}); gone = not any(n.get("id") == note_id for n in r[1].get("notes", [])); print(f"{'OK ' if gone else 'BAD'} gone after delete"); ok &= gone

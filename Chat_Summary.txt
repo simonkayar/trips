@@ -160,3 +160,6 @@ removed (no public copy of notes anywhere); backup now goes to the
 git-ignored journal-backup/ via tools/pull_journal.py. Unlock attempts
 limited to 10/IP/hour. Config regenerated with admin_pass_hash (same HMAC
 secret kept). Live test passed all checks; deployed and pushed.
+Follow-up: admin edit added — ✎ on each note opens an inline form (title,
+date, place, who, story); API action=edit (admin only) marks the note
+"edited". Test extended; deployed and pushed.

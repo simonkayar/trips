@@ -87,7 +87,7 @@ nothing may depend on a server-side language or a build step.
   from deploys** and web-blocked by `.htaccess`; never create or upload it.
 - Unlock returns a signed session token (`role.expiry.hmac`, 90 days) kept in
   localStorage (`trips_journal_session`). Family passphrase → role `family` (read +
-  post); admin passphrase → role `admin` (also delete, via the ✕ on each note). Every
+  post); admin passphrase → role `admin` (also ✎ edit and ✕ delete on each note). Every
   API call is a POST with `{token, …}`; `T.journalApi(action, body, cb)` in app.js.
 - Config (names, both passphrase hashes, HMAC secret, notify email) is
   `C:\Users\simon\.secrets\trips-journal-config.php`, uploaded ABOVE the web root with

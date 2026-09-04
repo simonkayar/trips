@@ -75,12 +75,15 @@
     $('#timeline').innerHTML = list.map(function (n) {
       var p = T.byId(n.place);
       return '<div class="card note" data-id="' + T.esc(n.id) + '">' +
-        (admin ? '<button class="del" title="Delete this note" data-id="' + T.esc(n.id) + '">✕ delete</button>' : '') +
+        (admin ? '<span class="admin-tools"><button class="edit" title="Edit this note" data-id="' + T.esc(n.id) + '">✎ edit</button>' +
+                 '<button class="del" title="Delete this note" data-id="' + T.esc(n.id) + '">✕ delete</button></span>' : '') +
         '<div class="head"><span class="title">' + T.esc(n.title) + '</span><span class="when">' + T.esc(fmtDate(n.date)) + '</span></div>' +
         '<div class="place">' + (p ? '<a href="place.html?id=' + p.id + '">' + p.emoji + ' ' + T.esc(p.name) + '</a>' : '') +
-        (n.who ? ' · <span class="byline">by ' + T.esc(n.who) + '</span>' : '') + '</div>' +
+        (n.who ? ' · <span class="byline">by ' + T.esc(n.who) + '</span>' : '') +
+        (n.edited ? ' · <span class="muted">edited</span>' : '') + '</div>' +
         '<div class="body">' + T.esc(n.text) + '</div></div>';
     }).join('');
+    $$('.note .edit').forEach(function (b) { b.addEventListener('click', function () { editNote(b.getAttribute('data-id')); }); });
     $$('.note .del').forEach(function (b) {
       b.addEventListener('click', function () {
         var id = b.getAttribute('data-id');
@@ -92,6 +95,37 @@
         });
       });
     });
+  }
+
+  /* admin: turn a note card into an inline form */
+  function editNote(id) {
+    var n = notes.filter(function (x) { return x.id === id; })[0];
+    var card = $('.note[data-id="' + id + '"]');
+    if (!n || !card) return;
+    var placeOpts = sorted.map(function (p) { return '<option value="' + p.id + '"' + (p.id === n.place ? ' selected' : '') + '>' + p.emoji + ' ' + T.esc(p.name) + '</option>'; }).join('');
+    var whoOpts = names.map(function (w) { return '<option' + (w === n.who ? ' selected' : '') + '>' + T.esc(w) + '</option>'; }).join('');
+    card.innerHTML = '<form class="edit-form">' +
+      '<div class="row2"><div><label class="field">Title</label><input type="text" name="title" maxlength="120" value="' + T.esc(n.title) + '"></div>' +
+      '<div><label class="field">Date</label><input type="date" name="date" value="' + T.esc((n.date || '').slice(0, 10)) + '"></div></div>' +
+      '<div class="row2"><div><label class="field">Place</label><select name="place">' + placeOpts + '</select></div>' +
+      '<div><label class="field">Who</label><select name="who">' + whoOpts + '</select></div></div>' +
+      '<label class="field">Story</label><textarea name="text" rows="6" maxlength="2000">' + T.esc(n.text) + '</textarea>' +
+      '<div class="actions"><button class="btn sm" type="submit">Save</button><button class="btn sm secondary" type="button" data-cancel>Cancel</button></div></form>';
+    var form = $('form', card);
+    $('[data-cancel]', form).addEventListener('click', function () { render(); });
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var f = function (k) { return form.elements[k].value; };
+      var body = { id: id, title: f('title').trim(), date: f('date'), place: f('place'), who: f('who'), text: f('text').trim() };
+      if (!body.title || !body.text) { T.toast('Title and story cannot be empty'); return; }
+      $('button[type=submit]', form).disabled = true;
+      T.journalApi('edit', body, function (d) {
+        if (!d.ok) { $('button[type=submit]', form).disabled = false; T.toast(d.error || 'Could not save'); return; }
+        notes = notes.map(function (x) { return x.id === id ? d.note : x; });
+        T.toast('Saved'); render();
+      });
+    });
+    $('input[name=title]', form).focus();
   }
 
   function load() {
