@@ -670,6 +670,16 @@ TRIPS.images = {
     "src": "images/kufri.jpg",
     "file": "Kufri Simla Himachal India (6).jpg",
     "page": "https://commons.wikimedia.org/wiki/File%3AKufri_Simla_Himachal_India_%286%29.jpg"
+  },
+  "talakadu": {
+    "src": "images/talakadu.jpg",
+    "file": "Vaidyeshvara_Temple_(1000_AD)_at_Talakad.JPG",
+    "page": "https://en.wikipedia.org/wiki/Talakadu"
+  },
+  "kabini": {
+    "src": "images/kabini.jpg",
+    "file": "Elephant Herd Nagarhole Karnataka Apr22 D72 23799.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Elephant_Herd_Nagarhole_Karnataka_Apr22_D72_23799.jpg"
   }
 };
 TRIPS.flags = {"singapore": "images/flags/sg.png", "thailand": "images/flags/th.png", "indonesia": "images/flags/id.png", "switzerland": "images/flags/ch.png", "france": "images/flags/fr.png", "india": "images/flags/in.png", "usa": "images/flags/us.png", "china": "images/flags/cn.png", "south-korea": "images/flags/kr.png"};

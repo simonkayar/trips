@@ -34,7 +34,7 @@ TRIPS.trips.push(
   { id: 'coorg-2014', title: 'Coorg (second trip)', when: 'Oct 2014', date: '2014-10', scope: 'domestic', emoji: '☕', places: ['coorg'] },
   { id: 'irvine-2014', title: 'Irvine, USA — Oceanside Pier, La Jolla', when: 'Nov 2014', date: '2014-11', scope: 'international', emoji: '🌴', places: ['san-diego'] },
   { id: 'goa-2015', title: 'Goa', when: 'Jan 2015', date: '2015-01', scope: 'domestic', emoji: '🏖️', places: ['goa'] },
-  { id: 'jaladhama-2016', title: 'Jaladhama (resort weekend)', when: 'Jan 2016', date: '2016-01', scope: 'domestic', emoji: '🏝️', places: [] },
+  { id: 'jaladhama-2016', title: 'New Year at Jaladhama, Talakadu', when: 'Jan 2016', date: '2016-01', scope: 'domestic', emoji: '🎉', places: ['talakadu'], summary: 'Saw in 2016 at the Jaladhama river resort on the Kaveri, with the sand-buried temples of Talakadu next door.' },
   { id: 'mangalore-2016', title: 'Mangalore & Murudeshwar', when: 'Oct 2016', date: '2016-10', scope: 'domestic', emoji: '⛵', places: ['mangalore', 'murudeshwar'] },
   { id: 'yercaud-2016', title: 'Yercaud', when: 'Nov 2016', date: '2016-11', scope: 'domestic', emoji: '🍊', places: ['yercaud'] },
   { id: 'yelagiri-2016', title: 'Yelagiri & Pondicherry', when: 'Dec 2016', date: '2016-12', scope: 'domestic', emoji: '🪂', places: ['yelagiri', 'pondicherry'] },
@@ -77,6 +77,12 @@ TRIPS.trips.push(
   { id: 'uttarakhand-2024', title: 'Uttarakhand — Rishikesh, Mussoorie, Dehradun', when: 'Oct 2024', date: '2024-10', scope: 'domestic', emoji: '🧘', places: ['rishikesh', 'mussoorie', 'dehradun'] },
   { id: 'singapore-2024', title: 'Singapore', when: 'Dec 2024', date: '2024-12', scope: 'international', emoji: '🦁', places: ['singapore'], summary: 'A year-end city break: Gardens by the Bay, Sentosa, Marina Bay and a lot of hawker food.' },
   { id: 'udaipur-2025', title: 'Udaipur & Kumbhalgarh', when: 'Feb 2025', date: '2025-02', scope: 'domestic', emoji: '🏰', places: ['udaipur', 'kumbhalgarh'] },
-  { id: 'indonesia-2025', title: 'Indonesia', when: 'Jun 2025', date: '2025-06', scope: 'international', emoji: '🌋', places: ['indonesia', 'borobudur', 'prambanan', 'bali'], summary: 'Sunrise at Borobudur, the Hindu temples of Prambanan, then rice terraces and beaches in Bali.' },
-  { id: 'europe-2026', title: 'Switzerland & Paris', when: 'Jun 2026', date: '2026-06', scope: 'international', emoji: '⛰️', places: ['switzerland', 'zurich', 'lucerne', 'interlaken', 'france', 'paris'], summary: 'Lakes and Alps across Zurich, Lucerne and Interlaken, finishing with a few days in Paris.' }
+  { id: 'himachal-2025', title: 'Himachal — Shimla, Kufri, Manali & Chandigarh', when: 'Apr 2025', date: '2025-04', scope: 'domestic', emoji: '🚞', places: ['shimla', 'kufri', 'manali', 'chandigarh'], summary: 'The Ridge and the toy train at Shimla, snow at Kufri, Solang and Old Manali, and Le Corbusier’s Chandigarh on the way home.' },
+  { id: 'indonesia-2025', title: 'Indonesia', when: 'May 2025', date: '2025-05', scope: 'international', emoji: '🌋', places: ['indonesia', 'borobudur', 'prambanan', 'bali'], summary: 'Sunrise at Borobudur, the Hindu temples of Prambanan, then rice terraces and beaches in Bali.' },
+  { id: 'kabini-2025', title: 'Kabini', when: 'Aug 2025', date: '2025-08', scope: 'domestic', emoji: '🐘', places: ['kabini'] },
+  { id: 'arupadai-2025', title: 'Arupadai Veedu trip — Kanyakumari, Palani, Tiruchendur, Madurai', when: 'Oct 2025', date: '2025-10', scope: 'domestic', emoji: '🪶', places: ['kanyakumari', 'palani', 'tiruchendur', 'madurai'] },
+  { id: 'goa-2025', title: 'Goa meetup with the Smiths', when: 'Oct 2025', date: '2025-10', scope: 'domestic', emoji: '🏖️', places: ['goa'] },
+  { id: 'europe-2026', title: 'Switzerland & Paris', when: 'Jun 2026', date: '2026-06', scope: 'international', emoji: '⛰️', places: ['switzerland', 'zurich', 'lucerne', 'interlaken', 'france', 'paris'], summary: 'Lakes and Alps across Zurich, Lucerne and Interlaken, finishing with a few days in Paris.' },
+  { id: 'pec-2026', title: 'PEC reunion', when: 'Jul 2026', date: '2026-07', scope: 'domestic', emoji: '🎓', places: [] },
+  { id: 'hyderabad-2026', title: 'Hyderabad — M.Tech convocation', when: 'Aug 2026', date: '2026-08', scope: 'domestic', emoji: '🎓', places: ['hyderabad'] }
 );

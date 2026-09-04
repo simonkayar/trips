@@ -51,15 +51,15 @@ Shared JS: js/loader.js (creates window.TRIPS, loads every data file in order),
 js/app.js (helpers, question generation, header/footer). Page scripts in js/.
 Data (all in data/):
 - places-international.js, places-karnataka.js, places-tamilnadu.js,
-  places-kerala-ap-ts.js, places-others.js, places-more.js — 134 entries:
-  108 places + 26 hubs (countries/states). Schema documented in CLAUDE.md.
+  places-kerala-ap-ts.js, places-others.js, places-more.js — 136 entries:
+  110 places + 26 hubs (countries/states). Schema documented in CLAUDE.md.
   Countries: India, Singapore, Thailand, Indonesia, Switzerland, France, USA,
   China, South Korea.
-- questions-*.js — 585 hand-written quiz questions; app.js generates ~460 more
+- questions-*.js — 595 hand-written quiz questions; app.js generates ~480 more
   from the data (state/country/tagline/"which is in X"/trip year questions).
 - facts-*.js — extra fun facts merged into each place (TRIPS.extraFacts).
 - collections.js — 15 themed collections (lists of place ids).
-- trips.js — THE TRIP LOG: all 72 trips 1996–2026 with dates and the place ids
+- trips.js — THE TRIP LOG: all 79 trips 1996–2026 with dates and the place ids
   covered. "Visited …" on every page comes from it (a place counts a trip only
   if listed directly; hubs roll up their children's trips). Trips with no page
   (resort weekends, work towns) have places: [] or just the country hub.

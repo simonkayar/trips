@@ -113,5 +113,17 @@ TRIPS.questions.push(
   /* Himachal addition */
   { id: "hampta-pass-1", place: "hampta-pass", q: "How high is the Hampta Pass?", a: ["About 4,270 m", "About 2,000 m", "About 6,000 m", "About 3,000 m"], correct: 0, why: "Crossed on day 3 or 4 of the trek." },
   { id: "hampta-pass-2", place: "hampta-pass", q: "The Hampta trek crosses from the Kullu valley into…", a: ["Lahaul", "Spiti", "Ladakh", "Kinnaur"], correct: 0, why: "Green on one side, high desert on the other." },
-  { id: "hampta-pass-3", place: "hampta-pass", q: "The lake at the end of the Hampta trek is…", a: ["Chandratal", "Pangong", "Tsomgo", "Dal"], correct: 0, why: "The ‘moon lake’ at 4,300 m." }
+  { id: "hampta-pass-3", place: "hampta-pass", q: "The lake at the end of the Hampta trek is…", a: ["Chandratal", "Pangong", "Tsomgo", "Dal"], correct: 0, why: "The ‘moon lake’ at 4,300 m." },
+
+  /* Talakadu & Kabini */
+  { id: "talakadu-1", place: "talakadu", q: "Talakadu’s temples are famous for being buried under…", a: ["Sand dunes", "Volcanic ash", "A reservoir", "Jungle"], correct: 0, why: "Dunes up to 30 m high swallowed the old Ganga capital." },
+  { id: "talakadu-2", place: "talakadu", q: "Whose curse is blamed for Talakadu turning to sand?", a: ["Alamelamma", "Onake Obavva", "Chennamma", "Meenakshi"], correct: 0, why: "She drowned in the Kaveri in 1610 cursing the Mysore kings." },
+  { id: "talakadu-3", place: "talakadu", q: "Talakadu was the capital of which early dynasty?", a: ["Western Gangas", "Hoysalas", "Kadambas", "Chalukyas"], correct: 0, why: "4th–10th century, before the Cholas took it." },
+  { id: "talakadu-4", place: "talakadu", q: "Where did we celebrate the 2016 New Year?", a: ["Jaladhama resort at Talakadu", "Coorg", "Goa", "Kabini"], correct: 0, why: "On the Kaveri, Jan 2016." },
+  { id: "talakadu-5", place: "talakadu", q: "The rare festival when five Shiva temples of Talakadu are opened together is…", a: ["Panchalinga Darshana", "Mahamaham", "Kumbh Mela", "Rathotsava"], correct: 0, why: "Held once every few years on a rare astrological date." },
+  { id: "kabini-1", place: "kabini", q: "Kabini is the southern gateway to which national park?", a: ["Nagarhole", "Bandipur", "Bhadra", "Periyar"], correct: 0, why: "Rajiv Gandhi (Nagarhole) National Park." },
+  { id: "kabini-2", place: "kabini", q: "Kabini is famous for the world’s largest summer gathering of…", a: ["Asian elephants", "Tigers", "Flamingos", "Gaur"], correct: 0, why: "Hundreds gather on the receding backwater banks." },
+  { id: "kabini-3", place: "kabini", q: "The famous black panther of Kabini is actually a…", a: ["Melanistic leopard", "Black tiger", "Jaguar", "Black jackal"], correct: 0, why: "A leopard with a dark coat — the spots are still faintly visible." },
+  { id: "kabini-4", place: "kabini", q: "Nagarhole means…", a: ["Snake river", "Elephant forest", "Tiger hill", "Black water"], correct: 0, why: "Naga (snake) + hole (stream), for the winding river." },
+  { id: "kabini-5", place: "kabini", q: "When was the Kabini dam built, creating the backwaters?", a: ["1974", "1902", "1956", "1990"], correct: 0, why: "It submerged villages whose temple towers appear in summer." }
 );

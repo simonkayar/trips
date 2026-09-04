@@ -101,6 +101,7 @@ TITLES = {
     "mekedatu": ["Mekedatu"], "kgf": ["Kolar Gold Fields", "commons:Kolar Gold Fields mine"], "mandaragiri": ["commons:Mandaragiri Jain temple Tumkur", "Mandaragiri"],
     "hogenakkal": ["Hogenakkal Falls"], "chidambaram": ["Thillai Nataraja Temple, Chidambaram"], "coimbatore": ["Adiyogi Shiva statue"],
     "pichavaram": ["Pichavaram"], "tharangambadi": ["Fort Dansborg", "Tharangambadi"], "hampta-pass": ["Hampta Pass", "commons:Hampta Pass trek"],
+    "talakadu": ["Talakadu", "commons:Talakadu temple sand"], "kabini": ["file:Elephant Herd Nagarhole Karnataka Apr22 D72 23799.jpg", "file:Kabini Reservoir Central Sky SE View Pano Karnataka Dec21 D72 21841-842.jpg"],
 }
 
 # picture changes requested Sept 2026 (better / more specific views)

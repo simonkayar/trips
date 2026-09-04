@@ -344,5 +344,29 @@ TRIPS.places.push(
     culture: ['Shared tents, camp fires and altitude headaches; leave-no-trace trekking'],
     funFacts: ['In one day you walk from lush pine forest to a landscape that looks like Ladakh.', 'Chandratal is a sacred lake in Buddhist legend — the place the Pandavas ascended to heaven, some say.'],
     tips: ['Acclimatise a day in Manali; book with a proper trek company (they arrange the Chhatru–Chandratal jeep).']
+  },
+
+  /* ======================= KARNATAKA additions (2) ======================= */
+  {
+    id: 'talakadu', name: 'Talakadu', kind: 'place', scope: 'domestic', country: 'India', state: 'Karnataka', parent: 'karnataka',
+    lat: 12.19, lng: 77.03, emoji: '🏜️', tagline: 'Temples buried in sand on a bend of the Kaveri', aka: ['Talakad', 'Jaladhama'],
+    glance: { 'District': 'Mysuru', 'River': 'Kaveri', 'Famous for': 'Sand-buried temples, the Panchalinga Darshana, the Alamelamma curse', 'Temples': 'Vaidyeshwara, Kirtinarayana and 30+ under the dunes', 'From Bengaluru': '~130 km; Jaladhama resort on the river' },
+    history: ['Capital of the **Western Gangas** (4th–10th century), then held by Cholas, Hoysalas and Vijayanagara — once a city of 30 temples.', 'The **Alamelamma curse** (1610): the wife of the last Vijayanagara viceroy, hounded by the Mysore Wodeyars for her jewels, drowned herself in the Kaveri cursing “May Talakad turn to sand, Malangi become a whirlpool, and the Mysore kings never have heirs.”', 'Sand dunes did swallow the town from the 17th century; the ASI has been digging temples out since the 1990s.'],
+    mustSee: ['**Vaidyeshwara temple** — Ganga-Chola, carved elephants and dwarapalas', '**Kirtinarayana temple**, excavated from the sand, and the dunes around it', 'The **Panchalinga Darshana** — five Shiva temples opened together once every few years (last 2019)', '**Jaladhama** river resort — coracles, bird-watching, New Year bonfires', 'Somanathapura (20 km) and Shivanasamudra (30 km)'],
+    food: ['Riverside meals at the resort; Malavalli sugarcane juice and jaggery'],
+    culture: ['The Mysore royal family still avoids Talakad; the curse is folk history in every Kannada home', 'Kaveri Sankramana bathing at the ghats'],
+    funFacts: ['The sand hills stand up to 30 m high over what was a city.', 'Geologists blame a 14th-century dam at Madhavamantri for the sand, not the curse — the river dropped its silt here.', 'The Wodeyars adopted heirs for generations — the curse’s “proof”.'],
+    tips: ['The temples are 1 km through soft sand — go early; the resort is on the Kaveri’s bank, 5 km away.']
+  },
+  {
+    id: 'kabini', name: 'Kabini', kind: 'place', scope: 'domestic', country: 'India', state: 'Karnataka', parent: 'karnataka',
+    lat: 11.97, lng: 76.34, emoji: '🐘', tagline: 'Elephants, leopards and the black panther of Nagarhole', aka: ['Nagarhole', 'Karapura'],
+    glance: { 'District': 'Mysuru', 'Park': 'Nagarhole (Rajiv Gandhi) National Park, southern zone', 'Reservoir': 'Kabini backwaters (1974 dam)', 'Famous for': 'Asian elephant congregation, leopards, the black panther, boat safaris', 'Best time': 'Mar–Jun for the elephant gathering; Nov–Feb for weather' },
+    history: ['**Nagarhole** was the Mysore Maharajas’ hunting forest; the Viceroy’s hunting lodge at Karapura is now the JLR resort.', 'The **Kabini dam** (1974) submerged villages and forest, but its receding backwater each summer creates grass banks where hundreds of elephants gather — the largest congregation of Asian elephants in the world.', 'Part of the Nilgiri Biosphere with Bandipur, Wayanad and Mudumalai — the tiger reserves all connect.'],
+    mustSee: ['**Jeep safari** at dawn or dusk — tiger, leopard, dhole, gaur, sloth bear', '**Boat safari** on the backwaters — elephants bathing, crocodiles, ospreys', 'The **black panther** (a melanistic leopard) that made Kabini famous through Shaaz Jung’s photographs', 'Sunset over the reservoir; the Kaveri–Kabini confluence at T. Narasipura'],
+    food: ['Resort buffets — JLR’s Kabini River Lodge, Evolve Back, Red Earth; wild-honey and ragi dishes'],
+    culture: ['Jenu Kuruba (honey-gatherer) and Betta Kuruba tribes — the original forest people, now safari naturalists', 'The Kabini backwater villages were relocated in 1974; the old temple towers still poke out in summer'],
+    funFacts: ['Nagarhole means “snake river” in Kannada, for the winding stream through the park.', 'The Kabini black panther, nicknamed Saya, has appeared on National Geographic and BBC.', 'Up to 400 elephants are seen on the Kabini banks in a single summer evening.'],
+    tips: ['Safaris are run only by the Forest Dept / JLR — book resorts months ahead for Mar–May.', 'Carry binoculars; the boat safari is the best bet for elephants.']
   }
 );

@@ -113,3 +113,16 @@ Done:
 Deployed: 156 changed files to simonkayar.com/trips (verified live); pushed to
 GitHub (commit 258bda3). Every one of the 134 entries now has a picture.
 Open: none. Photo album has only the one Trichy photo so far.
+
+2026-09-04 — Session 5: trip-log corrections and a new home title
+-----------------------------------------------------------------
+Asked: Himachal + Chandigarh trip was Apr 2025; New Year 2016 was at Jaladhama
+(Talakadu); a better home-page title/description; updated trip list with new
+entries (Kabini Aug 2025, Arupadai trip Oct 2025, Goa meetup Oct 2025, PEC
+reunion Jul 2026, Hyderabad M.Tech convocation Aug 2026, Indonesia was May not
+Jun 2025). Ignore PEC/Petit.
+Done: trips.js updated (79 trips); new pages for Talakadu (sand-buried temples,
+Alamelamma curse) and Kabini (Nagarhole, elephants, black panther) with
+questions, facts, pictures and collections; home title is now "Thirty years of
+wandering, one page at a time." with a new description. 110 places, 1,073
+questions. Deployed and pushed.

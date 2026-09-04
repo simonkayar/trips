@@ -14,7 +14,7 @@ TRIPS.collections = [
       'melukote', 'bhoga-nandeeshwara', 'gokarna', 'shravanabelagola', 'kanchipuram', 'trichy', 'mahabalipuram', 'lepakshi',
       'puri', 'konark', 'bhubaneswar', 'shirdi', 'velankanni', 'sanchi', 'prambanan', 'borobudur', 'bangkok', 'bali',
       'thiruparankundram', 'tiruchendur', 'palani', 'swamimalai', 'thiruthani', 'pazhamudircholai',
-      'chidambaram', 'murudeshwar', 'somanathapura', 'coimbatore', 'devarayanadurga', 'mandaragiri', 'gangtok']
+      'chidambaram', 'murudeshwar', 'somanathapura', 'coimbatore', 'devarayanadurga', 'mandaragiri', 'gangtok', 'talakadu']
   },
   {
     id: 'abroad', title: 'Countries & cities abroad', emoji: '✈️', blurb: 'From Singapore and Bali to the Grand Canyon, the Great Wall and Paris.',
@@ -50,7 +50,7 @@ TRIPS.collections = [
   {
     id: 'ancient', title: 'Ancient marvels', emoji: '🗿', blurb: 'Older than a thousand years — caves, stupas and rock art.',
     ids: ['bhimbetka', 'sanchi', 'ajanta', 'ellora', 'mahabalipuram', 'kanchipuram', 'bhoga-nandeeshwara', 'shravanabelagola',
-      'thanjavur', 'bhubaneswar', 'trichy', 'borobudur', 'prambanan', 'thiruparankundram', 'wayanad', 'belum-caves', 'chidambaram', 'beijing']
+      'thanjavur', 'bhubaneswar', 'trichy', 'borobudur', 'prambanan', 'thiruparankundram', 'wayanad', 'belum-caves', 'chidambaram', 'beijing', 'talakadu']
   },
   {
     id: 'water', title: 'Waterfalls, lakes & rivers', emoji: '💦', blurb: 'Backwaters, alpine lakes and the roar of the Kaveri.',
@@ -59,7 +59,7 @@ TRIPS.collections = [
   },
   {
     id: 'wildlife', title: 'Wildlife & nature', emoji: '🐘', blurb: 'Hornbills, tahr, dolphins and vultures.',
-    ids: ['dandeli', 'coorg', 'munnar', 'wayanad', 'chilika', 'ramanagara', 'kufri', 'mysuru', 'singapore', 'bali', 'dehradun', 'srirangapatna', 'pichavaram', 'san-diego', 'mekedatu', 'darjeeling']
+    ids: ['kabini', 'dandeli', 'coorg', 'munnar', 'wayanad', 'chilika', 'ramanagara', 'kufri', 'mysuru', 'singapore', 'bali', 'dehradun', 'srirangapatna', 'pichavaram', 'san-diego', 'mekedatu', 'darjeeling']
   },
   {
     id: 'pilgrim', title: 'Pilgrim trails', emoji: '🙏', blurb: 'Char Dham corners, Sai Baba, Velankanni and more.',
