@@ -126,3 +126,20 @@ Alamelamma curse) and Kabini (Nagarhole, elephants, black panther) with
 questions, facts, pictures and collections; home title is now "Thirty years of
 wandering, one page at a time." with a new description. 110 places, 1,073
 questions. Deployed and pushed.
+
+2026-09-04 — Session 6: the journal goes live (PHP, no database)
+-----------------------------------------------------------------
+Asked: let family members post journal notes directly on the site (who,
+place, date, title, note), immediate posting with an email to
+simonpeterj@gmail.com, no MySQL, cheap spam protection. Names: Simon, Kayar,
+Smitha, Kanni, Susi, Sana. Passphrase "SKS" (checked case-insensitively).
+Done: api/journal.php + api/lib.php + api/moderate.php; notes stored in
+api/journal-data/notes.json on the server (excluded from deploys, web-blocked);
+config with hashed passphrase, random admin key and HMAC secret lives in
+~/.secrets/trips-journal-config.php and is uploaded above the web root with
+deploy_ftp.py --config. Journal page form rewritten (who dropdown, passphrase
+remembered per device, honeypot); place pages merge live notes; local-only
+mode remains as fallback. tools/pull_journal.py backs notes up into notes.js;
+tools/test_journal_api.py verified everything live (all checks passed; one
+test note posted and deleted → one test email sent). Moderation page:
+/trips/api/moderate.php (admin key in the .secrets config).

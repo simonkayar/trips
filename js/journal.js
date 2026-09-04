@@ -1,8 +1,13 @@
-/* journal.js — memory log: notes from data/notes.js plus browser-local quick notes */
+/* journal.js — memory log.
+   Notes come from three places: data/notes.js (git backup), the server API
+   (api/journal.php — family posts, live) and, only when the API is unreachable
+   (e.g. opening the site from disk), browser-local quick notes. */
 (function () {
   var T = window.TRIPS;
-  var LOCAL_KEY = 'trips_local_notes';
+  var LOCAL_KEY = 'trips_local_notes', PASS_KEY = 'trips_family_pass';
+  var FALLBACK_NAMES = ['Simon', 'Kayar', 'Smitha', 'Kanni', 'Susi', 'Sana'];
   var filter = T.param('place') || '';
+  var server = { on: false, notes: [], names: FALLBACK_NAMES };
 
   // place selects
   var sorted = T.places.slice().sort(function (a, b) { return a.name.localeCompare(b.name); });
@@ -16,6 +21,19 @@
   $('#filter').value = filter;
   if (filter) $('#n-place').value = filter;
   $('#n-date').value = new Date().toISOString().slice(0, 10);
+
+  function fillWho() {
+    var sel = $('#n-who'), keep = T.store.get('trips_who', '');
+    sel.innerHTML = server.names.map(function (n) { return '<option' + (n === keep ? ' selected' : '') + '>' + T.esc(n) + '</option>'; }).join('');
+  }
+  fillWho();
+  function passRow() {
+    var has = !!T.store.get(PASS_KEY, '');
+    $('#pass-row').classList.toggle('hidden', has);
+    $('#forget-pass').classList.toggle('hidden', !has);
+  }
+  passRow();
+  $('#forget-link').addEventListener('click', function (e) { e.preventDefault(); T.store.set(PASS_KEY, ''); passRow(); });
 
   // trip log: every trip from data/trips.js grouped by year, newest first
   (function () {
@@ -42,14 +60,21 @@
     return (m[3] ? parseInt(m[3], 10) + ' ' : '') + months[parseInt(m[2], 10) - 1] + ' ' + m[1];
   }
 
+  function allNotes() {
+    var seen = {}, out = [];
+    server.notes.forEach(function (n) { seen[n.id] = 1; out.push(Object.assign({}, n, { src: 'server' })); });
+    T.notes.forEach(function (n) { if (!n.id || !seen[n.id]) out.push(Object.assign({}, n, { src: 'data' })); });
+    if (!server.on) localNotes().forEach(function (n) { out.push(Object.assign({}, n, { src: 'local' })); });
+    return out;
+  }
+
   function render() {
-    var all = T.notes.map(function (n) { return Object.assign({}, n, { local: false }); })
-      .concat(localNotes().map(function (n) { return Object.assign({}, n, { local: true }); }));
+    var all = allNotes();
     if (filter) {
       var kids = T.children(filter).map(function (c) { return c.id; });
       all = all.filter(function (n) { return n.place === filter || kids.indexOf(n.place) >= 0; });
     }
-    all.sort(function (a, b) { return (b.date || '').localeCompare(a.date || ''); });
+    all.sort(function (a, b) { return (b.date || '').localeCompare(a.date || '') || (b.created || '').localeCompare(a.created || ''); });
     $('#count').textContent = all.length + ' memor' + (all.length === 1 ? 'y' : 'ies');
     if (!all.length) {
       $('#timeline').innerHTML = '<div class="card pad muted">No memories here yet. Write one on the right →</div>';
@@ -57,10 +82,12 @@
     }
     $('#timeline').innerHTML = all.map(function (n) {
       var p = T.byId(n.place);
-      return '<div class="card note' + (n.local ? ' local' : '') + '">' +
-        (n.local ? '<button class="del" data-id="' + T.esc(n.id) + '">delete</button>' : '') +
+      return '<div class="card note' + (n.src === 'local' ? ' local' : '') + '">' +
+        (n.src === 'local' ? '<button class="del" data-id="' + T.esc(n.id) + '">delete</button>' : '') +
         '<div class="head"><span class="title">' + T.esc(n.title) + '</span><span class="when">' + T.esc(fmtDate(n.date)) + '</span></div>' +
-        (p ? '<div class="place"><a href="place.html?id=' + p.id + '">' + p.emoji + ' ' + T.esc(p.name) + '</a>' + (n.local ? ' · <span class="tag gold">on this device</span>' : '') + '</div>' : '') +
+        '<div class="place">' + (p ? '<a href="place.html?id=' + p.id + '">' + p.emoji + ' ' + T.esc(p.name) + '</a>' : '') +
+        (n.who ? ' · <span class="byline">by ' + T.esc(n.who) + '</span>' : '') +
+        (n.src === 'local' ? ' · <span class="tag gold">on this device</span>' : '') + '</div>' +
         '<div class="body">' + T.esc(n.text) + '</div></div>';
     }).join('');
     $$('.note .del').forEach(function (b) {
@@ -73,26 +100,68 @@
   }
 
   $('#filter').addEventListener('change', function (e) { filter = e.target.value; render(); });
-  $('#n-save').addEventListener('click', function () {
+
+  /* ---------- posting ---------- */
+  function setMode() {
+    $('#form-note').textContent = server.on
+      ? 'Posts go straight onto the site. Simon gets an email for each one.'
+      : 'The journal server is not reachable from here, so notes are saved in this browser only. Use “Copy for Claude” to send them on.';
+    $('#n-export').classList.toggle('hidden', server.on);
+    $('#pass-row').classList.toggle('hidden', !server.on || !!T.store.get(PASS_KEY, ''));
+  }
+
+  $('#note-form').addEventListener('submit', function (e) {
+    e.preventDefault();
     var title = $('#n-title').value.trim(), text = $('#n-text').value.trim();
     if (!title || !text) { T.toast('Give the note a title and some text'); return; }
-    var notes = localNotes();
-    notes.push({ id: 'local-' + Date.now(), place: $('#n-place').value, date: $('#n-date').value, title: title, text: text });
-    T.store.set(LOCAL_KEY, notes);
-    $('#n-title').value = ''; $('#n-text').value = '';
-    T.toast('Saved on this device');
-    render();
+    var who = $('#n-who').value;
+    T.store.set('trips_who', who);
+    if (!server.on) {
+      var notes = localNotes();
+      notes.push({ id: 'local-' + Date.now(), place: $('#n-place').value, who: who, date: $('#n-date').value, title: title, text: text });
+      T.store.set(LOCAL_KEY, notes);
+      $('#n-title').value = ''; $('#n-text').value = '';
+      T.toast('Saved on this device'); render();
+      return;
+    }
+    var pass = T.store.get(PASS_KEY, '') || $('#n-pass').value;
+    if (!pass) { $('#pass-row').classList.remove('hidden'); $('#n-pass').focus(); T.toast('Type the family passphrase'); return; }
+    var btn = $('#n-save'); btn.disabled = true; btn.textContent = 'Posting…';
+    fetch('api/journal.php?action=post', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ place: $('#n-place').value, who: who, date: $('#n-date').value, title: title, text: text, pass: pass, website: $('#n-website').value })
+    }).then(function (r) { return r.json(); }).then(function (d) {
+      btn.disabled = false; btn.textContent = 'Post it';
+      if (!d.ok) {
+        if (/passphrase/i.test(d.error || '')) { T.store.set(PASS_KEY, ''); passRow(); $('#n-pass').value = ''; $('#n-pass').focus(); }
+        T.toast(d.error || 'Could not post'); return;
+      }
+      T.store.set(PASS_KEY, pass); passRow();
+      server.notes.push(d.note);
+      $('#n-title').value = ''; $('#n-text').value = '';
+      T.toast('Posted — thank you, ' + who + '!');
+      filter = ''; $('#filter').value = ''; render();
+      window.scrollTo({ top: $('#timeline').offsetTop - 90, behavior: 'smooth' });
+    }).catch(function () { btn.disabled = false; btn.textContent = 'Post it'; T.toast('Network problem — try again'); });
   });
+
   $('#n-export').addEventListener('click', function () {
     var notes = localNotes();
     if (!notes.length) { T.toast('No local notes to copy yet'); return; }
     var txt = 'Please add these notes to data/notes.js:\n\n' + notes.map(function (n) {
-      return JSON.stringify({ place: n.place, date: n.date, title: n.title, text: n.text }, null, 2);
+      return JSON.stringify({ place: n.place, who: n.who, date: n.date, title: n.title, text: n.text }, null, 2);
     }).join(',\n');
     function done() { T.toast('Copied ' + notes.length + ' note(s) — paste into a chat with Claude'); }
     if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(txt).then(done, function () { prompt('Copy this:', txt); });
     else prompt('Copy this:', txt);
   });
 
+  /* ---------- load from the server, fall back quietly ---------- */
   render();
+  setMode();
+  T.loadServerNotes(function (d) {
+    if (!d) { setMode(); return; }
+    server.on = true; server.notes = d.notes || []; server.names = d.names || FALLBACK_NAMES;
+    fillWho(); setMode(); render();
+  });
 })();

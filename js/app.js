@@ -235,6 +235,19 @@
   };
 
   /* ---------- notes ---------- */
+  // Fetch the family's live notes from api/journal.php (PHP on the host) and merge
+  // them into T.notes. cb(data) on success, cb(null) if the API is unreachable
+  // (file://, local static server, host down) — pages then just use data/notes.js.
+  T.loadServerNotes = function (cb) {
+    if (!window.fetch || location.protocol === 'file:') { cb(null); return; }
+    fetch('api/journal.php?action=list', { cache: 'no-store' }).then(function (r) { return r.ok ? r.json() : null; }).then(function (d) {
+      if (!d || !d.ok) { cb(null); return; }
+      var have = {};
+      T.notes.forEach(function (n) { if (n.id) have[n.id] = 1; });
+      (d.notes || []).forEach(function (n) { if (!have[n.id]) T.notes.push(n); });
+      cb(d);
+    }).catch(function () { cb(null); });
+  };
   T.notesFor = function (placeId) {
     var kids = T.children(placeId).map(function (c) { return c.id; });
     return T.notes.filter(function (n) { return n.place === placeId || kids.indexOf(n.place) >= 0; });

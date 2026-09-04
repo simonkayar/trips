@@ -80,18 +80,22 @@
   if (p.funFacts && p.funFacts.length) nodes.push({ title: 'Fun facts', ic: '✨', cls: 'c-gold', html: '<div id="facts"></div>', facts: true });
   if (p.tips && p.tips.length) nodes.push({ title: 'Travel tips', ic: '🧭', cls: 'c-teal', html: list(p.tips) });
 
-  // our own memories
-  var notes = T.notesFor(p.id);
-  var ourHtml = '';
-  var myTrips = T.tripsOf(p);
-  if (myTrips.length) {
-    ourHtml += '<ul>' + myTrips.slice().reverse().map(function (t) {
-      return '<li><strong>' + T.esc(t.when) + '</strong> — ' + T.esc(t.title) + (t.summary ? '<br><span class="muted small">' + T.esc(t.summary) + '</span>' : '') + '</li>';
-    }).join('') + '</ul>';
-  } else if (visited) ourHtml += '<p><strong>Visited:</strong> ' + T.esc(visited) + '</p>';
-  if (notes.length) ourHtml += list(notes.slice(0, 4).map(function (n) { return '**' + n.title + '** — ' + n.text; }));
-  ourHtml += '<p style="margin:10px 0 0"><a href="journal.html?place=' + p.id + '">' + (notes.length ? 'All ' + notes.length + ' memories in the journal →' : 'Add a memory in the journal →') + '</a></p>';
-  nodes.push({ title: 'Our trip', ic: '❤️', cls: 'c-terracotta', html: ourHtml });
+  // our own memories (data/notes.js now; live family posts are merged in below)
+  function ourTripHTML() {
+    var notes = T.notesFor(p.id);
+    var html = '';
+    var myTrips = T.tripsOf(p);
+    if (myTrips.length) {
+      html += '<ul>' + myTrips.slice().reverse().map(function (t) {
+        return '<li><strong>' + T.esc(t.when) + '</strong> — ' + T.esc(t.title) + (t.summary ? '<br><span class="muted small">' + T.esc(t.summary) + '</span>' : '') + '</li>';
+      }).join('') + '</ul>';
+    } else if (visited) html += '<p><strong>Visited:</strong> ' + T.esc(visited) + '</p>';
+    if (notes.length) html += list(notes.slice(0, 4).map(function (n) { return '**' + n.title + '**' + (n.who ? ' (' + n.who + ')' : '') + ' — ' + n.text; }));
+    html += '<p style="margin:10px 0 0"><a href="journal.html?place=' + p.id + '">' + (notes.length ? 'All ' + notes.length + ' memories in the journal →' : 'Add a memory in the journal →') + '</a></p>';
+    return html;
+  }
+  nodes.push({ title: 'Our trip', ic: '❤️', cls: 'c-terracotta', html: '<div id="ourtrip">' + ourTripHTML() + '</div>' });
+  T.loadServerNotes(function (d) { if (d && $('#ourtrip')) { $('#ourtrip').innerHTML = ourTripHTML(); drawLinks(); } });
 
   var left = $('#col-left'), right = $('#col-right');
   nodes.forEach(function (n, i) {

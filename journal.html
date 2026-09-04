@@ -16,7 +16,7 @@
   <div class="page-head">
     <div class="eyebrow">Memory log</div>
     <h1>Journal</h1>
-    <p class="lead">Little things that happened on the trips — the stuff photos don't capture. Newest first.</p>
+    <p class="lead">Little things that happened on the trips — the stuff photos don't capture. Anyone in the family can add one. Newest first.</p>
   </div>
 
   <div class="grid" style="grid-template-columns: 1fr 340px; gap: 30px; align-items: start">
@@ -33,20 +33,30 @@
     </div>
 
     <aside class="card pad" style="position:sticky;top:90px">
-      <h3>✍️ Quick note</h3>
-      <p class="muted small">Saved in this browser only. Use “Copy for Claude” to move notes into the site’s data file for everyone.</p>
-      <label class="field">Place</label>
-      <select id="n-place" style="margin-bottom:10px"></select>
-      <label class="field">Date</label>
-      <input type="date" id="n-date" style="margin-bottom:10px">
-      <label class="field">Title</label>
-      <input type="text" id="n-title" placeholder="e.g. The night we missed the last ferry" style="margin-bottom:10px">
-      <label class="field">What happened</label>
-      <textarea id="n-text" rows="5" placeholder="Tell the story…" style="margin-bottom:12px"></textarea>
-      <div style="display:flex;gap:8px;flex-wrap:wrap">
-        <button class="btn" id="n-save">Save note</button>
-        <button class="btn secondary sm" id="n-export">Copy for Claude</button>
-      </div>
+      <h3>✍️ Add a memory</h3>
+      <p class="muted small" id="form-note">Posts go straight onto the site. Simon gets an email for each one.</p>
+      <form id="note-form" autocomplete="off">
+        <label class="field">Who are you?</label>
+        <select id="n-who" style="margin-bottom:10px"></select>
+        <label class="field">Place</label>
+        <select id="n-place" style="margin-bottom:10px"></select>
+        <label class="field">Date</label>
+        <input type="date" id="n-date" style="margin-bottom:10px">
+        <label class="field">Title</label>
+        <input type="text" id="n-title" maxlength="120" placeholder="e.g. The night we missed the last ferry" style="margin-bottom:10px">
+        <label class="field">What happened</label>
+        <textarea id="n-text" rows="5" maxlength="2000" placeholder="Tell the story…" style="margin-bottom:10px"></textarea>
+        <div id="pass-row">
+          <label class="field">Family passphrase</label>
+          <input type="password" id="n-pass" placeholder="Ask Simon if you don't know it" style="margin-bottom:12px">
+        </div>
+        <div class="hp" aria-hidden="true"><label>Website</label><input type="text" id="n-website" tabindex="-1" autocomplete="off"></div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+          <button class="btn" id="n-save" type="submit">Post it</button>
+          <button class="btn secondary sm hidden" id="n-export" type="button">Copy for Claude</button>
+          <span class="muted small hidden" id="forget-pass"><a href="#" id="forget-link">forget passphrase</a></span>
+        </div>
+      </form>
     </aside>
   </div>
 </main>

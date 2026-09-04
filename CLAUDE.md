@@ -80,6 +80,22 @@ nothing may depend on a server-side language or a build step.
 - Keep the warm "paper journal" look: colours and components live in `css/style.css`.
 - No frameworks, no build tools, no Node. Python 3 only for the helper scripts.
 
+## The journal is the one dynamic part (PHP, no database)
+- `api/journal.php` (API), `api/moderate.php` (Simon's moderation page), `api/lib.php`.
+  Notes are stored on the server in `api/journal-data/notes.json` — that folder is
+  **excluded from deploys** and web-blocked by `.htaccess`; never create or upload it.
+- Config (family names, passphrase hash, admin key, HMAC secret, notify email) is
+  `C:\Users\simon\.secrets\trips-journal-config.php`, uploaded ABOVE the web root with
+  `python tools/deploy_ftp.py --config`. `api/config.example.php` is the template.
+- Spam protection: family passphrase, honeypot field `website`, 5 posts/IP/hour, length
+  and link limits. Posting is immediate (`auto_approve => true`); every post emails Simon
+  with one-click delete/approve links (HMAC token per note).
+- Pages call `T.loadServerNotes()` and merge live notes into `TRIPS.notes` by id; when
+  the API is unreachable (file://, local server) they fall back to `data/notes.js`.
+- Back up the live notes into git: `python tools/pull_journal.py` (rewrites notes.js).
+- End-to-end check after any change: `python tools/test_journal_api.py` (posts and
+  deletes one test note → one email).
+
 ## Deploying
 `python tools/deploy_ftp.py` uploads changed files to
 `/domains/simonkayar.com/public_html/trips` → https://simonkayar.com/trips/ .

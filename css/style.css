@@ -254,6 +254,8 @@ a.stat:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); color:
 .note .place { font-size: 0.82rem; }
 .note.local { border-left: 4px solid var(--gold); }
 .note .del { float: right; background: none; border: 0; color: var(--muted); cursor: pointer; font-size: 0.8rem; }
+.note .byline { color: var(--terracotta); font-weight: 600; }
+.hp { position: absolute; left: -9999px; top: -9999px; height: 0; overflow: hidden; }   /* honeypot: invisible to people, tempting to bots */
 .note .del:hover { color: var(--terracotta); }
 
 /* ---------- Journal: trip log ---------- */

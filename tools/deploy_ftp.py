@@ -5,6 +5,7 @@ deploy_ftp.py — uploads the site to the web host over FTP.
     python tools/deploy_ftp.py --all        # upload everything, ignore the manifest
     python tools/deploy_ftp.py --dry-run    # show what would be uploaded
     python tools/deploy_ftp.py --list       # list the remote web root and exit
+    python tools/deploy_ftp.py --config     # upload the journal config (from ~/.secrets) above the web root
 
 Reads credentials from %USERPROFILE%\.secrets\trips-ftp.txt (outside the
 project, so it can never be committed or uploaded by mistake). Remote folder:
@@ -24,7 +25,10 @@ ROOT = Path(__file__).resolve().parent.parent
 CREDS = Path.home() / ".secrets" / "trips-ftp.txt"
 MANIFEST = ROOT / ".deploy-manifest.json"
 REMOTE_DIR = "/domains/simonkayar.com/public_html/trips"     # -> https://simonkayar.com/trips/
-EXCLUDE_DIRS = {".git", ".venv", "tools", "photos/_originals", "__pycache__", ".claude"}
+EXCLUDE_DIRS = {".git", ".venv", "tools", "photos/_originals", "__pycache__", ".claude",
+                "api/journal-data"}          # the live journal notes live only on the server — never overwrite
+JOURNAL_CONFIG = Path.home() / ".secrets" / "trips-journal-config.php"
+JOURNAL_CONFIG_REMOTE = "/domains/simonkayar.com/trips-journal-config.php"   # above the web root
 EXCLUDE_FILES = {"ftp.txt", "design.txt", "serve.bat", "CLAUDE.md", "Chat_Summary.txt", "Project_Summary.txt",
                  ".gitignore", ".deploy-manifest.json", "README.md"}
 
@@ -101,6 +105,16 @@ def main():
             except error_perm as e:
                 print(d, "MISSING:", e)
         f.quit()
+        return
+
+    if "--config" in args:
+        if not JOURNAL_CONFIG.exists():
+            raise SystemExit(f"missing {JOURNAL_CONFIG}")
+        f = connect()
+        with open(JOURNAL_CONFIG, "rb") as fh:
+            f.storbinary("STOR " + JOURNAL_CONFIG_REMOTE, fh)
+        f.quit()
+        print(f"uploaded journal config → {JOURNAL_CONFIG_REMOTE}")
         return
 
     manifest = {} if "--all" in args or not MANIFEST.exists() else json.loads(MANIFEST.read_text())
