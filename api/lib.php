@@ -9,7 +9,13 @@ declare(strict_types=1);
 function jr_config(): array {
     static $cfg = null;
     if ($cfg !== null) return $cfg;
-    foreach ([dirname(__DIR__, 3) . '/trips-journal-config.php', __DIR__ . '/config.php'] as $f) {
+    // the config sits above the web root (/domains/simonkayar.com/); walk up from
+    // api/ until it is found, so the site can live at any depth under public_html
+    $candidates = [];
+    $dir = __DIR__;
+    for ($i = 0; $i < 6; $i++) { $dir = dirname($dir); $candidates[] = $dir . '/trips-journal-config.php'; }
+    $candidates[] = __DIR__ . '/config.php';
+    foreach ($candidates as $f) {
         if (file_exists($f)) { $cfg = require $f; return $cfg; }
     }
     http_response_code(500);

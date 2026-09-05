@@ -12,7 +12,7 @@ import urllib.error
 import urllib.request
 from pathlib import Path
 
-API = "https://simonkayar.com/trips/api/journal.php"
+API = "https://simonkayar.com/sites/trips/api/journal.php"
 cfg = (Path.home() / ".secrets" / "trips-journal-config.php").read_text(encoding="utf-8")
 FAMILY = re.search(r"'pass_hash'\s*=>\s*hash\('sha256',\s*'([^']+)'\)", cfg).group(1)
 ADMIN = re.search(r"'admin_pass_hash'\s*=>\s*hash\('sha256',\s*'([^']+)'\)", cfg).group(1)
@@ -57,7 +57,7 @@ ok &= show("family cannot delete", call("delete", {"token": ft, "id": note_id}),
 ok &= show("admin deletes", call("delete", {"token": at, "id": note_id}), 200)
 r = call("list", {"token": at}); gone = not any(n.get("id") == note_id for n in r[1].get("notes", [])); print(f"{'OK ' if gone else 'BAD'} gone after delete"); ok &= gone
 try:
-    urllib.request.urlopen("https://simonkayar.com/trips/api/journal-data/notes.json", timeout=40); print("BAD raw data readable"); ok = False
+    urllib.request.urlopen("https://simonkayar.com/sites/trips/api/journal-data/notes.json", timeout=40); print("BAD raw data readable"); ok = False
 except urllib.error.HTTPError as e:
     print(f"OK  raw data blocked ({e.code})")
 print("\nALL GOOD" if ok else "\nSOMETHING FAILED — see above")

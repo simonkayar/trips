@@ -183,3 +183,15 @@ shrunk — they are uploaded full-size; re-run shrink_photos.py later.
 Tools: list_article_images.py can also search Commons ("commons:…");
 shrink_photos.py now also recompresses files over 600 KB and skips locked
 files instead of stopping.
+
+2026-09-05 — Session 9: site moved to /sites/trips
+--------------------------------------------------
+Asked: Simon moved the site on the server to https://simonkayar.com/sites/trips/
+(all websites will live under public_html/sites/); update whatever refers to
+the old path.
+Done: deploy_ftp.py REMOTE_DIR → public_html/sites/trips; api/lib.php now
+walks up the folder tree to find trips-journal-config.php (it used a fixed
+depth before, which the move would have broken); pull_journal.py,
+test_journal_api.py, CLAUDE.md and Project_Summary.txt point at the new URL.
+The old public_html/trips folder no longer exists on the server. Journal test
+re-run at the new location; committed and pushed.

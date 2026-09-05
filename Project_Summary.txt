@@ -11,13 +11,13 @@ New places are added by asking Claude, who edits the data files.
 
 LIVE SITE / HOSTING
 -------------------
-- URL: https://simonkayar.com/trips/
+- URL: https://simonkayar.com/sites/trips/   (moved from /trips on 2026-09-05 —
+  all websites now live under public_html/sites/)
 - Hosting: shared web hosting (Hostinger-style), plain FTP, port 21.
-  Server path: /domains/simonkayar.com/public_html/trips
+  Server path: /domains/simonkayar.com/public_html/sites/trips
   Credentials (host/user/password) are in C:\Users\simon\.secrets\trips-ftp.txt —
   outside the project, folder readable only by this Windows user. Never copy
-  them into the repo. (The host's original note said public_html/sites/trips; the
-  site was deployed to public_html/trips to match the URL simonkayar.com/trips.)
+  them into the repo.
 - Deploy: python tools/deploy_ftp.py   (uploads only changed files; --all forces
   everything; --dry-run previews; --list shows the remote folders). Excludes
   tools/, ftp.txt, design.txt, serve.bat, CLAUDE.md, the two summary files and

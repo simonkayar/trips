@@ -108,7 +108,7 @@ nothing may depend on a server-side language or a build step.
 
 ## Deploying
 `python tools/deploy_ftp.py` uploads changed files to
-`/domains/simonkayar.com/public_html/trips` → https://simonkayar.com/trips/ .
+`/domains/simonkayar.com/public_html/sites/trips` → https://simonkayar.com/sites/trips/ .
 FTP credentials live **outside the project** in `C:\Users\simon\.secrets\trips-ftp.txt`
 (never copy them into the repo). GitHub: https://github.com/simonkayar/trips — commit
 and push after each change; update `Chat_Summary.txt` / `Project_Summary.txt` too.

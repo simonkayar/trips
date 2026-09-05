@@ -24,7 +24,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 CREDS = Path.home() / ".secrets" / "trips-ftp.txt"
 MANIFEST = ROOT / ".deploy-manifest.json"
-REMOTE_DIR = "/domains/simonkayar.com/public_html/trips"     # -> https://simonkayar.com/trips/
+REMOTE_DIR = "/domains/simonkayar.com/public_html/sites/trips"     # -> https://simonkayar.com/sites/trips/
 EXCLUDE_DIRS = {".git", ".venv", "tools", "photos/_originals", "__pycache__", ".claude",
                 "api/journal-data",          # the live journal notes live only on the server — never overwrite
                 "journal-backup"}            # local backup of those notes — private, never uploaded
@@ -99,7 +99,7 @@ def main():
     args = set(sys.argv[1:])
     if "--list" in args:
         f = connect()
-        for d in ["/", "/domains/simonkayar.com/public_html", REMOTE_DIR]:
+        for d in ["/", "/domains/simonkayar.com/public_html", "/domains/simonkayar.com/public_html/sites", REMOTE_DIR]:
             try:
                 f.cwd(d)
                 print(d, "->", f.nlst())
@@ -164,7 +164,7 @@ def main():
         manifest.pop(rel, None)
     f.quit()
     MANIFEST.write_text(json.dumps(manifest, indent=1, sort_keys=True))
-    print("done → https://simonkayar.com/trips/")
+    print("done → https://simonkayar.com/sites/trips/")
 
 
 if __name__ == "__main__":

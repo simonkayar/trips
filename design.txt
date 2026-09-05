@@ -34,4 +34,4 @@ Improvements:
 5. In all destination pages, have a small map of the place showing where it is (for international it has to be a world level map, for domestic a country level. Instead of an interactive map, it can be a cartoonish explorative map)
 6. The slideshow should also have the realistic photo in the background (at least partly)
 7. In the fun facts box, have an arrow which can be clicked for the next set of fun facts. There should be a lot of information
-8. 
+8. Instead of repeating the menu items again in the home page like "Destinations", "Maps", 'Quiz', etc. Let's have interesting collections there like Temples, Beach side, Countries, 'Abodes of Muruga' and other such stuff that you can think of.

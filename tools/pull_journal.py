@@ -12,7 +12,7 @@ import urllib.request
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-API = "https://simonkayar.com/trips/api/journal.php"
+API = "https://simonkayar.com/sites/trips/api/journal.php"
 OUT = ROOT / "journal-backup" / "notes.json"
 
 cfg = (Path.home() / ".secrets" / "trips-journal-config.php").read_text(encoding="utf-8")
